@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import App from "./App";
 import Header from "./components/Header";
 import HomeMain from "./components/HomeMain";
 import BlogMain from "./components/BlogMain";
@@ -13,7 +12,7 @@ export default function RouteSwitch() {
             <Header/>
                 <Routes>
                     <Route path="/" element={<HomeMain/>}/>
-                    <Route path="/post" element={<BlogMain/>}/>
+                    <Route path="/posts/:postid" element={<BlogMain/>}/>
                     <Route/>
                 </Routes>
             <Footer/>

@@ -2,11 +2,14 @@ import React from "react";
 
 
 export default function PostCard(props) {
+    const {post} = props;
     return(
-        <div style={{backgroundColor: "gray"}}>
-            <h3>Author</h3>
-            <h2>Title</h2>
-            <p>Mauris convallis mauris nec nisl dictum, non elementum magna posuere. Donec et ipsum vitae nunc euismod porta. Nunc varius semper elit sed congue. Suspendisse at facilisis odio. Nulla quis eleifend ligula. Praesent in lobortis magna. Vivamus a vestibulum nibh.</p>
+        <div className="postCard" style={{backgroundColor: "gray"}}>
+            <a href={"/posts/"+post._id}>
+                <h3>{post.author.first_name + " " + post.author.last_name}</h3>
+                <h2>{post.title}</h2>
+                <p>{post.content.split(' ').slice(0, 20).join(' ') + "..."}</p>
+            </a>
         </div>
     )
 }

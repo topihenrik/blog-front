@@ -2,13 +2,14 @@ import React from "react";
 
 
 export default function Comment(props) {
+    const { comment } = props;
     return(
-        <div>
-            <div>
-                <h3>Author</h3>
-                <h3>Timestamp</h3>
+        <div className="comment">
+            <div className="info-box">
+                <h3>{comment.author.first_name + " " + comment.author.last_name}</h3>
+                <h4>{comment.timestamp}</h4>
             </div>
-            <p>In nulla magna, pellentesque vitae consequat eget, aliquet vitae mauris.</p>
+            <p>{comment.content}</p>
         </div>
     )
 }

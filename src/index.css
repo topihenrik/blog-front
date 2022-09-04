@@ -11,3 +11,83 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html, body, #root {
+  height: 100%;
+}
+
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 24px;
+}
+
+header > div {
+  display: flex;
+  align-items: center;
+}
+
+.auth-box {
+  display: flex;
+  gap: 10px;
+}
+
+.homeMain {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 24px;
+}
+
+.postCard a {
+  text-decoration: none;
+  color: black;
+}
+
+.blogMain {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 24px;
+}
+
+.postFull {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.postFull .info-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.commentSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comment {
+  background-color: gray;
+  padding: 10px;
+}
+
+.comment .info-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+}
