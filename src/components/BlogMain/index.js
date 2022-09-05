@@ -4,11 +4,12 @@ import PostFull from "./PostFull";
 import CommentSection from "./CommentSection";
 
 export default function BlogMain(props) {
+    const { user } = props;
     const { postid } = useParams();
     return(
         <main className="blogMain">
             <PostFull postid={postid}/>
-            <CommentSection postid={postid}/>
+            <CommentSection postid={postid} user={user}/>
         </main>
     )
 }

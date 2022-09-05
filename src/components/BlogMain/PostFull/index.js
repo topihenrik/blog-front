@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {DateTime} from "luxon";
 
 export default function PostFull(props) {
     const { postid } = props;
@@ -35,7 +36,7 @@ export default function PostFull(props) {
                 <h2>{post.title}</h2>
                 <div className="info-box">
                     <h3>{post.author.first_name + " " + post.author.last_name}</h3>
-                    <h3>{post.timestamp}</h3>
+                    <h3>{DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</h3>
                 </div>
                 <p>{post.content}</p>
             </div>

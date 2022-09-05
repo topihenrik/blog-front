@@ -1,5 +1,5 @@
 import React from "react";
-
+import {DateTime} from "luxon";
 
 export default function Comment(props) {
     const { comment } = props;
@@ -7,7 +7,7 @@ export default function Comment(props) {
         <div className="comment">
             <div className="info-box">
                 <h3>{comment.author.first_name + " " + comment.author.last_name}</h3>
-                <h4>{comment.timestamp}</h4>
+                <h4>{DateTime.fromJSDate(new Date(comment.timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</h4>
             </div>
             <p>{comment.content}</p>
         </div>

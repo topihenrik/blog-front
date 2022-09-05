@@ -36,9 +36,27 @@ header > div {
   align-items: center;
 }
 
+.logo-box a {
+  text-decoration: none;
+  color: black;
+}
+
+.logo-box a:hover {
+  color: gray;
+}
+
 .auth-box {
   display: flex;
   gap: 10px;
+}
+
+.auth-box a {
+  text-decoration: none;
+  color: black;
+}
+
+.auth-box a:hover {
+  color: gray;
 }
 
 .homeMain {
@@ -49,6 +67,10 @@ header > div {
 }
 
 .postCard a {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
   text-decoration: none;
   color: black;
 }
@@ -66,7 +88,7 @@ header > div {
   gap: 10px;
 }
 
-.postFull .info-box {
+.postFull .info-box, .postCard .info-box {
   display: flex;
   justify-content: space-between;
 }
@@ -86,6 +108,111 @@ header > div {
   display: flex;
   justify-content: space-between;
 }
+
+.commentCreator {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: gray;
+  padding: 10px;
+}
+
+.comment-creator-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comment-creator-form textarea {
+  height: 80px;
+  resize: none;
+}
+
+.comment-creator-form button {
+  padding: 5px 30px;
+  width: fit-content;
+}
+
+.new-comment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+  padding: 10px;
+}
+
+.new-comment a {
+  text-decoration: none;
+  color: black;
+}
+
+
+.login-box {
+  background-color: gray;
+  border-radius: 5px;
+  margin: 0 24px;
+}
+
+.title-box {
+  padding: 24px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: darkgrey;
+}
+
+.login-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 24px;
+}
+
+.error-box {
+  background-color: #cf000f;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.success-box {
+  background-color: #009944;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.signup-box {
+  background-color: gray;
+  border-radius: 5px;
+  margin: 0 24px;
+}
+
+.signup-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 24px;
+}
+
+.name-box {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+.name-box input {
+  width: 100%;
+}
+
+.signUpSuccess-box {
+  background-color: gray;
+  border-radius: 5px;
+  margin: 0 24px;
+}
+
+.signUpSuccess-box p {
+  padding: 48px 24px;
+}
+
 
 footer {
   display: flex;
