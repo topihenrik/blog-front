@@ -10,7 +10,6 @@ export default function CommentSection(props) {
 
     const [updateComments, setUpdateComments] = useState(0);
     
-
     useEffect(() => {
         fetch(`http://localhost:3000/posts/${postid}/comments`)
             .then((res) => res.json())
@@ -25,10 +24,6 @@ export default function CommentSection(props) {
         )
     }, [updateComments])
 
-
-    
-    
-
     if (error) {
         return <div>Error: {error.message}</div>
     } else if (!isLoaded) {
@@ -36,12 +31,16 @@ export default function CommentSection(props) {
     } else {
         return(
             <div className="commentSection">
+                <h2>Responses</h2>
                 {comments?
                 comments.map((comment) => {
                     return(
-                        <section key={comment._id}>
-                            <Comment comment={comment}/>
-                        </section>
+                        <>
+                            <section key={comment._id}>
+                                <Comment comment={comment}/>
+                            </section>
+                            <hr className="comment-hr"/>
+                        </>
                     )
                 }):<></>}
                 

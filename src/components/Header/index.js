@@ -17,8 +17,8 @@ export default function Header(props) {
             </div>
             {user?
             <div className="auth-box">
-                <p>{user.full_name}</p>
-                <a onClick={handleClick}><p>Log Out</p></a>
+                <p className="user-name">{user.full_name}</p>
+                <a onClick={handleClick}><button className="logout-button">Log Out</button></a>
             </div>:
             <div className="auth-box">
                 <a href="/login"><button className="login-button">Login</button></a>
