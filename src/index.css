@@ -215,6 +215,9 @@ header > div {
 }
 
 .comment {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   padding: 10px;
 }
 
@@ -256,15 +259,13 @@ header > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: gray;
-  padding: 10px;
 }
 
 .new-comment a {
   text-decoration: none;
+  padding: 10px;
   color: black;
 }
-
 
 .signUpSuccess-box {
   background-color: gray;
