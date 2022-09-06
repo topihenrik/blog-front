@@ -13,7 +13,7 @@ export default function Header(props) {
     return(
         <header>
             <div className="logo-box">
-                <a href="/"><h1>Site Name</h1></a>
+                <a href="/"><h1>{"<Blog/>"}</h1></a>
             </div>
             {user?
             <div className="auth-box">
@@ -21,8 +21,8 @@ export default function Header(props) {
                 <a onClick={handleClick}><p>Log Out</p></a>
             </div>:
             <div className="auth-box">
-                <a href="/signup"><p>Sign up</p></a>
-                <a href="/login"><p>Login</p></a>
+                <a href="/login"><button className="login-button">Login</button></a>
+                <a href="/signup"><button className="sign-up-button">Sign up</button></a>
             </div>}
             
         </header>

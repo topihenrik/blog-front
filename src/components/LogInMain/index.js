@@ -43,7 +43,7 @@ export default function LoginMain(props) {
                 <div className="title-box">
                     <h2>Log In</h2>
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form className="login-form" onSubmit={handleSubmit}>
                     <input id="email" name="email" required={true} type="email" placeholder="Email"/>
                     <input id="password" name="password" required={true} type="password" placeholder="Password"/>
                     {result.status == 401 && 

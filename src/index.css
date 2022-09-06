@@ -1,23 +1,58 @@
-body {
+@font-face {
+  font-family: "Montserrat";
+  src: url("./fonts/Montserrat-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./fonts/Montserrat-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./fonts/Montserrat-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./fonts/Montserrat-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+
+
+body, button {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Montserrat";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-html, body, #root {
-  height: 100%;
+:root {
+  --white: #FFFFFF;
+  --gray: #F2F2F2;
+  --black: #000000;
+  --border: #00000010;
+}
+
+html, body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 
 #root {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -27,8 +62,11 @@ html, body, #root {
 
 header {
   display: flex;
+  background-color: var(--white);
   justify-content: space-between;
-  margin: 0 24px;
+  min-height: 64px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border);
 }
 
 header > div {
@@ -36,9 +74,18 @@ header > div {
   align-items: center;
 }
 
+
+
 .logo-box a {
+  display: flex;
   text-decoration: none;
+  align-items: center;
   color: black;
+}
+
+.logo-box a h1 {
+  padding-bottom: 6px;
+  font-weight: 700;
 }
 
 .logo-box a:hover {
@@ -51,19 +98,86 @@ header > div {
 }
 
 .auth-box a {
+  display: flex;
+  align-items: center;
   text-decoration: none;
   color: black;
+  font-weight: bold;
+  height: 100%;
 }
+
+
 
 .auth-box a:hover {
   color: gray;
 }
 
+
+.auth-box a button {
+  padding: 8px 16px;
+  font-size: 16px;
+  border: 1px solid var(--black);
+}
+
+.sign-up-button {
+  background-color: black;
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 5px;
+}
+
+.login-button {
+  background-color: var(--white);
+  border-radius: 5px;
+}
+
 .homeMain {
   display: flex;
   flex-direction: column;
+  background-color: yellowgreen;
+}
+
+
+
+
+
+
+
+.posts-box, .heroScreen {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
-  margin: 0 24px;
+  padding: 0 24px;
+}
+
+.heroScreen {
+  background-color: var(--gray);
+  width: 100%;
+  padding: 128px 24px;
+}
+
+.posts-box {
+  background-color: var(--white);
+  padding: 32px 24px;
+  border-top: 1px solid var(--border);
+}
+
+.posts-title {
+  margin: 8px 0;
+}
+
+
+.post-hr {
+  height: 0;
+  border-top: 1px solid #eee;
+  width: calc(100% - 2px);
+}
+
+
+.postCard {
+  background-color: var(--white);
+  border-radius: 5px;
+  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.4);
 }
 
 .postCard a {
@@ -147,7 +261,35 @@ header > div {
 }
 
 
-.login-box {
+.signUpSuccess-box {
+  background-color: gray;
+  border-radius: 5px;
+  margin: 0 24px;
+}
+
+.signUpSuccess-box p {
+  padding: 48px 24px;
+}
+
+.login-form input, .signup-form input {
+  height: 48px;
+  padding: 16px;
+  border-radius: 8px;
+  border: 2px solid white;
+  font-size: 16px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.login-form button, .signup-form button {
+  border-radius: 16px;
+  padding: 4px 16px;
+  height: 48px;
+  border: 2px solid transparent;
+  font-size: 16px;
+}
+
+.login-box, .signup-box {
   background-color: gray;
   border-radius: 5px;
   margin: 0 24px;
@@ -160,11 +302,22 @@ header > div {
   background-color: darkgrey;
 }
 
-.login-box form {
+
+.login-box form, .signup-box form {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 16px;
   padding: 24px;
+}
+
+.name-box {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+.name-box input {
+  width: 100%;
 }
 
 .error-box {
@@ -180,41 +333,11 @@ header > div {
   border-radius: 5px;
 }
 
-.signup-box {
-  background-color: gray;
-  border-radius: 5px;
-  margin: 0 24px;
-}
-
-.signup-box form {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 24px;
-}
-
-.name-box {
-  display: flex;
-  width: 100%;
-  gap: 10px;
-}
-
-.name-box input {
-  width: 100%;
-}
-
-.signUpSuccess-box {
-  background-color: gray;
-  border-radius: 5px;
-  margin: 0 24px;
-}
-
-.signUpSuccess-box p {
-  padding: 48px 24px;
-}
-
 
 footer {
   display: flex;
   justify-content: center;
+  background-color: var(--white);
+  padding: 8px 0;
+  
 }

@@ -47,7 +47,7 @@ export default function SignUpMain(props) {
                 <div className="title-box">
                     <h2>Sign Up</h2>
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form className="signup-form" onSubmit={handleSubmit}>
                     <div className="name-box">
                         <input name="first_name" type="text" placeholder="First Name" required={true}/>
                         <input name="last_name" type="text" placeholder="Last Name" required={true}/>

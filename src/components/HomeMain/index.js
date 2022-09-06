@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
+import HeroScreen from "./HeroScreen";
 import PostCard from "./PostCard";
-
 
 export default function HomeMain(props) {
     const [error, setError] = useState(null);
@@ -30,13 +30,28 @@ export default function HomeMain(props) {
     } else {
         return(
             <main className="homeMain">
-                {posts.map((post) => {
-                    return(
-                        <section key={post._id}>
-                            <PostCard post={post}/>
-                        </section>
-                    )
-                })}
+                <HeroScreen/>
+                <div className="posts-box">
+                    <h2 className="posts-title">Shared ideas</h2>
+                    {posts.map((post, i) => {
+                        if (i+1 === posts.length) {
+                            return(
+                                <section key={post._id}>
+                                    <PostCard post={post}/>
+                                </section>
+                            )
+                        } else {
+                            return(
+                                <>
+                                    <section key={post._id}>
+                                        <PostCard post={post}/>
+                                    </section>
+                                    <hr className="post-hr"/>
+                                </>
+                            )
+                        }
+                    })}
+                </div>
             </main>
         )
     }

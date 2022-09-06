@@ -5,7 +5,7 @@ import { DateTime } from "luxon";
 export default function PostCard(props) {
     const {post} = props;
     return(
-        <div className="postCard" style={{backgroundColor: "gray"}}>
+        <div className="postCard">
             <a href={"/posts/"+post._id}>
                 <div className="info-box">
                     <h3>{post.author.first_name + " " + post.author.last_name}</h3>
