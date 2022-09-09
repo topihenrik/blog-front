@@ -44,8 +44,8 @@ export default function LoginMain(props) {
                     <h2>Log In</h2>
                 </div>
                 <form className="login-form" onSubmit={handleSubmit}>
-                    <input id="email" name="email" required={true} type="email" placeholder="Email"/>
-                    <input id="password" name="password" required={true} type="password" placeholder="Password"/>
+                    <input className="text-input" id="email" name="email" required={true} type="email" placeholder="Email"/>
+                    <input className="text-input" id="password" name="password" required={true} type="password" placeholder="Password"/>
                     {result.status == 401 && 
                     <div className="error-box">
                         <p>{result.message}</p>

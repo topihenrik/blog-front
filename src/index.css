@@ -180,6 +180,12 @@ header > div {
   color: black;
 }
 
+.author-avatar-card {
+  height: 24px;
+  width: 24px;
+  border-radius: 100px;
+}
+
 .blogMain {
   display: flex;
   flex-direction: column;
@@ -200,6 +206,19 @@ header > div {
 .postFull .info-box, .postCard .info-box {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.author-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.author-avatar-full {
+  height: 48px;
+  width: 48px;
+  border-radius: 100px;
 }
 
 .commentSection {
@@ -221,9 +240,16 @@ header > div {
   padding: 10px;
 }
 
+.author-avatar-comment {
+  height: 32px;
+  width: 32px;
+  border-radius: 100px;
+}
+
 .comment .info-box {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .commentCreator {
@@ -277,7 +303,7 @@ header > div {
   padding: 48px 24px;
 }
 
-.login-form input, .signup-form input {
+.text-input {
   height: 48px;
   padding: 16px;
   border-radius: 8px;

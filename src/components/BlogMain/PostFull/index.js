@@ -35,9 +35,13 @@ export default function PostFull(props) {
             <div className="postFull">
                 <h2>{post.title}</h2>
                 <div className="info-box">
-                    <h3>{post.author.first_name + " " + post.author.last_name}</h3>
+                    <div className="author-box">
+                        <img className="author-avatar-full" src={"http://localhost:3000/"+post.author.avatar.path}/>
+                        <h3>{post.author.first_name + " " + post.author.last_name}</h3>
+                    </div>
                     <h3>{DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</h3>
                 </div>
+                <img src={"http://localhost:3000/"+post.photo.path}/>
                 <p>{post.content}</p>
             </div>
         )
