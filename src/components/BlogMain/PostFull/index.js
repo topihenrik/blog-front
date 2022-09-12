@@ -42,7 +42,7 @@ export default function PostFull(props) {
                     <h3>{DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</h3>
                 </div>
                 <img src={"http://localhost:3000/"+post.photo.path}/>
-                <p>{post.content}</p>
+                <div dangerouslySetInnerHTML={{__html: post.content}}></div>
             </div>
         )
 

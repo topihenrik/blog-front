@@ -16,7 +16,7 @@ export default function PostCard(props) {
                     <h3>{DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATE_MED)}</h3>
                 </div>
                 <h2>{post.title}</h2>
-                <p>{post.content.split(' ').slice(0, 20).join(' ') + "..."}</p>
+                <p>{post.description.split(' ').slice(0, 20).join(' ') + "..."}</p>
             </a>
         </div>
     )

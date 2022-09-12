@@ -36,18 +36,16 @@ export default function HomeMain(props) {
                     {posts.map((post, i) => {
                         if (i+1 === posts.length) {
                             return(
-                                <section key={post._id}>
+                                <React.Fragment key={post._id}>
                                     <PostCard post={post}/>
-                                </section>
+                                </React.Fragment>
                             )
                         } else {
                             return(
-                                <>
-                                    <section key={post._id}>
-                                        <PostCard post={post}/>
-                                    </section>
+                                <React.Fragment key={post._id}>
+                                    <PostCard post={post}/>
                                     <hr className="post-hr"/>
-                                </>
+                                </React.Fragment>
                             )
                         }
                     })}
