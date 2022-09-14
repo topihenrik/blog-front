@@ -37,7 +37,7 @@ export default function CommentSection(props) {
                     return(
                         <>
                             <section key={comment._id}>
-                                <Comment comment={comment}/>
+                                <Comment postid={postid} comment={comment} user={user} updateComments={updateComments} setUpdateComments={setUpdateComments}/>
                             </section>
                             <hr className="comment-hr"/>
                         </>

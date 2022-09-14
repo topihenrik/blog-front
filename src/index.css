@@ -252,6 +252,11 @@ header > div {
   align-items: center;
 }
 
+.comment-modification-buttons {
+  display: flex;
+  gap: 10px;
+}
+
 .commentCreator {
   display: flex;
   flex-direction: column;
@@ -265,10 +270,15 @@ header > div {
   gap: 10px;
 }
 
-.comment-creator-form textarea {
+#comment-creator-textarea {
   height: 80px;
   border-radius: 5px;
   resize: none;
+}
+
+.comment-creator-buttons {
+  display: flex;
+  gap: 10px;
 }
 
 .comment-creator-form button {

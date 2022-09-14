@@ -18,7 +18,7 @@ export default function CommentCreator(props) {
                 headers: {
                     "Authorization": bearer,
                     "Content-Type": "application/x-www-form-urlencoded"},
-                body: new URLSearchParams({content: e.target.content.value, author: e.target.author.value})
+                body: new URLSearchParams({content: e.target.content.value})
             })
             .then((res) => res.json())
             .then((result) => {
@@ -38,8 +38,7 @@ export default function CommentCreator(props) {
         <div className="commentCreator">
             <h3>Author: {user.full_name}</h3>
             <form className="comment-creator-form" onSubmit={handleSubmit}>
-                <textarea name="content" placeholder="Comment"></textarea>
-                <input name="author" type="hidden" required={true} value={user._id}/>
+                <textarea name="content" placeholder="Comment" id="comment-creator-textarea"></textarea>
                 <button>Submit</button>
             </form>
         </div>
