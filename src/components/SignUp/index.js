@@ -49,11 +49,11 @@ export default function SignUpMain(props) {
     return(
         <div className="signUpMain">
             <div className="signup-box">
-                <div className="title-box">
+                <div className="signup-title-box">
                     <h2>Sign Up</h2>
                 </div>
                 <form className="signup-form" onSubmit={handleSubmit}>
-                    <div className="name-box">
+                    <div className="signup-name-box">
                         <input className="text-input" name="first_name" type="text" placeholder="First Name" required={true}/>
                         <input className="text-input" name="last_name" type="text" placeholder="Last Name" required={true}/>
                     </div>

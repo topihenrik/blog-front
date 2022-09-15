@@ -40,7 +40,7 @@ export default function LoginMain(props) {
     return(
         <div className="loginMain">
             <div className="login-box">
-                <div className="title-box">
+                <div className="login-title-box">
                     <h2>Log In</h2>
                 </div>
                 <form className="login-form" onSubmit={handleSubmit}>

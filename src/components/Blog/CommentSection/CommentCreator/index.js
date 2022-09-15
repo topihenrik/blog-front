@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import AddIcon from "../../../../icons/add.png"
 
 
 export default function CommentCreator(props) {
@@ -39,7 +40,7 @@ export default function CommentCreator(props) {
             <h3>Author: {user.full_name}</h3>
             <form className="comment-creator-form" onSubmit={handleSubmit}>
                 <textarea name="content" placeholder="Comment" id="comment-creator-textarea"></textarea>
-                <button>Submit</button>
+                <button className="comment-creator-button"><img className="icon" src={AddIcon}/>Submit</button>
             </form>
         </div>
     )

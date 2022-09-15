@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import HomeMain from "./components/HomeMain";
-import BlogMain from "./components/BlogMain";
+import Home from "./components/Home";
+import Blog from "./components/Blog";
 import Footer from "./components/Footer";
-import LogInMain from "./components/LogInMain";
-import SignUpMain from "./components/SignUpMain";
-import SignUpSuccess from "./components/SignUpMain/SignUpSuccess";
+import LogIn from "./components/LogIn";
+import SignUp from "./components/SignUp";
+import SignUpSuccess from "./components/SignUp/SignUpSuccess";
 
 
 
@@ -17,10 +17,10 @@ export default function RouteSwitch() {
         <BrowserRouter>
             <Header user={user} setUser={setUser}/>
                 <Routes>
-                    <Route path="/" element={<HomeMain/>}/>
-                    <Route path="/posts/:postid" element={<BlogMain user={user}/>}/>
-                    <Route path="/login" element={<LogInMain user={user} setUser={setUser}/>}/>
-                    <Route path="/signup" element={<SignUpMain/>}/> 
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/posts/:postid" element={<Blog user={user}/>}/>
+                    <Route path="/login" element={<LogIn user={user} setUser={setUser}/>}/>
+                    <Route path="/signup" element={<SignUp/>}/> 
                     <Route path="/signup/success" element={<SignUpSuccess/>}/>
                 </Routes>
             <Footer/>

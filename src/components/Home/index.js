@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import HeroScreen from "./HeroScreen";
 import PostCard from "./PostCard";
 
-export default function HomeMain(props) {
+export default function Home(props) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [posts, setPosts] = useState([]);

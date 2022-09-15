@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import {DateTime} from "luxon";
+import EditIcon from "../../../../icons/edit.png"
+import DeleteIcon from "../../../../icons/delete.png"
+import CancelIcon from "../../../../icons/cancel.png";
 
 export default function Comment(props) {
     const { postid, comment, user, updateComments, setUpdateComments } = props;
@@ -64,8 +67,8 @@ export default function Comment(props) {
                 <p>{comment.content}</p>
                 {(user?._id === comment.author._id)&&
                 <div className="comment-modification-buttons">
-                    <button onClick={handleClickEdit}>Edit</button>
-                    <button onClick={handleClickDelete}>Delete</button>
+                    <button className="comment-modification-button" onClick={handleClickEdit}><img className="icon" src={EditIcon}/>Edit</button>
+                    <button className="comment-modification-button" onClick={handleClickDelete}><img className="icon" src={DeleteIcon}/>Delete</button>
                 </div>}  
             </div>
         )
@@ -82,8 +85,8 @@ export default function Comment(props) {
                 <form className="comment-creator-form" onSubmit={handleSubmit}>
                     <textarea name="content" defaultValue={comment.content} id="comment-creator-textarea"></textarea>
                     <div className="comment-creator-buttons">
-                        <button type="submit">Update</button>
-                        <button type="button" onClick={handleCancel}>Cancel</button>
+                        <button className="comment-modification-button" type="submit"><img className="icon" src={EditIcon}/>Update</button>
+                        <button className="comment-modification-button" type="button" onClick={handleCancel}><img className="icon" src={CancelIcon}/>Cancel</button>
                     </div>   
                 </form>
             </div>
