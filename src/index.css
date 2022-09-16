@@ -47,7 +47,6 @@ html, body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 /* Header */
@@ -63,6 +62,12 @@ header {
 header > div {
   display: flex;
   align-items: center;
+}
+
+.header-box {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .logo-box a {
@@ -115,16 +120,29 @@ header > div {
   color: white;
   border: 2px solid transparent;
   border-radius: 5px;
+  white-space:nowrap
 }
 
 .login-button {
   background-color: var(--white);
   border-radius: 5px;
+  white-space:nowrap
 }
 
 .logout-button {
   background-color: var(--white);
   border-radius: 5px;
+}
+
+@media (min-width: 916px) {
+  header {
+    padding: 0;
+  }
+
+  .header-box {
+    margin: 0 auto;
+    width: 900px;
+  }
 }
 
 /* Login and SignUp */
@@ -201,30 +219,42 @@ header > div {
   padding: 48px 24px;
 }
 
+@media (min-width: 916px) {
+  .loginMain {
+    margin: 0 auto;
+    width: 500px;
+  }
+
+  .signUpMain {
+    margin: 0 auto;
+    width: 500px;
+  }
+}
+
 /* Home, HeroScreen and PostCard */
+
 .homeMain {
   display: flex;
   flex-direction: column;
   background-color: yellowgreen;
 }
 
-.posts-box, .heroScreen {
+.posts-box {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0 24px;
-}
-
-.heroScreen {
-  background-color: var(--gray);
-  width: calc(100%-48px);
-  padding: 128px 24px;
-}
-
-.posts-box {
   background-color: var(--white);
   padding: 32px 24px;
   border-top: 1px solid var(--border);
+}
+
+.heroScreen {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--gray);
+  width: calc(100%-48px);
+  padding: 128px 34px;
 }
 
 .posts-title {
@@ -258,11 +288,44 @@ header > div {
   color: black;
 }
 
+.post-box-left {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.photo-thumbnail {
+  display: none;
+  width: 256px;
+}
+
 .author-avatar-card {
   height: 24px;
   width: 24px;
   border-radius: 100px;
 }
+
+@media (min-width: 916px) {
+  .homeMain {
+    margin: 0 auto;
+    width: 900px;
+  }
+
+  .photo-thumbnail {
+    display: inline-block;
+  }
+
+  .posts-box {
+    padding: 32px 0;
+  }
+
+  .postCard a {
+    flex-direction: row;
+    gap: 32px;
+  }
+}
+
+
 
 /* Blog and PostFull */
 .blogMain {
@@ -284,7 +347,8 @@ header > div {
 
 .postFull .info-box {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  gap: 32px;
   align-items: center;
 }
 
@@ -298,6 +362,13 @@ header > div {
   height: 48px;
   width: 48px;
   border-radius: 100px;
+}
+
+@media (min-width: 916px) {
+  .blogMain {
+    margin: 0 auto;
+    width: 900px;
+  }
 }
 
 /* CommentSection, Comment and CommentCreator */
@@ -392,4 +463,5 @@ footer {
   background-color: var(--white);
   padding: 8px 0;
   border-top: 1px solid var(--border);
+  margin-top: auto;
 }
