@@ -47,7 +47,7 @@ export default function SignUpMain(props) {
     }
 
     return(
-        <div className="signUpMain">
+        <main className="signUpMain">
             <div className="signup-box">
                 <div className="signup-title-box">
                     <h2>Sign Up</h2>
@@ -60,7 +60,7 @@ export default function SignUpMain(props) {
                     <input className="text-input" name="email" type="email" placeholder="Email" required={true}/>
                     <input className="text-input" name="password" type="password" placeholder="Password" required={true}/>
                     <input className="text-input" name="password_confirm" type="password" placeholder="Confirm Password" required={true}/>
-                    <input name="avatar" type="file" accept="image/png, image/jpeg" onChange={handleChange}/>
+                    <input className="file-input" name="avatar" type="file" accept="image/png, image/jpeg" onChange={handleChange}/>
                     {result.status === 409  &&
                     <div className="error-box">
                         <p>{result.message}</p>
@@ -77,6 +77,6 @@ export default function SignUpMain(props) {
                     <button>Sign Up</button>
                 </form>
             </div>
-        </div>
+        </main>
     )
 }

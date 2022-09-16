@@ -38,7 +38,7 @@ export default function LoginMain(props) {
     }
 
     return(
-        <div className="loginMain">
+        <main className="loginMain">
             <div className="login-box">
                 <div className="login-title-box">
                     <h2>Log In</h2>
@@ -53,7 +53,7 @@ export default function LoginMain(props) {
                     <button>Log In</button>
                 </form>
             </div>
-        </div>
+        </main>
     )
 }
 

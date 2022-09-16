@@ -55,7 +55,6 @@ header {
   background-color: var(--white);
   justify-content: space-between;
   min-height: 64px;
-  padding: 0 24px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -67,6 +66,7 @@ header > div {
 .header-box {
   display: flex;
   justify-content: space-between;
+  margin: 0 14px;
   width: 100%;
 }
 
@@ -134,27 +134,58 @@ header > div {
   border-radius: 5px;
 }
 
-@media (min-width: 916px) {
-  header {
-    padding: 0;
-  }
 
+@media (min-width: 600px) {
+  .header-box {
+    width: clamp(550px, 90vw, 790px);
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 916px) {
   .header-box {
     margin: 0 auto;
-    width: 900px;
+    width: 790px;
   }
 }
 
 /* Login and SignUp */
 .text-input {
   height: 48px;
-  padding: 16px;
+  padding: 14px;
   border-radius: 8px;
   border: 2px solid black;
   font-size: 16px;
   text-decoration: none;
   box-sizing: border-box;
 }
+
+.file-input {
+  width: 250px;
+}
+
+.loginMain, .signUpMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+
+.login-box, .signup-box {
+  width: fit-content;
+  height: fit-content;
+  margin: 0 8px;
+  min-width: calc(320px - 28px);
+}
+
+
+.login-box {
+  min-width: clamp(292px, 95vw, 400px);
+}
+
+
 
 .login-form button, .signup-form button {
   font-weight: 600;
@@ -169,7 +200,7 @@ header > div {
   background-color: var(--white);
   border-radius: 5px;
   border: 1px solid black;
-  margin: 0 24px;
+  margin: 0 14px;
   box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.4);
 }
 
@@ -188,7 +219,7 @@ header > div {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 24px;
+  margin: 24px;
 }
 
 .signup-name-box {
@@ -198,8 +229,10 @@ header > div {
 }
 
 .signup-name-box input {
-  width: 100%;
+  width: 100%
 }
+
+
 
 .error-box {
   background-color: #cf000f;
@@ -225,7 +258,7 @@ header > div {
     width: 500px;
   }
 
-  .signUpMain {
+  .signup-box {
     margin: 0 auto;
     width: 500px;
   }
@@ -236,7 +269,6 @@ header > div {
 .homeMain {
   display: flex;
   flex-direction: column;
-  background-color: yellowgreen;
 }
 
 .posts-box {
@@ -244,8 +276,7 @@ header > div {
   flex-direction: column;
   gap: 10px;
   background-color: var(--white);
-  padding: 32px 24px;
-  border-top: 1px solid var(--border);
+  margin: 32px 14px;
 }
 
 .heroScreen {
@@ -255,10 +286,6 @@ header > div {
   background-color: var(--gray);
   width: calc(100%-48px);
   padding: 128px 34px;
-}
-
-.posts-title {
-  margin: 8px 0;
 }
 
 .post-hr, .comment-hr {
@@ -296,7 +323,6 @@ header > div {
 
 .photo-thumbnail {
   display: none;
-  width: 256px;
 }
 
 .author-avatar-card {
@@ -305,18 +331,46 @@ header > div {
   border-radius: 100px;
 }
 
-@media (min-width: 916px) {
+@media (min-width: 600px) {
+
   .homeMain {
+    width: clamp(550px, 90vw, 768px);
     margin: 0 auto;
-    width: 900px;
   }
 
   .photo-thumbnail {
     display: inline-block;
+    object-fit: cover;
+    width: 192px;
+    height: 100%;
   }
 
   .posts-box {
-    padding: 32px 0;
+    margin: 32px 0;
+  }
+
+  .postCard a {
+    flex-direction: row;
+    gap: 32px;
+  }
+}
+
+
+@media (min-width: 916px) {
+  .homeMain {
+    width: 768px;
+    margin: 0 auto;
+  }
+
+  .photo-thumbnail {
+    display: inline-block;
+    object-fit: fill;
+    width: 256px;
+    height: auto;
+  }
+
+  .posts-box {
+    margin: 32px 0;
   }
 
   .postCard a {
@@ -331,8 +385,8 @@ header > div {
 .blogMain {
   display: flex;
   flex-direction: column;
+  margin: 16px 14px;
   gap: 16px;
-  margin: 8px 24px;
 }
 
 .postFull {
@@ -364,10 +418,19 @@ header > div {
   border-radius: 100px;
 }
 
-@media (min-width: 916px) {
-  .blogMain {
+@media (min-width: 600px) {
+  .postFull {
+    max-width: clamp(550px, 90vw, 768px);
     margin: 0 auto;
-    width: 900px;
+  }
+}
+
+@media (min-width: 916px) {
+  .postFull {
+    margin: 16px auto;
+    /* width: 900px; */
+    width: 768px;
+    margin: 0 auto;
   }
 }
 
@@ -378,6 +441,7 @@ header > div {
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.4);
+  padding: 10px;
 }
 
 .commentSection h2 {
@@ -454,6 +518,21 @@ header > div {
   text-decoration: none;
   padding: 10px;
   color: black;
+}
+
+
+@media (min-width: 600px) {
+  .commentSection {
+    min-width: clamp(550px, 90vw, 768px);
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 912px) {
+  .commentSection {
+    width: 768px;
+    margin: 0 auto;
+  }
 }
 
 /* Footer */
