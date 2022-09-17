@@ -18,7 +18,7 @@ export default function PostCard(props) {
                     </div>
                     <h2>{post.title}</h2>
                     <p>{post.description.split(' ').slice(0, 50).join(' ') + "..."}</p>
-                    <p>{post.count + " comments"}</p>
+                    <p className="post-comments-count">{post.count + " comments"}</p>
                 </div>
                 <div className="post-box-right">
                     <img className="photo-thumbnail" src={"http://localhost:3000/"+post.photo.path}/>

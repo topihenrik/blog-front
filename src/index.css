@@ -88,6 +88,7 @@ header > div {
 
 .auth-box {
   display: flex;
+  align-items: center;
   gap: 10px;
 }
 
@@ -137,7 +138,7 @@ header > div {
 
 @media (min-width: 600px) {
   .header-box {
-    width: clamp(550px, 90vw, 790px);
+    width: clamp(550px, 90vw, 768px);
     margin: 0 auto;
   }
 }
@@ -145,7 +146,7 @@ header > div {
 @media (min-width: 916px) {
   .header-box {
     margin: 0 auto;
-    width: 790px;
+    width: 768px;
   }
 }
 
@@ -172,7 +173,6 @@ header > div {
   height: 100%;
 }
 
-
 .login-box, .signup-box {
   width: fit-content;
   height: fit-content;
@@ -180,12 +180,9 @@ header > div {
   min-width: calc(320px - 28px);
 }
 
-
 .login-box {
   min-width: clamp(292px, 95vw, 400px);
 }
-
-
 
 .login-form button, .signup-form button {
   font-weight: 600;
@@ -232,8 +229,6 @@ header > div {
   width: 100%
 }
 
-
-
 .error-box {
   background-color: #cf000f;
   color: white;
@@ -253,9 +248,9 @@ header > div {
 }
 
 @media (min-width: 916px) {
-  .loginMain {
+  .login-box {
     margin: 0 auto;
-    width: 500px;
+    width: 400px;
   }
 
   .signup-box {
@@ -282,10 +277,14 @@ header > div {
 .heroScreen {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 10px;
   background-color: var(--gray);
-  width: calc(100%-48px);
-  padding: 128px 34px;
+  height: 256px;
+}
+
+.hero-box {
+  padding: 0 34px;
 }
 
 .post-hr, .comment-hr {
@@ -321,6 +320,11 @@ header > div {
   gap: 5px;
 }
 
+.post-comments-count {
+  margin-top: auto;
+  font-weight: 500;
+}
+
 .photo-thumbnail {
   display: none;
 }
@@ -333,9 +337,9 @@ header > div {
 
 @media (min-width: 600px) {
 
-  .homeMain {
-    width: clamp(550px, 90vw, 768px);
+  .heroScreen {
     margin: 0 auto;
+    width: clamp(550px, 90vw, 768px);
   }
 
   .photo-thumbnail {
@@ -347,6 +351,8 @@ header > div {
 
   .posts-box {
     margin: 32px 0;
+    margin: 0 auto;
+    width: clamp(550px, 90vw, 768px);
   }
 
   .postCard a {
@@ -357,9 +363,15 @@ header > div {
 
 
 @media (min-width: 916px) {
-  .homeMain {
-    width: 768px;
+
+  .heroScreen {
     margin: 0 auto;
+    width: 768px;
+  }
+
+  .posts-box {
+    margin: 32px auto;
+    width: 768px;
   }
 
   .photo-thumbnail {
@@ -367,10 +379,6 @@ header > div {
     object-fit: fill;
     width: 256px;
     height: auto;
-  }
-
-  .posts-box {
-    margin: 32px 0;
   }
 
   .postCard a {
@@ -385,14 +393,13 @@ header > div {
 .blogMain {
   display: flex;
   flex-direction: column;
-  margin: 16px 14px;
+  margin: 16px 0;
   gap: 16px;
 }
 
 .postFull {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   border-radius: 5px;
   box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.4);
   padding: 10px;
@@ -401,8 +408,8 @@ header > div {
 
 .postFull .info-box {
   display: flex;
-  /* justify-content: space-between; */
-  gap: 32px;
+  justify-content: space-between;
+  /* gap: 32px; */
   align-items: center;
 }
 
@@ -418,9 +425,14 @@ header > div {
   border-radius: 100px;
 }
 
+.p-edit-timestamp {
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
 @media (min-width: 600px) {
   .postFull {
-    max-width: clamp(550px, 90vw, 768px);
+    max-width: clamp(550px, 90vw, 748px);
     margin: 0 auto;
   }
 }
@@ -429,7 +441,7 @@ header > div {
   .postFull {
     margin: 16px auto;
     /* width: 900px; */
-    width: 768px;
+    width: 748px;
     margin: 0 auto;
   }
 }
@@ -438,7 +450,6 @@ header > div {
 .commentSection {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   border-radius: 5px;
   box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.4);
   padding: 10px;
@@ -523,14 +534,14 @@ header > div {
 
 @media (min-width: 600px) {
   .commentSection {
-    min-width: clamp(550px, 90vw, 768px);
+    min-width: clamp(550px, 90vw, 748px);
     margin: 0 auto;
   }
 }
 
 @media (min-width: 912px) {
   .commentSection {
-    width: 768px;
+    width: 748px;
     margin: 0 auto;
   }
 }

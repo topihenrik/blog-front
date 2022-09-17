@@ -39,10 +39,10 @@ export default function PostFull(props) {
                         <h3>{post.author.first_name + " " + post.author.last_name}</h3>
                     </div>
                     <h3>{DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</h3>
+                    {post.edit_timestamp?<p className="p-edit-timestamp">{"Edited: "+DateTime.fromJSDate(new Date(post.edit_timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</p>:<></>}
                 </div>
                 <img src={"http://localhost:3000/"+post.photo.path}/>
                 <h1>{post.title}</h1>
-                {post.edit_timestamp?<p>{"Edited: "+DateTime.fromJSDate(new Date(post.edit_timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</p>:<></>}
                 <div dangerouslySetInnerHTML={{__html: post.content}}></div>
             </div>
         )
