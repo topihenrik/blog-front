@@ -37,20 +37,21 @@ body, button, input, textarea {
   --border: #00000010;
 }
 
-html, body {
-  height: 100vh;
+html, body, #root {
+  height: 100%;
   margin: 0;
   padding: 0;
 }
 
 #root {
-  height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 /* Header */
 header {
+  position: sticky;
+  top: 0px;
   display: flex;
   background-color: var(--white);
   justify-content: space-between;
@@ -138,6 +139,7 @@ header > div {
 
 @media (min-width: 600px) {
   .header-box {
+    box-sizing: border-box;
     width: clamp(550px, 90vw, 768px);
     margin: 0 auto;
   }
@@ -145,6 +147,7 @@ header > div {
 
 @media (min-width: 916px) {
   .header-box {
+    box-sizing: border-box;
     margin: 0 auto;
     width: 768px;
   }
@@ -166,18 +169,23 @@ header > div {
 }
 
 .loginMain, .signUpMain {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  padding: 16px 0;
   height: 100%;
 }
 
 .login-box, .signup-box {
   width: fit-content;
   height: fit-content;
-  margin: 0 8px;
   min-width: calc(320px - 28px);
+  background-color: var(--white);
+  border-radius: 5px;
+  border: 1px solid black;
+  margin: 0 14px;
+  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.4);
 }
 
 .login-box {
@@ -191,14 +199,6 @@ header > div {
   height: 48px;
   border: 1px solid black;
   font-size: 16px;
-}
-
-.login-box, .signup-box {
-  background-color: var(--white);
-  border-radius: 5px;
-  border: 1px solid black;
-  margin: 0 14px;
-  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.4);
 }
 
 .login-title-box, .signup-title-box {
@@ -236,16 +236,16 @@ header > div {
   border-radius: 5px;
 }
 
-/* SignUpSuccess */
-.signUpSuccess-box {
-  background-color: gray;
-  border-radius: 5px;
-  margin: 0 24px;
+@media (min-width: 600px) {
+  .login-box {
+    margin: 0 auto;
+  }
+
+  .signup-box {
+    margin: 0 auto;
+  }
 }
 
-.signUpSuccess-box p {
-  padding: 48px 24px;
-}
 
 @media (min-width: 916px) {
   .login-box {
@@ -259,11 +259,24 @@ header > div {
   }
 }
 
+/* SignUpSuccess */
+.signUpSuccess-box {
+  background-color: gray;
+  border-radius: 5px;
+  margin: 0 24px;
+}
+
+.signUpSuccess-box p {
+  padding: 48px 24px;
+}
+
 /* Home, HeroScreen and PostCard */
 
 .homeMain {
   display: flex;
   flex-direction: column;
+  gap: 16px;
+  padding-bottom: 16px;
 }
 
 .posts-box {
@@ -271,7 +284,7 @@ header > div {
   flex-direction: column;
   gap: 10px;
   background-color: var(--white);
-  margin: 32px 14px;
+  margin: 0 14px;
 }
 
 .heroScreen {
@@ -338,6 +351,7 @@ header > div {
 @media (min-width: 600px) {
 
   .heroScreen {
+    box-sizing: border-box;
     margin: 0 auto;
     width: clamp(550px, 90vw, 768px);
   }
@@ -350,7 +364,7 @@ header > div {
   }
 
   .posts-box {
-    margin: 32px 0;
+    box-sizing: border-box;
     margin: 0 auto;
     width: clamp(550px, 90vw, 768px);
   }
@@ -365,12 +379,14 @@ header > div {
 @media (min-width: 916px) {
 
   .heroScreen {
+    box-sizing: border-box;
     margin: 0 auto;
     width: 768px;
   }
 
   .posts-box {
-    margin: 32px auto;
+    box-sizing: border-box;
+    margin: 0 auto;
     width: 768px;
   }
 
@@ -387,13 +403,11 @@ header > div {
   }
 }
 
-
-
 /* Blog and PostFull */
 .blogMain {
   display: flex;
   flex-direction: column;
-  margin: 16px 0;
+  padding: 16px 0;
   gap: 16px;
 }
 
@@ -432,16 +446,17 @@ header > div {
 
 @media (min-width: 600px) {
   .postFull {
-    max-width: clamp(550px, 90vw, 748px);
+    box-sizing: border-box;
+    max-width: clamp(550px, 90vw, 768px);
     margin: 0 auto;
   }
 }
 
 @media (min-width: 916px) {
   .postFull {
+    box-sizing: border-box;
     margin: 16px auto;
-    /* width: 900px; */
-    width: 748px;
+    width: 768px;
     margin: 0 auto;
   }
 }
@@ -534,14 +549,16 @@ header > div {
 
 @media (min-width: 600px) {
   .commentSection {
-    min-width: clamp(550px, 90vw, 748px);
+    box-sizing: border-box;
+    min-width: clamp(550px, 90vw, 768px);
     margin: 0 auto;
   }
 }
 
 @media (min-width: 912px) {
   .commentSection {
-    width: 748px;
+    box-sizing: border-box;
+    width: 768px;
     margin: 0 auto;
   }
 }
