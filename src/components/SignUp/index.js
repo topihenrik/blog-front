@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import uploadIcon from "../../icons/file_upload.png";
 
 
 export default function SignUpMain(props) {
@@ -60,7 +61,11 @@ export default function SignUpMain(props) {
                     <input className="text-input" name="email" type="email" placeholder="Email" required={true}/>
                     <input className="text-input" name="password" type="password" placeholder="Password" required={true}/>
                     <input className="text-input" name="password_confirm" type="password" placeholder="Confirm Password" required={true}/>
-                    <input className="file-input" name="avatar" type="file" accept="image/png, image/jpeg" onChange={handleChange}/>
+                    {/* <input className="file-input" name="avatar" type="file" accept="image/png, image/jpeg" onChange={handleChange}/> */}
+                    <div className="signup-avatar-box">
+                        <label className="signup-avatar-label" htmlFor="avatar"><img id="upload-icon" src={uploadIcon}/><span className="signup-avatar-span">{file?file.name:"Avatar image"}</span></label>
+                        <input id="avatar" name="avatar" type="file" accept="image/png, image/jpeg" onChange={handleChange}/>
+                    </div>
                     {result.status === 409  &&
                     <div className="error-box">
                         <p>{result.message}</p>
