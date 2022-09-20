@@ -1,16 +1,12 @@
 import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
-import { nanoid } from "nanoid";
 
-export default function LoginMain(props) {
+export default function LogIn(props) {
     const { user, setUser } = props;
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState({});
-
     const navigate = useNavigate();
-
-    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -57,4 +53,3 @@ export default function LoginMain(props) {
         </main>
     )
 }
-
