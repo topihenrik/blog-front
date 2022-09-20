@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
+import { nanoid } from "nanoid";
 
 export default function LoginMain(props) {
     const { user, setUser } = props;

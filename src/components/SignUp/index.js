@@ -25,7 +25,7 @@ export default function SignUpMain(props) {
         formData.append("last_name", e.target.last_name.value);
         formData.append("email", e.target.email.value);
         formData.append("password", e.target.password.value);
-        formData.append("password_confirm", e.target.password.value);
+        formData.append("password_confirm", e.target.password_confirm.value);
         formData.append("avatar", file);
 
         fetch("http://localhost:3000/signup",
@@ -66,7 +66,7 @@ export default function SignUpMain(props) {
                         <label className="signup-avatar-label" htmlFor="avatar"><img id="upload-icon" src={uploadIcon}/><span className="signup-avatar-span">{file?file.name:"Avatar image"}</span></label>
                         <input id="avatar" name="avatar" type="file" accept="image/png, image/jpeg" onChange={handleChange}/>
                     </div>
-                    {result.status === 409  &&
+                    {(result.status >= 400 && result.status <= 451)  &&
                     <div className="error-box">
                         <p>{result.message}</p>
                     </div>}

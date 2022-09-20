@@ -341,10 +341,20 @@ header > div {
 }
 
 .error-box {
+  box-sizing: border-box;
   background-color: #cf000f;
   color: white;
   padding: 10px;
   border-radius: 5px;
+  width: 100%;
+}
+
+.login-error-box {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 0;
 }
 
 .signup-avatar-label {
