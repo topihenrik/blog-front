@@ -60,7 +60,7 @@ export default function Comment(props) {
                 <div className="info-box">
                     <div className="author-box">
                         <img className="author-avatar-comment" src={"http://localhost:3000/"+comment.author.avatar.path}/>
-                        <h3>{comment.author.first_name + " " + comment.author.last_name}</h3>
+                        <h4>{comment.author.first_name + " " + comment.author.last_name}</h4>
                     </div>
                     <h4>{DateTime.fromJSDate(new Date(comment.timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</h4>
                 </div>
