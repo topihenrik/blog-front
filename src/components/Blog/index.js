@@ -6,10 +6,11 @@ import CommentSection from "./CommentSection";
 export default function BlogMain(props) {
     const { user } = props;
     const { postid } = useParams();
+    const [postExists, setPostExists] = useState(false);
     return(
         <main className="blogMain">
-            <PostFull postid={postid}/>
-            <CommentSection postid={postid} user={user}/>
+            <PostFull postid={postid} setPostExists={setPostExists}/>
+            <CommentSection postid={postid} user={user} postExists={postExists}/>
         </main>
     )
 }

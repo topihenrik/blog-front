@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import HeroScreen from "./HeroScreen";
 import PostCard from "./PostCard";
+import LoadingIcon from "../../icons/loading.svg"
 
 export default function Home(props) {
     const [error, setError] = useState(null);
@@ -22,11 +23,34 @@ export default function Home(props) {
     }, [])
 
     if (error) {
-        return <div>Error: {error.message}</div>
+        return (
+            <div className="errorMain">
+                <div className="error-container">
+                    <h2>Error</h2>
+                    <p>{error.message}</p>
+                </div>
+            </div>
+        )
     } else if (posts === undefined) {
-        return <div>No posts!</div>
+        return (
+            <div className="noContentMain">
+                <div className="no-content-container">
+                    <h2>No posts found</h2>
+                    <p>🥇 Be the first creator to make a post!</p>
+                </div>
+            </div>
+        )
     } else if (!isLoaded) {
-        return <div>Loading...</div>
+        return (
+            <div className="loadingMain">
+                <div className="loading-container">
+                    <div className="loading-icon-box">
+                        <img id="loading-icon" src={LoadingIcon}/>
+                    </div>
+                    <p>Loading...</p>
+                </div>
+            </div>
+        )
     } else {
         return(
             <main className="homeMain">

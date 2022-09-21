@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {DateTime} from "luxon";
+import LoadingIcon from "../../../icons/loading.svg"
 
 export default function PostFull(props) {
-    const { postid } = props;
+    const { postid, setPostExists } = props;
     
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -14,6 +15,9 @@ export default function PostFull(props) {
             .then((result) => {
                 setIsLoaded(true);
                 setPost(result.post_list);
+                if (result.post_list !== undefined) {
+                    setPostExists(true);
+                }
             },
             (error) => {
                 setIsLoaded(true);
@@ -24,11 +28,33 @@ export default function PostFull(props) {
 
 
     if (error) {
-        return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-        return <div>Loading...</div>;
+        return (
+            <div className="errorMain">
+                <div className="error-container">
+                    <h2>Error</h2>
+                    <p>{error.message}</p>
+                </div>
+            </div>
+        )
     } else if (post === undefined) {
-        return <div>No post!</div>
+        return (
+            <div className="noContentMain">
+                <div className="no-content-container">
+                    <h2>No post found</h2>
+                </div>
+            </div>
+        )
+    } else if (!isLoaded) {
+        return (
+            <div className="loadingMain">
+                <div className="loading-container">
+                    <div className="loading-icon-box">
+                        <img id="loading-icon" src={LoadingIcon}/>
+                    </div>
+                    <p>Loading Post...</p>
+                </div>
+            </div>
+        )
     } else {
         console.log(post);
         return(
