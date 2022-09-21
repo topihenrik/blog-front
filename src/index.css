@@ -724,6 +724,48 @@ header > div {
   align-items: center;
 }
 
+.comment-timestamp, .post-timestamp {
+  position: relative;
+}
+
+.comment-timestamp .comment-timestamp-edit-tooltip, .post-timestamp .post-timestamp-edit-tooltip {
+  position: absolute;
+  bottom: 150%;
+  margin-left: -60px;
+  opacity: 0;
+  padding: 10px;
+  width: fit-content;
+  border: 1px solid black;
+  background-color: black;
+  color: white;
+
+  
+}
+
+.comment-timestamp .comment-timestamp-edit-tooltip {
+  left: 10%;
+}
+
+.post-timestamp .post-timestamp-edit-tooltip {
+  left: -40%;
+}
+
+
+.comment-timestamp .comment-timestamp-edit-tooltip p, .post-timestamp .post-timestamp-edit-tooltip p {
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.comment-timestamp-original:hover + .comment-timestamp-edit-tooltip, .post-timestamp-original:hover + .post-timestamp-edit-tooltip {
+  opacity: 1;
+  transition: 1s;
+}
+
+.comment-timestamp .comment-timestamp-edit-tooltip::after, .post-timestamp .post-timestamp-edit-tooltip{
+  content: " ";
+  position: absolute;
+}
+
 .comment-modification-buttons, .comment-creator-buttons {
   display: flex;
   gap: 10px;

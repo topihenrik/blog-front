@@ -7,7 +7,7 @@ export default function CommentCreator(props) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState({});
-
+ 
 
 
     const handleSubmit = (e) => {
@@ -27,6 +27,7 @@ export default function CommentCreator(props) {
                 setResult(result);
                 if (result.status == 201) {
                     setUpdateComments(updateComments+1);
+                    e.target.reset();
                 }
             },
             (error) => {

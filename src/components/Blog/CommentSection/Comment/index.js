@@ -62,7 +62,11 @@ export default function Comment(props) {
                         <img className="author-avatar-comment" src={"http://localhost:3000/"+comment.author.avatar.path}/>
                         <h4>{comment.author.first_name + " " + comment.author.last_name}</h4>
                     </div>
-                    <h4>{DateTime.fromJSDate(new Date(comment.timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</h4>
+                    <h4 className="comment-timestamp">
+                        <span className="comment-timestamp-original">{DateTime.fromJSDate(new Date(comment.timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</span>
+                        {comment.edit_timestamp&&"*"}
+                        {comment.edit_timestamp?<span className="comment-timestamp-edit-tooltip"><p className="p-edit-timestamp">{"Edited: "+DateTime.fromJSDate(new Date(comment.edit_timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</p></span>:<></>}
+                    </h4>
                 </div>
                 <p>{comment.content}</p>
                 {(user?._id === comment.author._id)&&

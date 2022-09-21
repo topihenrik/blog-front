@@ -64,8 +64,11 @@ export default function PostFull(props) {
                         <img className="author-avatar-full" src={"http://localhost:3000/"+post.author.avatar.path}/>
                         <h4>{post.author.first_name + " " + post.author.last_name}</h4>
                     </div>
-                    <h4>{DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATE_MED)}</h4>
-                    {post.edit_timestamp?<p className="p-edit-timestamp">{"Edited: "+DateTime.fromJSDate(new Date(post.edit_timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</p>:<></>}
+                    <h4 className="post-timestamp">
+                        <span className="post-timestamp-original">{DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATE_MED)}</span>
+                        {post.edit_timestamp&&"*"}
+                        {post.edit_timestamp&&<span className="post-timestamp-edit-tooltip"><p className="p-edit-timestamp">{"Edited: "+DateTime.fromJSDate(new Date(post.edit_timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</p></span>}
+                    </h4>
                 </div>
                 <img src={"http://localhost:3000/"+post.photo.path}/>
                 <h1>{post.title}</h1>
