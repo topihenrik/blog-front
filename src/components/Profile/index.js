@@ -76,7 +76,7 @@ export default function Profile(props) {
                         <h2>{"Hello, " + result?.user.first_name + " " + result?.user.last_name + "! 👋"}</h2>
                     </div>
                     <div className="profile-content-box">
-                        <p>{"Since the creation of your account <15> day ago, you have created " + result.postCount + " posts and " + result.commentCount + " comments."}</p>
+                        <p>{"Since the creation of your account " + Math.floor(-1*DateTime.fromJSDate(new Date(result.user.creation_date)).diffNow("days").values.days) + " days ago, you have created " + result.postCount + " posts and " + result.commentCount + " comments."}</p>
                         <div className="profile-personal-information">
                             <h2>Personal Information</h2>
                             <div className="profile-personal-box">
