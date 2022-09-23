@@ -398,6 +398,33 @@ header > div {
   width: 100%
 }
 
+.signup-dob-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.signup-select-box {
+  display: flex;
+  gap: 10px;
+}
+
+.dob-select {
+  width: 100%;
+  height: 48px;
+  border: 2px solid black;
+  border-radius: 8px;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.dob-option {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 16px;
+}
+
 .error-box {
   box-sizing: border-box;
   background-color: #cf000f;
@@ -498,6 +525,193 @@ header > div {
 
 .signUpSuccess-box p {
   padding: 48px 24px;
+}
+
+/* Profile and ProfileEdit */
+.profile-main, .profile-edit-main, .profile-delete-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.profile-container, .profile-edit-container, .profile-delete-container {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: fit-content;
+  box-sizing: border-box;
+  margin: 0 14px;
+  width: 568px;
+}
+
+
+
+
+.profile-title-box, .profile-edit-title-box, .profile-delete-title-box {
+  padding: 24px;
+  background-color: black;
+  color: white;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  box-sizing: border-box;
+}
+
+
+
+.profile-content-box, .profile-delete-content-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px;
+}
+
+.profile-personal-information {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-personal-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-personal-text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#author-avatar-profile {
+  width: 112px;
+  height: 112px;
+}
+
+.profile-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.profile-buttons a {
+  text-decoration: none;
+  width: fit-content;
+}
+
+.profile-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: white;
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  width: 180px;
+}
+
+
+.profile-avatar-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-weight: 700;
+  color: black;
+  background-color: white;
+  padding: 8px;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.profile-avatar-span {
+  padding: 0 8px;
+}
+
+.profile-edit-button {
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 4px 16px;
+  height: 48px;
+  border: 1px solid black;
+  font-size: 16px;
+}
+
+
+.profile-delete-box {
+  margin: 24px;
+}
+
+.profile-delete-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px;
+}
+
+
+.profile-delete-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile-delete-form-div {
+  display: flex;
+  gap: 16px;
+}
+
+.profile-delete-input {
+  width: calc(140px + 20%);
+  height: 32px;
+  padding: 16px;
+  border-radius: 8px;
+  border: 2px solid black;
+  font-size: 16px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.profile-delete-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: black;
+  color: white;
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  width: fit-content;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 600px) {
+  .profile-edit-container, .profile-delete-container {
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: clamp(500px, 90vw, 768px);
+  }
+}
+
+@media (min-width: 916px) {
+  .profile-edit-container, .profile-delete-container {
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 768px;
+  }
 }
 
 /* Home, HeroScreen and PostCard */
