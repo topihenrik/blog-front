@@ -6,7 +6,7 @@ import { DateTime } from "luxon";
 import { nanoid } from "nanoid";
 
 export default function ProfileEdit(props) {
-    const { user } = props;
+    const { user, setUser } = props;
 
     const navigate = useNavigate();
     const [error, setError] = useState(null);
@@ -80,7 +80,7 @@ export default function ProfileEdit(props) {
         formData.append("email", e.target.email.value);
         formData.append("dob", dob_iso);
         formData.append("avatar", file);
-
+        console.log(formData);
         fetch("http://localhost:3000/auth/user/basic",
             {
                 headers: {
@@ -92,7 +92,7 @@ export default function ProfileEdit(props) {
             .then((res) => res.json())
             .then((result) => {
                 // Do something with result
-                if(result.status === 201) {
+                if (result.status === 201) {
                     navigate("../profile", {replace: true});
                 }
             }, (error) => {
@@ -100,10 +100,29 @@ export default function ProfileEdit(props) {
             })
     }
 
+    const handleSubmitPassword = (e) => {
+        e.preventDefault();
+        const bearer = "Bearer " + localStorage.getItem("token");
 
-
-
-    // Create HandleSubmits for both forms. Create backend functions to updates to the User data.
+        fetch("http://localhost:3000/auth/user/password",
+            {
+                headers: {
+                    "Authorization": bearer
+                },
+                method: "PUT",
+                body: new URLSearchParams({"old_password": e.target.old_password.value, "password": e.target.password.value, "password_confirm": e.target.password_confirm.value})
+            })
+            .then((res) => res.json())
+            .then((result) => {
+                if (result.status === 201) {
+                    localStorage.clear();
+                    setUser(null);
+                    navigate("../login", {replace: true});
+                }
+            }, (error) => {
+                // Do something with fetch error
+            })
+    }
 
     if (error) {
         return (
@@ -200,11 +219,11 @@ export default function ProfileEdit(props) {
                             </div>
                             <button className="profile-edit-button">Update</button>
                         </form>
-                        <form className="profile-form">
+                        <form onSubmit={handleSubmitPassword} className="profile-form">
                             <h2>Change Password</h2>
-                            <input className="text-input" placeholder="Old Password"/>
-                            <input className="text-input" placeholder="New Password"/>
-                            <input className="text-input" placeholder="Confirm New Password"/>
+                            <input className="text-input" type="password" name="old_password" placeholder="Old Password"/>
+                            <input className="text-input" type="password" name="password" placeholder="New Password"/>
+                            <input className="text-input" type="password" name="password_confirm" placeholder="Confirm New Password"/>
                             <button className="profile-edit-button">Update</button>
                         </form>
                     </div>

@@ -26,7 +26,7 @@ export default function RouteSwitch() {
                     <Route path="/signup" element={<SignUp/>}/> 
                     <Route path="/signup/success" element={<SignUpSuccess/>}/>
                     <Route path="/profile" element={<Profile user={user}/>}/>
-                    <Route path="/profile/edit" element={<ProfileEdit user={user}/>}/>
+                    <Route path="/profile/edit" element={<ProfileEdit user={user} setUser={setUser}/>}/>
                     <Route path="/profile/delete" element={<ProfileDelete user={user}/>}/>
                 </Routes>
             <Footer/>
