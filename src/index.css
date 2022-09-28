@@ -742,7 +742,12 @@ header > div {
 }
 
 .hero-box {
-  padding: 0 34px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin: 0 34px;
+  width: 85%;
+  gap: 8px;
 }
 
 .post-hr, .comment-hr {
@@ -801,6 +806,10 @@ header > div {
     width: clamp(550px, 90vw, 768px);
   }
 
+  .hero-box {
+    width: 500px;
+  }
+
   .photo-thumbnail {
     display: inline-block;
     object-fit: cover;
@@ -837,9 +846,9 @@ header > div {
 
   .photo-thumbnail {
     display: inline-block;
-    object-fit: fill;
+    object-fit: cover;
     width: 256px;
-    height: auto;
+    height: 100%;
   }
 
   .postCard a {

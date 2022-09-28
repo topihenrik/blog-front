@@ -71,7 +71,6 @@ export default function PostFull(props) {
                     </h4>
                 </div>
                 <img src={"http://localhost:3000/"+post.photo.path}/>
-                <h1>{post.title}</h1>
                 <div dangerouslySetInnerHTML={{__html: post.content}}></div>
             </div>
         )
