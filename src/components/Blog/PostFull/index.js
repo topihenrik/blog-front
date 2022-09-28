@@ -36,14 +36,6 @@ export default function PostFull(props) {
                 </div>
             </div>
         )
-    } else if (post === undefined) {
-        return (
-            <div className="noContentMain">
-                <div className="no-content-container">
-                    <h2>No post found</h2>
-                </div>
-            </div>
-        )
     } else if (!isLoaded) {
         return (
             <div className="loadingMain">
@@ -52,6 +44,14 @@ export default function PostFull(props) {
                         <img id="loading-icon" src={LoadingIcon}/>
                     </div>
                     <p>Loading Post...</p>
+                </div>
+            </div>
+        )
+    } else if (post === undefined) {
+        return (
+            <div className="noContentMain">
+                <div className="no-content-container">
+                    <h2>No post found</h2>
                 </div>
             </div>
         )
