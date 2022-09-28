@@ -15,6 +15,8 @@ export default function ProfileEdit(props) {
     const [file, setFile] = useState(null);
     const [years, setYears] = useState([]);
     const [oldDob, setOldDob] = useState(undefined);
+    const [resultBasic, setResultBasic] = useState({});
+    const [resultPassword, setResultPassword] = useState({});
 
     const handleChange = (e) => {
         setFile(e.target.files[0]);
@@ -62,6 +64,7 @@ export default function ProfileEdit(props) {
 
         // Client side validation
         const dob_iso = e.target.dob_year.value.padStart(2, "0") + "-" + e.target.dob_month.value.padStart(2, "0") + "-" + e.target.dob_day.value.padStart(2, "0");
+        console.log(dob_iso);
         if (!DateTime.fromISO(dob_iso).isValid) {
             console.log("Not valid date")
             setResult({errors:[{msg: "Invalid date"}]})
@@ -92,6 +95,7 @@ export default function ProfileEdit(props) {
             .then((res) => res.json())
             .then((result) => {
                 // Do something with result
+                setResultBasic(result);
                 if (result.status === 201) {
                     navigate("../profile", {replace: true});
                 }
@@ -114,6 +118,7 @@ export default function ProfileEdit(props) {
             })
             .then((res) => res.json())
             .then((result) => {
+                setResultPassword(result);
                 if (result.status === 201) {
                     localStorage.clear();
                     setUser(null);
@@ -188,11 +193,11 @@ export default function ProfileEdit(props) {
                                         {["January","February","March","April","May","June","July","August","September","October","November","December"].map((month, i) => {
                                             if (oldDob.month == i) {
                                                 return(
-                                                    <option key={nanoid(10)} selected className="dob-option" value={i}>{month}</option>
+                                                    <option key={nanoid(10)} selected className="dob-option" value={i+1}>{month}</option>
                                                 )
                                             } else {
                                                 return(
-                                                    <option key={nanoid(10)} className="dob-option" value={i}>{month}</option>
+                                                    <option key={nanoid(10)} className="dob-option" value={i+1}>{month}</option>
                                                 )
                                             }
                                         })}
@@ -217,6 +222,19 @@ export default function ProfileEdit(props) {
                                 <label className="profile-avatar-label" htmlFor="avatar"><img id="upload-icon" src={uploadIcon}/><span className="profile-avatar-span">{file?file.name:result.avatar.originalName?result.avatar.originalName:"Avatar image"}</span></label>
                                 <input id="avatar" name="avatar" type="file" accept="image/png, image/jpeg" onChange={handleChange}/>
                             </div>
+                            {(resultBasic.status >= 400 && resultBasic.status <= 451)  &&
+                            <div className="error-box">
+                                <p>{resultBasic.message}</p>
+                            </div>}
+                            {resultBasic["errors"] !== undefined &&
+                            resultBasic.errors.map((error) => {
+                                return (
+                                    <div className="error-box">
+                                        <p>{error.msg}</p>
+                                    </div>
+                                )
+                            })
+                            }
                             <button className="profile-edit-button">Update</button>
                         </form>
                         <form onSubmit={handleSubmitPassword} className="profile-form">
@@ -224,6 +242,19 @@ export default function ProfileEdit(props) {
                             <input className="text-input" type="password" name="old_password" placeholder="Old Password"/>
                             <input className="text-input" type="password" name="password" placeholder="New Password"/>
                             <input className="text-input" type="password" name="password_confirm" placeholder="Confirm New Password"/>
+                            {(resultPassword.status >= 400 && resultPassword.status <= 451)  &&
+                            <div className="error-box">
+                                <p>{resultPassword.message}</p>
+                            </div>}
+                            {resultPassword["errors"] !== undefined &&
+                            resultPassword.errors.map((error) => {
+                                return (
+                                    <div className="error-box">
+                                        <p>{error.msg}</p>
+                                    </div>
+                                )
+                            })
+                            }
                             <button className="profile-edit-button">Update</button>
                         </form>
                     </div>

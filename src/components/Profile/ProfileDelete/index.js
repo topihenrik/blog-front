@@ -9,6 +9,7 @@ export default function ProfileDelete(props) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState(null);
+    const [resultDelete, setResultDelete] = useState({});
 
     useEffect(() => {
         if (!user) {
@@ -45,7 +46,7 @@ export default function ProfileDelete(props) {
             })
             .then((res) => res.json())
             .then((result) => {
-                console.log(result);
+                setResultDelete(result);
                 if (result.status === 200) {
                     localStorage.clear();
                     setUser(null);
@@ -103,6 +104,19 @@ export default function ProfileDelete(props) {
                                 <input name="email" type="text" placeholder="Email" id="confirmation" className="profile-delete-input"/>
                                 <input name="password" type="password" placeholder="Password" className="profile-delete-input"/>
                             </div>
+                            {(resultDelete.status >= 400 && resultDelete.status <= 451)  &&
+                            <div className="error-box">
+                                <p>{resultDelete.message}</p>
+                            </div>}
+                            {resultDelete["errors"] !== undefined &&
+                            resultDelete.errors.map((error) => {
+                                return (
+                                    <div className="error-box">
+                                        <p>{error.msg}</p>
+                                    </div>
+                                )
+                            })
+                            }
                             <button className="profile-delete-button">Delete</button>
                         </form>
                     </div>
