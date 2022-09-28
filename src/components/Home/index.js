@@ -24,7 +24,7 @@ export default function Home(props) {
 
     if (error) {
         return (
-            <div className="errorMain">
+            <div className="error-main">
                 <div className="error-container">
                     <h2>Error</h2>
                     <p>{error.message}</p>
@@ -33,7 +33,8 @@ export default function Home(props) {
         )
     } else if (!isLoaded) {
         return (
-            <div className="loadingMain">
+            <div className="loading-main">
+                <HeroScreen/>
                 <div className="loading-container">
                     <div className="loading-icon-box">
                         <img id="loading-icon" src={LoadingIcon}/>
@@ -44,7 +45,8 @@ export default function Home(props) {
         )
     } else if (posts === undefined) {
         return (
-            <div className="noContentMain">
+            <div className="no-content-main">
+                <HeroScreen/>
                 <div className="no-content-container">
                     <h2>No posts found</h2>
                     <p>🥇 Be the first creator to make a post!</p>
@@ -53,7 +55,7 @@ export default function Home(props) {
         )
     } else {
         return(
-            <main className="homeMain">
+            <main className="home-main">
                 <HeroScreen/>
                 <div className="posts-box">
                     <h2 className="posts-title">Shared ideas</h2>

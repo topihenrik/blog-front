@@ -78,7 +78,7 @@ export default function SignUpMain(props) {
     }
 
     return(
-        <main className="signUpMain">
+        <main className="signup-main">
             <div className="signup-box">
                 <div className="signup-title-box">
                     <h2>Sign Up</h2>

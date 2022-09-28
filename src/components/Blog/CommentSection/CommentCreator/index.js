@@ -37,7 +37,7 @@ export default function CommentCreator(props) {
     }
 
     return(
-        <div className="commentCreator">
+        <div className="comment-creator">
             <h3>Author: {user.full_name}</h3>
             <form className="comment-creator-form" onSubmit={handleSubmit}>
                 <textarea name="content" placeholder="Comment" id="comment-creator-textarea"></textarea>

@@ -9,8 +9,8 @@ export default function SignUpSuccess(props) {
     }, [])
 
     return(
-        <div className="signUpSuccess">
-            <div className="signUpSuccess-box">
+        <div className="signup-success">
+            <div className="signup-success-box">
                 <div className="success-title-box">
                     <h2>Account Created 👏</h2>
                 </div>

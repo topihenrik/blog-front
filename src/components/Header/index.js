@@ -41,7 +41,7 @@ export default function Header(props) {
                 </div>}
                 {user?
                 <div className="auth-box">
-                    <a href="/profile"><div className="user-name-container"><p className="user-name">{user.full_name}</p></div></a>
+                    <a href="/profile"><button className="profile-button">Profile</button></a>
                     <a onClick={handleClick}><button className="logout-button">Log Out</button></a>
                 </div>:
                 <div className="auth-box">

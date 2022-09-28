@@ -35,7 +35,7 @@ export default function LogIn(props) {
     }
 
     return(
-        <main className="loginMain">
+        <main className="login-main">
             <div className="login-box">
                 <div className="login-title-box">
                     <h2>Log In</h2>

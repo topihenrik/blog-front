@@ -5,7 +5,7 @@ import { DateTime } from "luxon";
 export default function PostCard(props) {
     const {post} = props;
     return(
-        <div className="postCard">
+        <div className="post-card">
             <a href={"/posts/"+post._id}>
                 <div className="post-box-left">
                     <div className="info-box">

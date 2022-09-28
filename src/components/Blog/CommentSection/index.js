@@ -27,7 +27,7 @@ export default function CommentSection(props) {
 
     if (error) {
         return (
-            <div className="errorMain">
+            <div className="error-main">
                 <div className="error-container">
                     <h2>Error</h2>
                     <p>{error.message}</p>
@@ -36,7 +36,7 @@ export default function CommentSection(props) {
         )
     } else if (!isLoaded) {
         return (
-            <div className="loadingMain">
+            <div className="loading-main">
                 <div className="loading-container">
                     <div className="loading-icon-box">
                         <img id="loading-icon" src={LoadingIcon}/>
@@ -48,17 +48,15 @@ export default function CommentSection(props) {
     } else {
         if (postExists) {
             return(
-                <div className="commentSection">
+                <div className="comment-section">
                     <h2>Responses</h2>
                     {comments?
                     comments.map((comment) => {
                         return(
-                            <>
-                                <section key={comment._id}>
-                                    <Comment postid={postid} comment={comment} user={user} updateComments={updateComments} setUpdateComments={setUpdateComments}/>
-                                </section>
+                            <React.Fragment key={comment._id}>
+                                <Comment postid={postid} comment={comment} user={user} updateComments={updateComments} setUpdateComments={setUpdateComments}/>
                                 <hr className="comment-hr"/>
-                            </>
+                            </React.Fragment>
                         )
                     }):<></>}
                     

@@ -131,7 +131,7 @@ export default function ProfileEdit(props) {
 
     if (error) {
         return (
-            <div className="errorMain">
+            <div className="error-main">
                 <div className="error-container">
                     <h2>Error</h2>
                     <p>{error.message}</p>
@@ -140,7 +140,7 @@ export default function ProfileEdit(props) {
         )
     } else if (!isLoaded) {
         return (
-            <div className="loadingMain">
+            <div className="loading-main">
                 <div className="loading-container">
                     <div className="loading-icon-box">
                         <img id="loading-icon" src={LoadingIcon}/>
@@ -151,7 +151,7 @@ export default function ProfileEdit(props) {
         )
     } else if (result === undefined) {
         return (
-            <div className="noContentMain">
+            <div className="no-content-main">
                 <div className="no-content-container">
                     <h2>No profile found</h2>
                     <p>Something went wrong.</p>

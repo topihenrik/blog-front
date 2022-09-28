@@ -41,7 +41,7 @@ export default function Profile(props) {
 
     if (error) {
         return (
-            <div className="errorMain">
+            <div className="error-main">
                 <div className="error-container">
                     <h2>Error</h2>
                     <p>{error.message}</p>
@@ -50,7 +50,7 @@ export default function Profile(props) {
         )
     } else if (!isLoaded) {
         return (
-            <div className="loadingMain">
+            <div className="loading-main">
                 <div className="loading-container">
                     <div className="loading-icon-box">
                         <img id="loading-icon" src={LoadingIcon}/>
@@ -61,7 +61,7 @@ export default function Profile(props) {
         )
     } else if (result?.user === undefined) {
         return (
-            <div className="noContentMain">
+            <div className="no-content-main">
                 <div className="no-content-container">
                     <h2>No profile found</h2>
                     <p>Something went wrong.</p>
@@ -92,9 +92,9 @@ export default function Profile(props) {
                                     </div>
                             </div>
                         </div>
-                        <div className="profile-buttons">
-                            <a href="/profile/edit"><button className="profile-button"><img className="icon" src={EditIcon}/>Edit Information</button></a>
-                            <a href="/profile/delete"><button className="profile-button"><img className="icon" src={DeleteIcon}/>Delete Account</button></a>
+                        <div className="profile-action-buttons">
+                            <a href="/profile/edit"><button className="profile-action-button"><img className="icon" src={EditIcon}/>Edit Information</button></a>
+                            <a href="/profile/delete"><button className="profile-action-button"><img className="icon" src={DeleteIcon}/>Delete Account</button></a>
                         </div>
                     </div>
                 </div>

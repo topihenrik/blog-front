@@ -8,7 +8,7 @@ export default function BlogMain(props) {
     const { postid } = useParams();
     const [postExists, setPostExists] = useState(false);
     return(
-        <main className="blogMain">
+        <main className="blog-main">
             <PostFull postid={postid} setPostExists={setPostExists}/>
             <CommentSection postid={postid} user={user} postExists={postExists}/>
         </main>

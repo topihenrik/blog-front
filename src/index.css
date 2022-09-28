@@ -30,6 +30,10 @@ body, button, input, textarea {
   -moz-osx-font-smoothing: grayscale;
 }
 
+button, select {
+  cursor: pointer;
+}
+
 :root {
   --white: #FFFFFF;
   --gray: #F2F2F2;
@@ -60,13 +64,15 @@ body {
 
 /* Loading and Error */
 
-.loadingMain, .noContentMain, .errorMain {
+.loading-main, .no-content-main, .error-main {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  flex: 1 0 0;
   height: 100%;
   width: 100%;
+  gap: 16px;
   margin: auto 0;
+  padding-bottom: 16px;
 }
 
 .loading-container {
@@ -74,6 +80,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: auto 0;
   gap: 8px;
   font-weight: 500;
 }
@@ -191,13 +198,17 @@ header > div {
   white-space:nowrap
 }
 
-.user-name {
+
+.profile-button {
+  background-color: black;
+  color: white;
   font-weight: 500;
+  border-radius: 5px;
   white-space: nowrap;
 }
 
 .logout-button {
-  background-color: var(--white);
+  background-color: white;
   border-radius: 5px;
   white-space: nowrap;
 }
@@ -215,7 +226,7 @@ header > div {
   display: none;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
   #menuBtn {
     display: block;
     background-color: white;
@@ -330,7 +341,7 @@ header > div {
   width: 250px;
 }
 
-.loginMain, .signUpMain {
+.login-main, .signup-main {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -491,7 +502,7 @@ header > div {
 
 /* SignUpSuccess */
 
-.signUpSuccess {
+.signup-success {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -502,7 +513,7 @@ header > div {
 }
 
 
-.signUpSuccess-box {
+.signup-success-box {
   box-sizing: border-box;
   width: fit-content;
   height: fit-content;
@@ -523,7 +534,7 @@ header > div {
   color: white;
 }
 
-.signUpSuccess-box p {
+.signup-success-box p {
   padding: 48px 24px;
 }
 
@@ -590,17 +601,17 @@ header > div {
   height: 112px;
 }
 
-.profile-buttons {
+.profile-action-buttons {
   display: flex;
   gap: 16px;
 }
 
-.profile-buttons a {
+.profile-action-buttons a {
   text-decoration: none;
   width: fit-content;
 }
 
-.profile-button {
+.profile-action-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -716,7 +727,7 @@ header > div {
 
 /* Home, HeroScreen and PostCard */
 
-.homeMain {
+.home-main {
   display: flex;
   flex-direction: column;
   flex: 1 0 0;
@@ -732,7 +743,7 @@ header > div {
   margin: 0 14px;
 }
 
-.heroScreen {
+.hero-screen {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -756,19 +767,19 @@ header > div {
   width: calc(100% - 2px);
 }
 
-.postCard {
+.post-card {
   background-color: var(--white);
   border-radius: 5px;
   box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.4);
 }
 
-.postCard .info-box {
+.post-card .info-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.postCard a {
+.post-card a {
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -800,7 +811,7 @@ header > div {
 
 @media (min-width: 600px) {
 
-  .heroScreen {
+  .hero-screen {
     box-sizing: border-box;
     margin: 0 auto;
     width: clamp(550px, 90vw, 768px);
@@ -823,7 +834,7 @@ header > div {
     width: clamp(550px, 90vw, 768px);
   }
 
-  .postCard a {
+  .post-card a {
     flex-direction: row;
     gap: 32px;
   }
@@ -832,7 +843,7 @@ header > div {
 
 @media (min-width: 916px) {
 
-  .heroScreen {
+  .hero-screen {
     box-sizing: border-box;
     margin: 0 auto;
     width: 768px;
@@ -851,14 +862,14 @@ header > div {
     height: 100%;
   }
 
-  .postCard a {
+  .post-card a {
     flex-direction: row;
     gap: 32px;
   }
 }
 
 /* Blog and PostFull */
-.blogMain {
+.blog-main {
   display: flex;
   flex: 1 0 0;
   flex-direction: column;
@@ -866,7 +877,7 @@ header > div {
   gap: 16px;
 }
 
-.postFull {
+.post-full {
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -875,7 +886,7 @@ header > div {
   gap: 10px;
 }
 
-.postFull .info-box {
+.post-full .info-box {
   display: flex;
   justify-content: space-between;
   /* gap: 32px; */
@@ -900,7 +911,7 @@ header > div {
 }
 
 @media (min-width: 600px) {
-  .postFull {
+  .post-full {
     box-sizing: border-box;
     max-width: clamp(550px, 90vw, 768px);
     margin: 0 auto;
@@ -908,7 +919,7 @@ header > div {
 }
 
 @media (min-width: 916px) {
-  .postFull {
+  .post-full {
     box-sizing: border-box;
     margin: 16px auto;
     width: 768px;
@@ -917,7 +928,7 @@ header > div {
 }
 
 /* CommentSection, Comment and CommentCreator */
-.commentSection {
+.comment-section {
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -925,7 +936,7 @@ header > div {
   padding: 10px;
 }
 
-.commentSection h2 {
+.comment-section h2 {
   padding: 8px 10px;
 }
 
@@ -1010,7 +1021,7 @@ header > div {
   height: 24px;
 }
 
-.commentCreator {
+.comment-creator {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -1043,7 +1054,7 @@ header > div {
 
 
 @media (min-width: 600px) {
-  .commentSection {
+  .comment-section {
     box-sizing: border-box;
     min-width: clamp(550px, 90vw, 768px);
     margin: 0 auto;
@@ -1051,7 +1062,7 @@ header > div {
 }
 
 @media (min-width: 912px) {
-  .commentSection {
+  .comment-section {
     box-sizing: border-box;
     width: 768px;
     margin: 0 auto;
@@ -1066,4 +1077,22 @@ footer {
   background-color: var(--white);
   padding: 8px 0;
   border-top: 1px solid var(--border);
+}
+
+.footer-author {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-author a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+}
+
+#github-logo {
+  height: 1rem;
+  margin: 0 4px;
 }
