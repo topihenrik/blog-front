@@ -10,7 +10,7 @@ export default function LogIn(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch("http://localhost:3000/login", 
+        fetch(`${process.env.REACT_APP_API_URL}/login`, 
             {
                 method: "POST",
                 headers: {"Content-Type": "application/x-www-form-urlencoded"}, 
@@ -20,7 +20,6 @@ export default function LogIn(props) {
             .then((result) => {
                 setIsLoaded(true);
                 setResult(result);
-                console.log(result);
                 if (result.status == 201) {
                     localStorage.setItem("token", result.token);
                     localStorage.setItem("user", JSON.stringify(result.user));

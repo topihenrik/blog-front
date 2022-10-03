@@ -15,7 +15,7 @@ export default function Comment(props) {
     const handleClickDelete = () => {
 
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`http://localhost:3000/auth/posts/${postid}/comments/${comment._id}`,
+        fetch(`${process.env.REACT_APP_API_URL}/auth/posts/${postid}/comments/${comment._id}`,
             {
                 method: "DELETE",
                 headers: {
@@ -33,7 +33,7 @@ export default function Comment(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`http://localhost:3000/auth/posts/${postid}/comments/${comment._id}`,
+        fetch(`${process.env.REACT_APP_API_URL}/auth/posts/${postid}/comments/${comment._id}`,
             {
                 method: "PUT",
                 headers: {

@@ -9,7 +9,7 @@ export default function Home(props) {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:3000/posts")
+        fetch(`${process.env.REACT_APP_API_URL}/posts`)
             .then((res) => res.json())
             .then((result) => {
                     setIsLoaded(true);

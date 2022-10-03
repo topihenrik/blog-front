@@ -19,7 +19,7 @@ export default function Profile(props) {
         }
 
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch("http://localhost:3000/auth/user", 
+        fetch(`${process.env.REACT_APP_API_URL}/auth/user`, 
             {
                 headers: {
                     "Authorization": bearer

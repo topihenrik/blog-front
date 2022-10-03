@@ -12,7 +12,7 @@ export default function CommentSection(props) {
     const [updateComments, setUpdateComments] = useState(0);
     
     useEffect(() => {
-        fetch(`http://localhost:3000/posts/${postid}/comments`)
+        fetch(`${process.env.REACT_APP_API_URL}/posts/${postid}/comments`)
             .then((res) => res.json())
             .then((result) => {
                 setIsLoaded(true);

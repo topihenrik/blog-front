@@ -17,7 +17,7 @@ export default function ProfileDelete(props) {
         }
 
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch("http://localhost:3000/auth/user", 
+        fetch(`${process.env.REACT_APP_API_URL}/auth/user`, 
             {
                 headers: {
                     "Authorization": bearer
@@ -36,7 +36,7 @@ export default function ProfileDelete(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch("http://localhost:3000/auth/user/delete/all",
+        fetch(`${process.env.REACT_APP_API_URL}/auth/user/delete/all`,
             {
                 headers: {
                     "Authorization": bearer

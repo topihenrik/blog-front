@@ -10,7 +10,7 @@ export default function PostFull(props) {
     const [post, setPost] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/posts/${postid}`)
+        fetch(`${process.env.REACT_APP_API_URL}/posts/${postid}`)
             .then((res) => res.json())
             .then((result) => {
                 setIsLoaded(true);

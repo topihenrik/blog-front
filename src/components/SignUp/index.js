@@ -3,15 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import uploadIcon from "../../icons/file_upload.png";
 import {DateTime} from "luxon";
 
-export default function SignUpMain(props) {
-
-
+export default function SignUp(props) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState({});
     const [file, setFile] = useState(null);
     const [years, setYears] = useState([]);
-
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,32 +19,23 @@ export default function SignUpMain(props) {
         setYears(loopYears);
     },[])
 
-
     const handleChange = (e) => {
         setFile(e.target.files[0]);
     }
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
-
         // Client side validation
         const dob_iso = e.target.dob_year.value.padStart(2, "0") + "-" + e.target.dob_month.value.padStart(2, "0") + "-" + e.target.dob_day.value.padStart(2, "0");
         if (!DateTime.fromISO(dob_iso).isValid) {
-            console.log("Not valid date")
             setResult({errors:[{msg: "Invalid date"}]})
             return;
         }
 
         if(DateTime.fromISO(dob_iso).diffNow("years").years>-18) {
-            console.log("You must be over 18 years old to make an account.")
             setResult({errors:[{msg: "you must be over 18 years old"}]})
             return;
         }
-
-        console.log(dob_iso)
-
-
 
         const formData = new FormData();
         formData.append("first_name", e.target.first_name.value);
@@ -58,7 +46,7 @@ export default function SignUpMain(props) {
         formData.append("password_confirm", e.target.password_confirm.value);
         formData.append("avatar", file);
 
-        fetch("http://localhost:3000/signup",
+        fetch(`${process.env.REACT_APP_API_URL}/signup`,
             {
                 method: "POST",
                 body: formData

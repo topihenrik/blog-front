@@ -34,7 +34,7 @@ export default function ProfileEdit(props) {
         setYears(loopYears);
 
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch("http://localhost:3000/auth/user/edit",
+        fetch(`${process.env.REACT_APP_API_URL}/auth/user/edit`,
             {
                 headers: {
                     "Authorization": bearer
@@ -64,15 +64,12 @@ export default function ProfileEdit(props) {
 
         // Client side validation
         const dob_iso = e.target.dob_year.value.padStart(2, "0") + "-" + e.target.dob_month.value.padStart(2, "0") + "-" + e.target.dob_day.value.padStart(2, "0");
-        console.log(dob_iso);
         if (!DateTime.fromISO(dob_iso).isValid) {
-            console.log("Not valid date")
             setResult({errors:[{msg: "Invalid date"}]})
             return;
         }
 
         if(DateTime.fromISO(dob_iso).diffNow("years").years>-18) {
-            console.log("You must be over 18 years old to make an account.")
             setResult({errors:[{msg: "you must be over 18 years old"}]})
             return;
         }
@@ -83,8 +80,7 @@ export default function ProfileEdit(props) {
         formData.append("email", e.target.email.value);
         formData.append("dob", dob_iso);
         formData.append("avatar", file);
-        console.log(formData);
-        fetch("http://localhost:3000/auth/user/basic",
+        fetch(`${process.env.REACT_APP_API_URL}/auth/user/basic`,
             {
                 headers: {
                     "Authorization": bearer
@@ -94,13 +90,12 @@ export default function ProfileEdit(props) {
             })
             .then((res) => res.json())
             .then((result) => {
-                // Do something with result
                 setResultBasic(result);
                 if (result.status === 201) {
                     navigate("../profile", {replace: true});
                 }
             }, (error) => {
-                // Do something with fetch error
+                console.log(error);
             })
     }
 
@@ -108,7 +103,7 @@ export default function ProfileEdit(props) {
         e.preventDefault();
         const bearer = "Bearer " + localStorage.getItem("token");
 
-        fetch("http://localhost:3000/auth/user/password",
+        fetch(`${process.env.REACT_APP_API_URL}/auth/user/password`,
             {
                 headers: {
                     "Authorization": bearer
@@ -125,7 +120,7 @@ export default function ProfileEdit(props) {
                     navigate("../login", {replace: true});
                 }
             }, (error) => {
-                // Do something with fetch error
+                console.log(error);
             })
     }
 

@@ -13,7 +13,7 @@ export default function CommentCreator(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`http://localhost:3000/auth/posts/${postid}/comments`, 
+        fetch(`${process.env.REACT_APP_API_URL}/auth/posts/${postid}/comments`, 
             {
                 method: "POST",
                 headers: {

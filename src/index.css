@@ -889,7 +889,6 @@ header > div {
 .post-full .info-box {
   display: flex;
   justify-content: space-between;
-  /* gap: 32px; */
   align-items: center;
 }
 
