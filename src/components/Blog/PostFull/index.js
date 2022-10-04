@@ -60,7 +60,7 @@ export default function PostFull(props) {
             <div className="post-full">
                 <div className="info-box">
                     <div className="author-box">
-                        <img className="author-avatar-full" src={"http://localhost:3000/"+post.author.avatar.path}/>
+                        <img className="author-avatar-full" src={`${process.env.REACT_APP_API_URL}/`+post.author.avatar.path}/>
                         <h4>{post.author.first_name + " " + post.author.last_name}</h4>
                     </div>
                     <h4 className="post-timestamp">
@@ -69,7 +69,7 @@ export default function PostFull(props) {
                         {post.edit_timestamp&&<span className="post-timestamp-edit-tooltip"><p className="p-edit-timestamp">{"Edited: "+DateTime.fromJSDate(new Date(post.edit_timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</p></span>}
                     </h4>
                 </div>
-                <img src={"http://localhost:3000/"+post.photo.path}/>
+                <img src={`${process.env.REACT_APP_API_URL}/`+post.photo.path}/>
                 <div dangerouslySetInnerHTML={{__html: post.content}}></div>
             </div>
         )
