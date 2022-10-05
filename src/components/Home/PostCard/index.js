@@ -10,7 +10,7 @@ export default function PostCard(props) {
                 <div className="post-box-left">
                     <div className="info-box">
                         <div className="author-box">
-                            <img className="author-avatar-card" src={`${process.env.REACT_APP_API_URL}/`+post.author.avatar.path}/>
+                            <img className="author-avatar-card" src={post.author.avatar.url}/>
                             <h4>{post.author.first_name + " " + post.author.last_name}</h4>
                         </div>
                         
@@ -21,7 +21,7 @@ export default function PostCard(props) {
                     <p className="post-comments-count">{post.count + " comments"}</p>
                 </div>
                 <div className="post-box-right">
-                    <img className="photo-thumbnail" src={`${process.env.REACT_APP_API_URL}/`+post.photo.path}/>
+                    <img className="photo-thumbnail" src={post.photo.url}/>
                 </div>
             </a>
         </div>

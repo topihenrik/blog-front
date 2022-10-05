@@ -87,9 +87,8 @@ export default function Profile(props) {
                                     <p>{"Date of Birth: " + DateTime.fromJSDate(new Date(result?.user.dob)).toLocaleString()}</p>
                                 </div>
                                 <div>
-                                    
-                                        <img id="author-avatar-profile" src={`${process.env.REACT_APP_API_URL}/`+result?.user?.avatar?.path}/>
-                                    </div>
+                                    <img id="author-avatar-profile" src={result?.user?.avatar?.url}/>
+                                </div>
                             </div>
                         </div>
                         <div className="profile-action-buttons">
