@@ -261,7 +261,7 @@ header > div {
     padding: 0 14px;
   }
 
-  .mobile-login-button, .mobile-sign-up-button, .mobile-logout-button {
+  .mobile-login-button, .mobile-sign-up-button, .mobile-logout-button, .mobile-profile-button {
     all: unset;
     box-sizing: border-box;
     width: 100%;
@@ -283,7 +283,7 @@ header > div {
     width: 100%;
   }
 
-  .mobile-auth-box a, .mobile-auth-box .mobile-user-name-container {
+  .mobile-auth-box a {
     all: unset;
     background-color: white;
     display: flex;
@@ -292,10 +292,6 @@ header > div {
     width: 100%;
     height: 65px;
     border: 1px solid var(--black);
-  }
-
-  .mobile-user-name-container p {
-    padding: 0 14px;
   }
 
 
@@ -545,6 +541,7 @@ header > div {
   flex: 1 0 0;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 
 
@@ -555,7 +552,10 @@ header > div {
   width: fit-content;
   box-sizing: border-box;
   margin: 0 14px;
-  width: 568px;
+}
+
+.profile-container, .profile-edit-container, .profile-delete-container {
+  width: clamp(292px, calc(100% - 28px), 500px);
 }
 
 
@@ -587,6 +587,7 @@ header > div {
 
 .profile-personal-box {
   display: flex;
+  flex-direction: column-reverse;
   justify-content: space-between;
 }
 
@@ -599,10 +600,12 @@ header > div {
 #author-avatar-profile {
   width: 112px;
   height: 112px;
+  margin-bottom: 16px;
 }
 
 .profile-action-buttons {
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
 }
 
@@ -713,7 +716,15 @@ header > div {
   .profile-edit-container, .profile-delete-container {
     box-sizing: border-box;
     margin: 0 auto;
-    width: clamp(500px, 90vw, 768px);
+    width: 500px;
+  }
+
+  .profile-personal-box {
+    flex-direction: row;
+  }
+
+  #author-avatar-profile {
+    margin-bottom: 0;
   }
 }
 
@@ -721,7 +732,6 @@ header > div {
   .profile-edit-container, .profile-delete-container {
     box-sizing: border-box;
     margin: 0 auto;
-    width: 768px;
   }
 }
 
@@ -883,6 +893,7 @@ header > div {
   border-radius: 5px;
   box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.4);
   padding: 10px;
+  margin: 0 14px;
   gap: 10px;
 }
 
@@ -933,6 +944,7 @@ header > div {
   border-radius: 5px;
   box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.4);
   padding: 10px;
+  margin: 0 14px;
 }
 
 .comment-section h2 {

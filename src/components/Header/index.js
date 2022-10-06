@@ -32,7 +32,7 @@ export default function Header(props) {
                 </div>
                 {user?
                 <div className={menuVis + " mobile-auth-box"}>
-                    <div className="mobile-user-name-container"><p className="user-name">{user.full_name}</p></div>
+                    <a href="/profile"><button className="mobile-profile-button">Profile</button></a>
                     <a onClick={handleClick}><button className="mobile-logout-button">Log Out</button></a>
                 </div>:
                 <div className={menuVis + " mobile-auth-box"}>
