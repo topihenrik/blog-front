@@ -69,8 +69,8 @@ export default function PostFull(props) {
                         {post.edit_timestamp&&<span className="post-timestamp-edit-tooltip"><p className="p-edit-timestamp">{"Edited: "+DateTime.fromJSDate(new Date(post.edit_timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</p></span>}
                     </h4>
                 </div>
-                <img src={post.photo.url}/>
-                <div dangerouslySetInnerHTML={{__html: post.content}}></div>
+                <img className="post-cover-photo" src={post.photo.url}/>
+                <div className="post-text-container" dangerouslySetInnerHTML={{__html: post.content}}></div>
             </div>
         )
 

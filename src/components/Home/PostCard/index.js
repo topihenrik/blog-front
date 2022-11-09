@@ -13,11 +13,10 @@ export default function PostCard(props) {
                             <img className="author-avatar-card" src={post.author.avatar.url}/>
                             <h4>{post.author.first_name + " " + post.author.last_name}</h4>
                         </div>
-                        
                         <h4>{DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATE_MED)}</h4>
                     </div>
                     <h2>{post.title}</h2>
-                    <p>{post.description.split(' ').slice(0, 50).join(' ') + " ..."}</p>
+                    <p className="post-description">{post.description.split(' ').slice(0, 28).join(' ') + " ..."}</p>
                     <p className="post-comments-count">{post.count + " comments"}</p>
                 </div>
                 <div className="post-box-right">

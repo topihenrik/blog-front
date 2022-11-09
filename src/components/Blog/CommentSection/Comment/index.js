@@ -68,7 +68,7 @@ export default function Comment(props) {
                         {comment.edit_timestamp?<span className="comment-timestamp-edit-tooltip"><p className="p-edit-timestamp">{"Edited: "+DateTime.fromJSDate(new Date(comment.edit_timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</p></span>:<></>}
                     </h4>
                 </div>
-                <p>{comment.content}</p>
+                <p className="comment-text">{comment.content}</p>
                 {(user?._id === comment.author._id)&&
                 <div className="comment-modification-buttons">
                     <button className="comment-modification-button" onClick={handleClickEdit}><img className="icon" src={EditIcon}/>Edit</button>

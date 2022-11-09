@@ -113,7 +113,7 @@ body {
 
 /* Header */
 header {
-  z-index: 1;
+  z-index: 2;
   position: sticky;
   top: 0px;
   display: flex;
@@ -771,6 +771,11 @@ header > div {
   gap: 8px;
 }
 
+.hero-box > p {
+  line-height: 20px;
+  word-break: break-word;
+}
+
 .post-hr, .comment-hr {
   height: 0;
   border-top: 1px solid rgb(222, 222, 222);
@@ -811,12 +816,19 @@ header > div {
 
 .photo-thumbnail {
   display: none;
+  max-height: 220px;
+  object-fit: cover;
 }
 
 .author-avatar-card {
   height: 24px;
   width: 24px;
   border-radius: 100px;
+}
+
+.post-description {
+  font-size: 16px;
+  line-height: 20px;
 }
 
 @media (min-width: 600px) {
@@ -846,6 +858,7 @@ header > div {
 
   .post-card a {
     flex-direction: row;
+    justify-content: space-between;
     gap: 32px;
   }
 }
@@ -920,6 +933,35 @@ header > div {
   font-size: 0.9rem;
 }
 
+.post-cover-photo {
+  max-height: 500px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.post-text-container {
+  padding-bottom: 16px;
+}
+
+.post-text-container > * {
+  color: rgb(16, 16, 16);
+}
+
+.post-text-container > h1 {
+  margin-top: 16px;
+}
+
+.post-text-container > :where(h2, h3, h4, h5) {
+  margin-top: 32px;
+}
+
+.post-text-container > p {
+  margin-top: 32px;
+  line-height: 28px;
+  font-size: 18px;
+  word-break: break-word;
+}
+
 @media (min-width: 600px) {
   .post-full {
     box-sizing: border-box;
@@ -956,6 +998,11 @@ header > div {
   flex-direction: column;
   gap: 8px;
   padding: 10px;
+}
+
+.comment-text {
+  line-height: 28px;
+  word-break: break-word;
 }
 
 .author-avatar-comment {
