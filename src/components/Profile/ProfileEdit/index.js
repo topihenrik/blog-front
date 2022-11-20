@@ -17,6 +17,8 @@ export default function ProfileEdit(props) {
     const [oldDob, setOldDob] = useState(undefined);
     const [resultBasic, setResultBasic] = useState({});
     const [resultPassword, setResultPassword] = useState({});
+    const [submitBasicBtnDisabled, setSubmitBasicBtnDisabled] = useState(false); // During fetch request -> disable submit button
+    const [submitPwdBtnDisabled, setSubmitPwdBtnDisabled] = useState(false); // During fetch request -> disable submit button
 
     const handleChange = (e) => {
         setFile(e.target.files[0]);
@@ -60,17 +62,26 @@ export default function ProfileEdit(props) {
 
     const handleSubmitBasic = (e) => {
         e.preventDefault();
+        setSubmitBasicBtnDisabled(true);
         const bearer = "Bearer " + localStorage.getItem("token");
 
         // Client side validation
         const dob_iso = e.target.dob_year.value.padStart(2, "0") + "-" + e.target.dob_month.value.padStart(2, "0") + "-" + e.target.dob_day.value.padStart(2, "0");
         if (!DateTime.fromISO(dob_iso).isValid) {
-            setResult({errors:[{msg: "Invalid date"}]})
+            setResultBasic({errors:[{msg: "Invalid date"}]});
+            setSubmitBasicBtnDisabled(false);
             return;
         }
 
         if(DateTime.fromISO(dob_iso).diffNow("years").years>-18) {
-            setResult({errors:[{msg: "you must be over 18 years old"}]})
+            setResultBasic({errors:[{msg: "you must be over 18 years old"}]});
+            setSubmitBasicBtnDisabled(false);
+            return;
+        }
+
+        if (file?.size >= 2097152) {
+            setResultBasic({errors:[{msg: "File too large, max size is 2MB"}]});
+            setSubmitBasicBtnDisabled(false);
             return;
         }
 
@@ -94,13 +105,16 @@ export default function ProfileEdit(props) {
                 if (result.status === 201) {
                     navigate("../profile", {replace: true});
                 }
+                setSubmitBasicBtnDisabled(false);
             }, (error) => {
                 console.log(error);
+                setSubmitBasicBtnDisabled(false);
             })
     }
 
     const handleSubmitPassword = (e) => {
         e.preventDefault();
+        setSubmitPwdBtnDisabled(true);
         const bearer = "Bearer " + localStorage.getItem("token");
 
         fetch(`${process.env.REACT_APP_API_URL}/auth/user/password`,
@@ -119,8 +133,10 @@ export default function ProfileEdit(props) {
                     setUser(null);
                     navigate("../login", {replace: true});
                 }
+                setSubmitPwdBtnDisabled(false);
             }, (error) => {
                 console.log(error);
+                setSubmitPwdBtnDisabled(false);
             })
     }
 
@@ -214,7 +230,7 @@ export default function ProfileEdit(props) {
                                 </div>
                             </div>
                             <div className="profile-avatar-box">
-                                <label className="profile-avatar-label" htmlFor="avatar"><img id="upload-icon" src={uploadIcon}/><span className="profile-avatar-span">{file?file.name:result.avatar.originalName?result.avatar.originalName:"Avatar image"}</span></label>
+                                <label className="profile-avatar-label" htmlFor="avatar"><img id="upload-icon" src={uploadIcon}/><span className="profile-avatar-span">{file?file.name:result.avatar.originalName?result.avatar.originalName:"Avatar image"}</span><span className="profile-avatar-span">{"(max: 2MB)"}</span></label>
                                 <input id="avatar" name="avatar" type="file" accept="image/png, image/jpeg" onChange={handleChange}/>
                             </div>
                             {(resultBasic.status >= 400 && resultBasic.status <= 451)  &&
@@ -230,13 +246,13 @@ export default function ProfileEdit(props) {
                                 )
                             })
                             }
-                            <button className="profile-edit-button">Update</button>
+                            <button className="profile-edit-button" disabled={submitBasicBtnDisabled} style={submitBasicBtnDisabled?{cursor: "wait"}:{}}>Update</button>
                         </form>
                         <form onSubmit={handleSubmitPassword} className="profile-form">
                             <h2>Change Password</h2>
-                            <input className="text-input" type="password" name="old_password" placeholder="Old Password"/>
-                            <input className="text-input" type="password" name="password" placeholder="New Password"/>
-                            <input className="text-input" type="password" name="password_confirm" placeholder="Confirm New Password"/>
+                            <input className="text-input" type="password" name="old_password" placeholder="Old Password" required/>
+                            <input className="text-input" type="password" name="password" placeholder="New Password" required/>
+                            <input className="text-input" type="password" name="password_confirm" placeholder="Confirm New Password" required/>
                             {(resultPassword.status >= 400 && resultPassword.status <= 451)  &&
                             <div className="error-box">
                                 <p>{resultPassword.message}</p>
@@ -250,7 +266,7 @@ export default function ProfileEdit(props) {
                                 )
                             })
                             }
-                            <button className="profile-edit-button">Update</button>
+                            <button className="profile-edit-button" disabled={submitPwdBtnDisabled} style={submitPwdBtnDisabled?{cursor: "wait"}:{}}>Update</button>
                         </form>
                     </div>
                 </div>

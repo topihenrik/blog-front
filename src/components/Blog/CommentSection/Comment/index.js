@@ -7,13 +7,16 @@ import CancelIcon from "../../../../icons/cancel.png";
 export default function Comment(props) {
     const { postid, comment, user, updateComments, setUpdateComments } = props;
     const [edit, setEdit] = useState(false);
+    const [submitDelBtnDisabled, setSubmitDelBtnDisabled] = useState(false); // During fetch request -> disable submit button
+    const [submitEditBtnDisabled, setSubmitEditBtnDisabled] = useState(false); // During fetch request -> disable submit button
+    
 
     const handleClickEdit = () => {
         (edit === false?setEdit(true):setEdit(false))
     }
 
     const handleClickDelete = () => {
-
+        setSubmitDelBtnDisabled(true);
         const bearer = "Bearer " + localStorage.getItem("token");
         fetch(`${process.env.REACT_APP_API_URL}/auth/posts/${postid}/comments/${comment._id}`,
             {
@@ -27,11 +30,16 @@ export default function Comment(props) {
                 if (result.status === 200) {
                     setUpdateComments(updateComments+1);
                 }
+                setSubmitDelBtnDisabled(false);
+            }, (error) => {
+                console.error(error);
+                setSubmitDelBtnDisabled(false);
             })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setSubmitEditBtnDisabled(true);
         const bearer = "Bearer " + localStorage.getItem("token");
         fetch(`${process.env.REACT_APP_API_URL}/auth/posts/${postid}/comments/${comment._id}`,
             {
@@ -47,6 +55,10 @@ export default function Comment(props) {
                     setEdit(false);
                     setUpdateComments(updateComments+1);
                 }
+                setSubmitEditBtnDisabled(false);
+            }, (error) => {
+                console.error(error);
+                setSubmitEditBtnDisabled(false);
             })
     }
 
@@ -72,7 +84,7 @@ export default function Comment(props) {
                 {(user?._id === comment.author._id)&&
                 <div className="comment-modification-buttons">
                     <button className="comment-modification-button" onClick={handleClickEdit}><img className="icon" src={EditIcon}/>Edit</button>
-                    <button className="comment-modification-button" onClick={handleClickDelete}><img className="icon" src={DeleteIcon}/>Delete</button>
+                    <button className="comment-modification-button" onClick={handleClickDelete} disabled={submitDelBtnDisabled} style={submitDelBtnDisabled?{cursor: "wait"}:{}}><img className="icon" src={DeleteIcon}/>Delete</button>
                 </div>}  
             </div>
         )
@@ -89,8 +101,8 @@ export default function Comment(props) {
                 <form className="comment-creator-form" onSubmit={handleSubmit}>
                     <textarea name="content" defaultValue={comment.content} id="comment-creator-textarea"></textarea>
                     <div className="comment-creator-buttons">
-                        <button className="comment-modification-button" type="submit"><img className="icon" src={EditIcon}/>Update</button>
-                        <button className="comment-modification-button" type="button" onClick={handleCancel}><img className="icon" src={CancelIcon}/>Cancel</button>
+                        <button className="comment-modification-button" type="submit" disabled={submitEditBtnDisabled} style={submitEditBtnDisabled?{cursor: "wait"}:{}}><img className="icon" src={EditIcon}/>Update</button>
+                        <button className="comment-modification-button" type="button" onClick={handleCancel} disabled={submitEditBtnDisabled} style={submitEditBtnDisabled?{cursor: "wait"}:{}}><img className="icon" src={CancelIcon}/>Cancel</button>
                     </div>   
                 </form>
             </div>

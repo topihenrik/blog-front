@@ -9,6 +9,7 @@ export default function SignUp(props) {
     const [result, setResult] = useState({});
     const [file, setFile] = useState(null);
     const [years, setYears] = useState([]);
+    const [submitBtnDisabled, setSubmitBtnDisabled] = useState(false); // During fetch request -> disable submit button
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,15 +26,24 @@ export default function SignUp(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setSubmitBtnDisabled(true);
         // Client side validation
         const dob_iso = e.target.dob_year.value.padStart(2, "0") + "-" + e.target.dob_month.value.padStart(2, "0") + "-" + e.target.dob_day.value.padStart(2, "0");
         if (!DateTime.fromISO(dob_iso).isValid) {
-            setResult({errors:[{msg: "Invalid date"}]})
+            setResult({errors:[{msg: "Invalid date"}]});
+            setSubmitBtnDisabled(false);
             return;
         }
 
         if(DateTime.fromISO(dob_iso).diffNow("years").years>-18) {
-            setResult({errors:[{msg: "you must be over 18 years old"}]})
+            setResult({errors:[{msg: "you must be over 18 years old"}]});
+            setSubmitBtnDisabled(false);
+            return;
+        }
+
+        if (file?.size >= 2097152) {
+            setResult({errors:[{msg: "File too large, max size is 2MB"}]});
+            setSubmitBtnDisabled(false);
             return;
         }
 
@@ -58,10 +68,12 @@ export default function SignUp(props) {
                 if (result.status === 201) {
                     navigate("/signup/success", {replace: true});
                 }
+                setSubmitBtnDisabled(false);
             },
             (error) => {
                 setIsLoaded(true);
                 setError(error);
+                setSubmitBtnDisabled(false);
             })
     }
 
@@ -116,7 +128,7 @@ export default function SignUp(props) {
                     <input className="text-input" name="password" type="password" placeholder="Password" required={true}/>
                     <input className="text-input" name="password_confirm" type="password" placeholder="Confirm Password" required={true}/>
                     <div className="signup-avatar-box">
-                        <label className="signup-avatar-label" htmlFor="avatar"><img id="upload-icon" src={uploadIcon}/><span className="signup-avatar-span">{file?file.name:"Avatar image"}</span></label>
+                        <label className="signup-avatar-label" htmlFor="avatar"><img id="upload-icon" src={uploadIcon}/><span className="signup-avatar-span">{file?file.name:"Avatar image"}</span><span className="signup-avatar-span">{"(max: 2MB)"}</span></label>
                         <input id="avatar" name="avatar" type="file" accept="image/png, image/jpeg" onChange={handleChange}/>
                     </div>
                     {(result.status >= 400 && result.status <= 451)  &&
@@ -132,7 +144,7 @@ export default function SignUp(props) {
                         )
                     })
                     }
-                    <button>Sign Up</button>
+                    <button disabled={submitBtnDisabled} style={submitBtnDisabled?{cursor: "wait"}:{}}>Sign Up</button>
                 </form>
             </div>
         </main>

@@ -10,6 +10,7 @@ export default function ProfileDelete(props) {
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState(null);
     const [resultDelete, setResultDelete] = useState({});
+    const [submitBtnDisabled, setSubmitBtnDisabled] = useState(false); // During fetch request -> disable submit button
 
     useEffect(() => {
         if (!user) {
@@ -31,10 +32,11 @@ export default function ProfileDelete(props) {
                 setIsLoaded(true);
                 setError(error);
             })
-    }, [])
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setSubmitBtnDisabled(true);
         const bearer = "Bearer " + localStorage.getItem("token");
         fetch(`${process.env.REACT_APP_API_URL}/auth/user/delete/all`,
             {
@@ -52,8 +54,10 @@ export default function ProfileDelete(props) {
                     setUser(null);
                     navigate("../login", {replace: true});
                 }
+                setSubmitBtnDisabled(false);
             }, (error) => {
-                console.log(error);
+                console.error(error);
+                setSubmitBtnDisabled(false);
             })
     }
 
@@ -117,7 +121,7 @@ export default function ProfileDelete(props) {
                                 )
                             })
                             }
-                            <button className="profile-delete-button">Delete</button>
+                            <button className="profile-delete-button" disabled={submitBtnDisabled} style={submitBtnDisabled?{cursor: "wait"}:{}}>Delete</button>
                         </form>
                     </div>
                 </div>

@@ -7,11 +7,12 @@ export default function CommentCreator(props) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState({});
- 
+    const [submitBtnDisabled, setSubmitBtnDisabled] = useState(false); // During fetch request -> disable submit button
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setSubmitBtnDisabled(true);
         const bearer = "Bearer " + localStorage.getItem("token");
         fetch(`${process.env.REACT_APP_API_URL}/auth/posts/${postid}/comments`, 
             {
@@ -29,10 +30,12 @@ export default function CommentCreator(props) {
                     setUpdateComments(updateComments+1);
                     e.target.reset();
                 }
+                setSubmitBtnDisabled(false);
             },
             (error) => {
                 setIsLoaded(true);
                 setError(error);
+                setSubmitBtnDisabled(false);
             })
     }
 
@@ -41,7 +44,7 @@ export default function CommentCreator(props) {
             <h3>Author: {user.full_name}</h3>
             <form className="comment-creator-form" onSubmit={handleSubmit}>
                 <textarea name="content" placeholder="Comment" id="comment-creator-textarea"></textarea>
-                <button className="comment-creator-button"><img className="icon" src={AddIcon}/>Submit</button>
+                <button className="comment-creator-button" disabled={submitBtnDisabled} style={submitBtnDisabled?{cursor: "wait"}:{}}><img className="icon" src={AddIcon}/>Submit</button>
             </form>
         </div>
     )

@@ -200,11 +200,21 @@ header > div {
 
 
 .profile-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   background-color: black;
   color: white;
   font-weight: 500;
   border-radius: 5px;
   white-space: nowrap;
+}
+
+.profile-avatar-icon {
+  background-color: white;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
 }
 
 .logout-button {
@@ -263,11 +273,21 @@ header > div {
 
   .mobile-login-button, .mobile-sign-up-button, .mobile-logout-button, .mobile-profile-button {
     all: unset;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     box-sizing: border-box;
     width: 100%;
     background-color: white;
     height: 100%;
     padding: 0 14px;
+  }
+
+  .mobile-profile-avatar-icon {
+    background-color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
   }
 
   .mobile-sign-up-button, .mobile-logout-button {
@@ -443,6 +463,7 @@ header > div {
 
 .signup-avatar-label {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 4px;
@@ -630,6 +651,7 @@ header > div {
 
 .profile-avatar-label {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 4px;
@@ -807,6 +829,7 @@ header > div {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  width: 100%;
 }
 
 .post-comments-count {
@@ -816,7 +839,7 @@ header > div {
 
 .photo-thumbnail {
   display: none;
-  max-height: 220px;
+  max-height: 200px;
   object-fit: cover;
 }
 
