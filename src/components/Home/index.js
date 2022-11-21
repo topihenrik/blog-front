@@ -4,6 +4,7 @@ import PostCard from "./PostCard";
 import LoadingIcon from "../../icons/loading.svg"
 
 export default function Home(props) {
+    const { user } = props;
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [posts, setPosts] = useState([]);
@@ -50,6 +51,13 @@ export default function Home(props) {
                 <div className="no-content-container">
                     <h2>No posts found</h2>
                     <p>🥇 Be the first creator to make a post!</p>
+                    {user?
+                    <div>
+                        <a href="/edit"><button className="action-button">Your Stories 📖</button></a>
+                    </div>:
+                    <div>
+                        <a href="/signup"><button className="action-button">Join now</button></a>
+                    </div>}
                 </div>
             </div>
         )
@@ -58,7 +66,16 @@ export default function Home(props) {
             <main className="home-main">
                 <HeroScreen/>
                 <div className="posts-box">
-                    <h2 className="posts-title">Shared ideas</h2>
+                    <div className="posts-title-box">
+                        <h2 className="posts-title">Shared ideas</h2>
+                        {user?
+                        <div>
+                            <a href="/edit"><button className="action-button">Your Stories 📖</button></a>
+                        </div>:
+                        <div>
+                            <a href="/signup"><button className="action-button">Join now</button></a>
+                        </div>}                        
+                    </div>
                     {posts.map((post, i) => {
                         if (i+1 === posts.length) {
                             return(

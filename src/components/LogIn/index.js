@@ -32,7 +32,7 @@ export default function LogIn(props) {
                     localStorage.setItem("token", result.token);
                     localStorage.setItem("user", JSON.stringify(result.user));
                     setUser({...result.user});
-                    navigate("/", {replace: true});
+                    window.location = document.referrer;
                 }
                 setSubmitBtnDisabled(false);
             },

@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import MenuIcon from "../../icons/menu.png";
+import { useNavigate } from 'react-router-dom';
 
 export default function Header(props) {
     const { user, setUser } = props;
     const [ menuVis, setMenuVis ] = useState("dispNone");
+    const navigate = useNavigate();
 
     const handleClick = (e) => {
         e.preventDefault();
         localStorage.clear();
         setUser(null);
+        navigate("/", {replace: true});
     }
 
     const handleClickMenu = (e) => {

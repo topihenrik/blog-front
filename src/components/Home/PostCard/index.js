@@ -6,7 +6,7 @@ export default function PostCard(props) {
     const {post} = props;
     return(
         <div className="post-card">
-            <a href={"/posts/"+post._id}>
+            <a href={"/post/"+post._id}>
                 <div className="post-box-left">
                     <div className="info-box">
                         <div className="author-box">
