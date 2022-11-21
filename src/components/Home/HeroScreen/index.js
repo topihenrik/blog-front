@@ -4,10 +4,16 @@ import React from "react";
 export default function HeroScreen(props) {
 
     return(
-        <div className="hero-screen">
+        <div className="hero-screen" style={
+            {
+                backgroundImage: `url("https://res.cloudinary.com/dqcnxy51g/image/upload/v1668987801/${process.env.REACT_APP_CLOUDINARY_FOLDER}/static/blog-bg_tmdcsm.jpg")`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover"
+            }
+        }>
             <div className="hero-box">
-                <h1>Share your ideas with others</h1>
-                <p>Find and share different perspectives with other participants who are from around the world.</p>
+                <h1>Share your ideas.</h1>
+                <p>Discover and share different perspectives with other participants from around the world.</p>
             </div>
         </div>
     )

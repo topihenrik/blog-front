@@ -23,6 +23,12 @@
   font-weight: 700;
 }
 
+@font-face {
+  font-family: "Montserrat-Alternates";
+  src: url("./fonts/MontserratAlternates-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
 body, button, input, textarea {
   margin: 0;
   font-family: "Montserrat";
@@ -150,8 +156,8 @@ header > div {
 }
 
 .logo-box a h1 {
+  font-family: "Montserrat-Alternates";
   padding-bottom: 6px;
-  font-weight: 700;
 }
 
 .logo-box a:hover {
@@ -565,8 +571,6 @@ header > div {
   box-sizing: border-box;
 }
 
-
-
 .profile-container, .profile-edit-container, .profile-delete-container {
   border: 1px solid black;
   border-radius: 5px;
@@ -579,9 +583,6 @@ header > div {
   width: clamp(292px, calc(100% - 28px), 500px);
 }
 
-
-
-
 .profile-title-box, .profile-edit-title-box, .profile-delete-title-box {
   padding: 24px;
   background-color: black;
@@ -590,8 +591,6 @@ header > div {
   border-top-left-radius: 5px;
   box-sizing: border-box;
 }
-
-
 
 .profile-content-box, .profile-delete-content-box {
   display: flex;
@@ -648,7 +647,6 @@ header > div {
   width: 180px;
 }
 
-
 .profile-avatar-label {
   display: flex;
   flex-wrap: wrap;
@@ -677,7 +675,6 @@ header > div {
   font-size: 16px;
 }
 
-
 .profile-delete-box {
   margin: 24px;
 }
@@ -688,7 +685,6 @@ header > div {
   gap: 16px;
   margin: 24px;
 }
-
 
 .profile-delete-form {
   display: flex;
@@ -758,7 +754,6 @@ header > div {
 }
 
 /* Home, HeroScreen and PostCard */
-
 .home-main {
   display: flex;
   flex-direction: column;
@@ -793,9 +788,14 @@ header > div {
   gap: 8px;
 }
 
+.hero-box > h1 {
+  font-family: "Montserrat-Alternates";
+}
+
 .hero-box > p {
   line-height: 20px;
   word-break: break-word;
+  font-weight: 600;
 }
 
 .post-hr, .comment-hr {
