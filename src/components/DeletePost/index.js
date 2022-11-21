@@ -63,7 +63,7 @@ export default function DeletePost(props) {
                 setIsLoaded2(true);
                 setResult(result);
                 if (result.status === 200) {
-                    navigate("/", {replace: true});
+                    navigate("/edit", {replace: true});
                 }
                 setSubmitBtnDisabled(false);
             },

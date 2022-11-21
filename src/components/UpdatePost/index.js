@@ -83,7 +83,7 @@ export default function UpdatePost(props) {
                     setIsLoaded2(true);
                     setResultErrors(result);
                     if (result.status === 201) {
-                        navigate("/", {replace: true});
+                        navigate("/edit", {replace: true});
                     }
                     setSubmitBtnDisabled(false);
                 },

@@ -1,8 +1,8 @@
 import React from "react";
 import { DateTime } from "luxon";
+import ViewIcon from "../../../icons/view.png";
 import EditIcon from "../../../icons/edit.png";
-import DeleteIcon from "../../../icons/delete.png"
-
+import DeleteIcon from "../../../icons/delete.png";
 
 export default function PostCardEdit(props) {
     const {post} = props;
@@ -22,6 +22,8 @@ export default function PostCardEdit(props) {
                     <p className="edit-post-comments-count">{post.count + " comments"}</p>
                     {post.published?<p className="edit-post-published-true">Published</p>:<p className="edit-post-published-false">Not published</p>}
                     <div className="edit-post-modification-buttons">
+                        {post.published &&
+                        <a className="edit-post-modification-anchor" href={"/post/"+post._id}><button className="edit-post-modification-button"><img className="icon" src={ViewIcon}/>View</button></a>}
                         <a className="edit-post-modification-anchor" href={"/post/update/"+post._id}><button className="edit-post-modification-button"><img className="icon" src={EditIcon}/>Edit</button></a>
                         <a className="edit-post-modification-anchor" href={"/post/delete/"+post._id}><button className="edit-post-modification-button"><img className="icon" src={DeleteIcon}/>Delete</button></a>
                     </div>
