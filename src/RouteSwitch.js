@@ -11,8 +11,6 @@ import Profile from "./components/Profile";
 import ProfileEdit from "./components/Profile/ProfileEdit";
 import ProfileDelete from "./components/Profile/ProfileDelete";
 
-
-
 export default function RouteSwitch() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
@@ -23,7 +21,7 @@ export default function RouteSwitch() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/posts/:postid" element={<Blog user={user}/>}/>
                     <Route path="/login" element={<LogIn user={user} setUser={setUser}/>}/>
-                    <Route path="/signup" element={<SignUp/>}/> 
+                    <Route path="/signup" element={<SignUp user={user}/>}/> 
                     <Route path="/signup/success" element={<SignUpSuccess/>}/>
                     <Route path="/profile" element={<Profile user={user}/>}/>
                     <Route path="/profile/edit" element={<ProfileEdit user={user} setUser={setUser}/>}/>

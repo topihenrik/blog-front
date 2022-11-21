@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
 
 export default function LogIn(props) {
@@ -8,6 +8,12 @@ export default function LogIn(props) {
     const [result, setResult] = useState({});
     const [submitBtnDisabled, setSubmitBtnDisabled] = useState(false); // During fetch request -> disable submit button
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user != null) {
+            navigate("/", {replace: true});
+        }
+    },[]);
 
     const handleSubmit = (e) => {
         e.preventDefault();

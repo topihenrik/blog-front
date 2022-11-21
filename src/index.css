@@ -67,9 +67,7 @@ body {
   min-height: 100%;
 }
 
-
 /* Loading and Error */
-
 .loading-main, .no-content-main, .error-main {
   display: flex;
   flex-direction: column;
@@ -204,7 +202,6 @@ header > div {
   white-space:nowrap
 }
 
-
 .profile-button {
   display: flex;
   align-items: center;
@@ -300,7 +297,6 @@ header > div {
     margin-top: -2px;
   }
 
-
   .mobile-auth-box {
     all: unset;
     display: flex;
@@ -320,7 +316,6 @@ header > div {
     border: 1px solid var(--black);
   }
 
-
   .dispNone {
     display: none !important;
   }
@@ -328,8 +323,6 @@ header > div {
   .dispFlex {
     display: flex !important;
   }
-  
-
 }
 
 @media (min-width: 600px) {
@@ -499,7 +492,6 @@ header > div {
   height: 24px;
 }
 
-
 @media (min-width: 600px) {
   .login-box {
     margin: 0 auto;
@@ -509,7 +501,6 @@ header > div {
     margin: 0 auto;
   }
 }
-
 
 @media (min-width: 916px) {
   .login-box {
@@ -524,7 +515,6 @@ header > div {
 }
 
 /* SignUpSuccess */
-
 .signup-success {
   box-sizing: border-box;
   display: flex;
@@ -534,7 +524,6 @@ header > div {
   padding: 16px 0;
   flex: 1 0 0;
 }
-
 
 .signup-success-box {
   box-sizing: border-box;
@@ -855,7 +844,6 @@ header > div {
 }
 
 @media (min-width: 600px) {
-
   .hero-screen {
     box-sizing: border-box;
     margin: 0 auto;
@@ -886,9 +874,7 @@ header > div {
   }
 }
 
-
 @media (min-width: 916px) {
-
   .hero-screen {
     box-sizing: border-box;
     margin: 0 auto;
@@ -1063,7 +1049,6 @@ header > div {
 .post-timestamp .post-timestamp-edit-tooltip {
   left: -40%;
 }
-
 
 .comment-timestamp .comment-timestamp-edit-tooltip p, .post-timestamp .post-timestamp-edit-tooltip p {
   width: fit-content;

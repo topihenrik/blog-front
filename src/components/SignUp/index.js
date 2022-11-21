@@ -4,6 +4,7 @@ import uploadIcon from "../../icons/file_upload.png";
 import {DateTime} from "luxon";
 
 export default function SignUp(props) {
+    const { user } = props;
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState({});
@@ -13,12 +14,16 @@ export default function SignUp(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (user != null) {
+            navigate("/", {replace: true});
+        }
+
         const loopYears = [];
         for (let i = new Date().getFullYear();i>=1900;i--) {
             loopYears.push(i)
         }
         setYears(loopYears);
-    },[])
+    },[]);
 
     const handleChange = (e) => {
         setFile(e.target.files[0]);

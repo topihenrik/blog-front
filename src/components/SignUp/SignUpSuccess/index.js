@@ -5,8 +5,8 @@ export default function SignUpSuccess(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        setTimeout(() => {navigate("/", {replace: true});}, 5000);
-    }, [])
+        setTimeout(() => {navigate("/login", {replace: true});}, 5000);
+    }, []);
 
     return(
         <div className="signup-success">

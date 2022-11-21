@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import MenuIcon from "../../icons/menu.png";
 
-
 export default function Header(props) {
     const { user, setUser } = props;
     const [ menuVis, setMenuVis ] = useState("dispNone");
