@@ -1,15 +1,38 @@
 import React, {useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
-import PostCardDel from "./PostCardDel";
+import { DateTime } from "luxon";
 import LoadingIcon from "../../icons/loading.svg"
 
-export default function DeletePost(props) {
-    const { user } = props;
+function PostCard({post, count}) {
+    return(
+        <div className="post-card-del">
+            <div className="post-card-del-container">
+                <div className="del-post-box-left">
+                    <div className="del-info-box">
+                        <div className="del-author-box">
+                            <img className="del-author-avatar-card" src={post.author.avatar.url}/>
+                            <h3>{post.author.first_name + " " + post.author.last_name}</h3>
+                        </div>
+                        
+                        <h3>{DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATE_MED)}</h3>
+                    </div>
+                    <h2>{post.title}</h2>
+                    <p className="del-post-description">{post.description.split(' ').slice(0, 28).join(' ') + "..."}</p>
+                    <p className="del-post-comments-count">{count + " comments"}</p>
+                </div>
+                <div className="del-post-box-right">
+                    <img className="del-photo-thumbnail" src={post.photo.url}/>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default function DeletePost({user}) {
     const { postid } = useParams();
     const navigate = useNavigate();
     
-
     const [error1, setError1] = useState(null);
     const [isLoaded1, setIsLoaded1] = useState(false);
     const [post, setPost] = useState([]);
@@ -44,7 +67,7 @@ export default function DeletePost(props) {
                 setError1(error);
             }
         )
-    }, [])
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -73,7 +96,6 @@ export default function DeletePost(props) {
                 setSubmitBtnDisabled(false);
             })
     }
-
 
     if (error1) {
         return (
@@ -108,7 +130,7 @@ export default function DeletePost(props) {
             <main className="delete-post">
                 <div className="delete-post-box">
                     <h2>Are you sure you want to delete this post?</h2>
-                    <PostCardDel post={post} count={count}/>
+                    <PostCard post={post} count={count}/>
                     <form className="delete-form" onSubmit={handleSubmit}>
                         <label className="delete-label" htmlFor="confirmation">To delete the post, type the title to confirm</label>
                         {(result.status >= 400 && result.status <= 451)  &&

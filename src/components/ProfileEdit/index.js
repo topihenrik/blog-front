@@ -1,19 +1,151 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import uploadIcon from "../../../icons/file_upload.png";
-import LoadingIcon from "../../../icons/loading.svg"
+import uploadIcon from "../../icons/file_upload.png";
+import LoadingIcon from "../../icons/loading.svg";
 import { DateTime } from "luxon";
 import { nanoid } from "nanoid";
 
-export default function ProfileEdit(props) {
-    const { user, setUser } = props;
+function FullName({result}) {
+    return(
+        <>
+            <input className="text-input" name="first_name" placeholder="First Name" defaultValue={result.first_name}/>
+            <input className="text-input" name="last_name" placeholder="Last Name" defaultValue={result.last_name}/>
+        </>
+    )
+}
 
+function Email({result}) {
+    return(
+        <input className="text-input" name="email" placeholder="Email" defaultValue={result.email}/>
+    )
+}
+
+function DateOfBirth({oldDob}) {
+    const [years, setYears] = useState([]);
+    useEffect(() => {
+        const loopYears = [];
+        for (let i = new Date().getFullYear();i>=1900;i--) {
+            loopYears.push(i)
+        }
+        setYears(loopYears);
+    }, [])
+
+    return(
+        <div className="signup-dob-box">
+            <p>Date of Birth</p>
+            <div className="signup-select-box">
+                <select className="dob-select" name="dob_day">
+                    <option className="dob-option" disabled selected>Day</option>
+                    {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31].map((day, i) => {
+                        if (oldDob.date === i+1) {
+                            return(
+                                <option key={nanoid(10)} selected className="dob-option" value={day}>{day}</option>
+                            )
+                        } else {
+                            return(
+                                <option key={nanoid(10)} className="dob-option" value={day}>{day}</option>
+                            )
+                        }
+                    })}
+                </select>
+                <select className="dob-select" name="dob_month">
+                    <option className="dob-option" disabled selected>Month</option>
+                    {["January","February","March","April","May","June","July","August","September","October","November","December"].map((month, i) => {
+                        if (oldDob.month === i) {
+                            return(
+                                <option key={nanoid(10)} selected className="dob-option" value={i+1}>{month}</option>
+                            )
+                        } else {
+                            return(
+                                <option key={nanoid(10)} className="dob-option" value={i+1}>{month}</option>
+                            )
+                        }
+                    })}
+                </select>
+                <select className="dob-select" name="dob_year">
+                    <option className="dob-option" disabled selected>Year</option>
+                    {years.map((year, i) => {
+                        if (oldDob.year === year) {
+                            return(
+                                <option key={nanoid(10)} selected className="dob-option" value={year}>{year}</option>
+                            )
+                        } else {
+                            return(
+                                <option key={nanoid(10)} className="dob-option" value={year}>{year}</option>
+                            )
+                        }
+                    })}
+                </select>
+            </div>
+        </div>
+    )
+}
+
+function Avatar({file, result, handleChange}) {
+    return(
+        <div className="profile-avatar-box">
+            <label className="profile-avatar-label" htmlFor="avatar"><img id="upload-icon" src={uploadIcon}/><span className="profile-avatar-span">{file?file.name:result.avatar.originalName?result.avatar.originalName:"Avatar image"}</span><span className="profile-avatar-span">{"(max: 2MB)"}</span></label>
+            <input id="avatar" name="avatar" type="file" accept="image/png, image/jpeg" onChange={handleChange}/>
+        </div>
+    )
+}
+
+function BasicErrors({resultBasic}) {
+    return(
+        <>
+            {(resultBasic.status >= 400 && resultBasic.status <= 451)  &&
+            <div className="error-box">
+                <p>{resultBasic.message}</p>
+            </div>}
+            {resultBasic["errors"] !== undefined &&
+            resultBasic.errors.map((error) => {
+                return (
+                    <div className="error-box">
+                        <p>{error.msg}</p>
+                    </div>
+                )
+            })}
+        </>
+    )
+}
+
+function Password() {
+    return(
+        <>
+            <h2>Change Password</h2>
+            <input className="text-input" type="password" name="old_password" placeholder="Old Password" required/>
+            <input className="text-input" type="password" name="password" placeholder="New Password" required/>
+            <input className="text-input" type="password" name="password_confirm" placeholder="Confirm New Password" required/>
+        </>
+    )
+}
+
+function PasswordErrors({resultPassword}) {
+    return(
+        <>
+            {(resultPassword.status >= 400 && resultPassword.status <= 451)  &&
+            <div className="error-box">
+                <p>{resultPassword.message}</p>
+            </div>}
+            {resultPassword["errors"] !== undefined &&
+            resultPassword.errors.map((error) => {
+                return (
+                    <div className="error-box">
+                        <p>{error.msg}</p>
+                    </div>
+                )
+            })}
+        </>
+    )
+}
+
+export default function ProfileEdit({user, setUser}) {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState(null);
     const [file, setFile] = useState(null);
-    const [years, setYears] = useState([]);
+    
     const [oldDob, setOldDob] = useState(undefined);
     const [resultBasic, setResultBasic] = useState({});
     const [resultPassword, setResultPassword] = useState({});
@@ -28,12 +160,6 @@ export default function ProfileEdit(props) {
         if (!user) {
             navigate("../login", {replace: true});
         }
-
-        const loopYears = [];
-        for (let i = new Date().getFullYear();i>=1900;i--) {
-            loopYears.push(i)
-        }
-        setYears(loopYears);
 
         const bearer = "Bearer " + localStorage.getItem("token");
         fetch(`${process.env.REACT_APP_API_URL}/auth/user/edit`,
@@ -56,9 +182,7 @@ export default function ProfileEdit(props) {
                 setIsLoaded(true);
                 setError(error);
             })
-    }, [])
-
-
+    }, []);
 
     const handleSubmitBasic = (e) => {
         e.preventDefault();
@@ -179,93 +303,16 @@ export default function ProfileEdit(props) {
                     <div className="profile-forms">
                         <form onSubmit={handleSubmitBasic} className="profile-form">
                             <h2>Basic Information</h2>
-                            <input className="text-input" name="first_name" placeholder="First Name" defaultValue={result.first_name}/>
-                            <input className="text-input" name="last_name" placeholder="Last Name" defaultValue={result.last_name}/>
-                            <input className="text-input" name="email" placeholder="Email" defaultValue={result.email}/>
-                            <div className="signup-dob-box">
-                                <p>Date of Birth</p>
-                                <div className="signup-select-box">
-                                    <select className="dob-select" name="dob_day">
-                                        <option className="dob-option" disabled selected>Day</option>
-                                        {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31].map((day, i) => {
-                                            if (oldDob.date == i+1) {
-                                                return(
-                                                    <option key={nanoid(10)} selected className="dob-option" value={day}>{day}</option>
-                                                )
-                                            } else {
-                                                return(
-                                                    <option key={nanoid(10)} className="dob-option" value={day}>{day}</option>
-                                                )
-                                            }
-                                        })}
-                                    </select>
-                                    <select className="dob-select" name="dob_month">
-                                        <option className="dob-option" disabled selected>Month</option>
-                                        {["January","February","March","April","May","June","July","August","September","October","November","December"].map((month, i) => {
-                                            if (oldDob.month == i) {
-                                                return(
-                                                    <option key={nanoid(10)} selected className="dob-option" value={i+1}>{month}</option>
-                                                )
-                                            } else {
-                                                return(
-                                                    <option key={nanoid(10)} className="dob-option" value={i+1}>{month}</option>
-                                                )
-                                            }
-                                        })}
-                                    </select>
-                                    <select className="dob-select" name="dob_year">
-                                        <option className="dob-option" disabled selected>Year</option>
-                                        {years.map((year, i) => {
-                                            if (oldDob.year == year) {
-                                                return(
-                                                    <option key={nanoid(10)} selected className="dob-option" value={year}>{year}</option>
-                                                )
-                                            } else {
-                                                return(
-                                                    <option key={nanoid(10)} className="dob-option" value={year}>{year}</option>
-                                                )
-                                            }
-                                        })}
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="profile-avatar-box">
-                                <label className="profile-avatar-label" htmlFor="avatar"><img id="upload-icon" src={uploadIcon}/><span className="profile-avatar-span">{file?file.name:result.avatar.originalName?result.avatar.originalName:"Avatar image"}</span><span className="profile-avatar-span">{"(max: 2MB)"}</span></label>
-                                <input id="avatar" name="avatar" type="file" accept="image/png, image/jpeg" onChange={handleChange}/>
-                            </div>
-                            {(resultBasic.status >= 400 && resultBasic.status <= 451)  &&
-                            <div className="error-box">
-                                <p>{resultBasic.message}</p>
-                            </div>}
-                            {resultBasic["errors"] !== undefined &&
-                            resultBasic.errors.map((error) => {
-                                return (
-                                    <div className="error-box">
-                                        <p>{error.msg}</p>
-                                    </div>
-                                )
-                            })
-                            }
+                            <FullName result={result}/>
+                            <Email result={result}/>
+                            <DateOfBirth oldDob={oldDob}/>
+                            <Avatar file={file} result={result} handleChange={handleChange}/>
+                            <BasicErrors resultBasic={resultBasic}/>
                             <button className="profile-edit-button" disabled={submitBasicBtnDisabled} style={submitBasicBtnDisabled?{cursor: "wait"}:{}}>Update</button>
                         </form>
                         <form onSubmit={handleSubmitPassword} className="profile-form">
-                            <h2>Change Password</h2>
-                            <input className="text-input" type="password" name="old_password" placeholder="Old Password" required/>
-                            <input className="text-input" type="password" name="password" placeholder="New Password" required/>
-                            <input className="text-input" type="password" name="password_confirm" placeholder="Confirm New Password" required/>
-                            {(resultPassword.status >= 400 && resultPassword.status <= 451)  &&
-                            <div className="error-box">
-                                <p>{resultPassword.message}</p>
-                            </div>}
-                            {resultPassword["errors"] !== undefined &&
-                            resultPassword.errors.map((error) => {
-                                return (
-                                    <div className="error-box">
-                                        <p>{error.msg}</p>
-                                    </div>
-                                )
-                            })
-                            }
+                            <Password/>
+                            <PasswordErrors resultPassword={resultPassword}/>
                             <button className="profile-edit-button" disabled={submitPwdBtnDisabled} style={submitPwdBtnDisabled?{cursor: "wait"}:{}}>Update</button>
                         </form>
                     </div>

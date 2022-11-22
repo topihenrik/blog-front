@@ -4,12 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import uploadIcon from "../../icons/file_upload.png";
 import { nanoid } from "nanoid";
 
-
-export default function CreatePost(props) {
-    const { user } = props;
+export default function CreatePost({user}) {
     const editorRef = useRef(null);
     const navigate = useNavigate();
-
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -22,7 +19,7 @@ export default function CreatePost(props) {
         if (!user) {
             navigate("../login", {replace: true});
         }
-    }, [])
+    }, []);
 
     const handleChange = (e) => {
         setFile(e.target.files[0]);
@@ -119,5 +116,4 @@ export default function CreatePost(props) {
             </div>
         </main>
     )
-
 }

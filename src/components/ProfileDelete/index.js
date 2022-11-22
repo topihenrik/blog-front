@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
-import LoadingIcon from "../../../icons/loading.svg"
+import LoadingIcon from "../../icons/loading.svg";
 
-export default function ProfileDelete(props) {
-    const { user, setUser } = props;
-
+export default function ProfileDelete({user, setUser}) {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -128,6 +126,4 @@ export default function ProfileDelete(props) {
             </main>
         )
     }
-
-
 }

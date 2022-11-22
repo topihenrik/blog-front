@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
 
-export default function SignUpSuccess(props) {
+export default function SignUpSuccess() {
     const navigate = useNavigate();
 
     useEffect(() => {

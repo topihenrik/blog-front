@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
 
-export default function LogIn(props) {
-    const { user, setUser } = props;
+export default function LogIn({user, setUser}) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState({});

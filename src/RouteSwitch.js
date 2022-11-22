@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
@@ -6,11 +6,10 @@ import Blog from "./components/Blog";
 import Footer from "./components/Footer";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
-import SignUpSuccess from "./components/SignUp/SignUpSuccess";
+import SignUpSuccess from "./components/SignUpSuccess";
 import Profile from "./components/Profile";
-import ProfileEdit from "./components/Profile/ProfileEdit";
-import ProfileDelete from "./components/Profile/ProfileDelete";
-
+import ProfileEdit from "./components/ProfileEdit";
+import ProfileDelete from "./components/ProfileDelete";
 import Edit from "./components/Edit";
 import CreatePost from "./components/CreatePost";
 import UpdatePost from "./components/UpdatePost";

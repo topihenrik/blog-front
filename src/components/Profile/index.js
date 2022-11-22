@@ -5,9 +5,7 @@ import DeleteIcon from "../../icons/delete.png"
 import LoadingIcon from "../../icons/loading.svg"
 import { DateTime } from "luxon";
 
-export default function Profile(props) {
-    const { user } = props;
-
+export default function Profile({user}) {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -33,11 +31,7 @@ export default function Profile(props) {
                 setIsLoaded(true);
                 setError(error);
             })
-    }, [])
-
-
-
-
+    }, []);
 
     if (error) {
         return (

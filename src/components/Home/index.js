@@ -1,10 +1,49 @@
 import React, {useState, useEffect} from "react";
-import HeroScreen from "./HeroScreen";
-import PostCard from "./PostCard";
+import { DateTime } from "luxon";
 import LoadingIcon from "../../icons/loading.svg"
 
-export default function Home(props) {
-    const { user } = props;
+function HeroScreen() {
+    return(
+        <div className="hero-screen" style={
+            {
+                backgroundImage: `url("https://res.cloudinary.com/dqcnxy51g/image/upload/v1668987801/${process.env.REACT_APP_CLOUDINARY_FOLDER}/static/blog-bg_tmdcsm.jpg")`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover"
+            }
+        }>
+            <div className="hero-box">
+                <h1>Share your ideas.</h1>
+                <p>Discover and share different perspectives with other participants from around the world.</p>
+            </div>
+        </div>
+    )
+}
+
+function PostCard({post}) {
+    return(
+        <div className="post-card">
+            <a href={"/post/"+post._id}>
+                <div className="post-box-left">
+                    <div className="info-box">
+                        <div className="author-box">
+                            <img className="author-avatar-card" src={post.author.avatar.url}/>
+                            <h4>{post.author.first_name + " " + post.author.last_name}</h4>
+                        </div>
+                        <h4>{DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATE_MED)}</h4>
+                    </div>
+                    <h2>{post.title}</h2>
+                    <p className="post-description">{post.description.split(' ').slice(0, 28).join(' ') + " ..."}</p>
+                    <p className="post-comments-count">{post.count + " comments"}</p>
+                </div>
+                <div className="post-box-right">
+                    <img className="photo-thumbnail" src={post.photo.url}/>
+                </div>
+            </a>
+        </div>
+    )
+}
+
+export default function Home({user}) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [posts, setPosts] = useState([]);
@@ -21,7 +60,7 @@ export default function Home(props) {
                     setError(error);
                 }
             )
-    }, [])
+    }, []);
 
     if (error) {
         return (
@@ -96,6 +135,4 @@ export default function Home(props) {
             </main>
         )
     }
-
-    
 }

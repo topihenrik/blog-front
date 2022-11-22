@@ -566,6 +566,7 @@ header > div {
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  padding: 16px 0;
 }
 
 .profile-container, .profile-edit-container, .profile-delete-container {

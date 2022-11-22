@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import MenuIcon from "../../icons/menu.png";
 import { useNavigate } from 'react-router-dom';
 
-export default function Header(props) {
-    const { user, setUser } = props;
+export default function Header({user, setUser}) {
     const [ menuVis, setMenuVis ] = useState("dispNone");
     const navigate = useNavigate();
 

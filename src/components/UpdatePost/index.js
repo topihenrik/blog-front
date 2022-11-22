@@ -6,8 +6,7 @@ import { useParams } from "react-router-dom";
 import { nanoid } from "nanoid";
 import LoadingIcon from "../../icons/loading.svg"
 
-export default function UpdatePost(props) {
-    const { user } = props;
+export default function UpdatePost({user}) {
     const editorRef = useRef(null);
     const navigate = useNavigate();
     const { postid } = useParams();
@@ -46,8 +45,7 @@ export default function UpdatePost(props) {
                 setError1(error);
             }
         )
-
-    }, [])
+    }, []);
 
     const handleChange = (e) => {
         setFile(e.target.files[0]);
@@ -96,8 +94,6 @@ export default function UpdatePost(props) {
             setSubmitBtnDisabled(false);
         }
     }
-
-
 
     if (error1) {
         return (
@@ -186,9 +182,4 @@ export default function UpdatePost(props) {
             </main>
         )
     }
-
-
-
-    
-
 }
