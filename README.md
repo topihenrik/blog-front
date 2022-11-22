@@ -1,10 +1,10 @@
 # Frontend App for the Blog Project
-This is the repository for the frontend of the blog project. Frontend is split into two repositories: Blog Front and Blog Edit. Link to the other repository can be seen below. The original idea was to create blog website that has two distinct frontend react applications and one backend express.js api that manages the persistent data. This separation was created so that the developer learns how to create a web applications that have independent frontend and backend code.
+The blog project has seperated frontend and backend. This is the repository for the frontend of the blog project. Frontend obtains necessary data by utilizing the Express.js REST API that has a separate repository. Information is then displayed with the use of React.js and vanilla CSS.
 
 ## Live preview
 https://blog-front-pi.vercel.app/
 
-![blog-front](https://user-images.githubusercontent.com/79649210/200315117-744b4782-e216-42a3-a035-dcd8232eee45.png)
+![blog-front-screenshot](https://user-images.githubusercontent.com/79649210/203314936-b22d7beb-befc-4c5f-8717-54dc3208509d.png)
 
 ## What actions can be done?
 * Create account
@@ -19,6 +19,7 @@ https://blog-front-pi.vercel.app/
 ## What was utilized?
 * React
 * React Router
+* TinyMCE (WYSIWYG Text Editor)
 * Vanilla CSS (No styling libraries or frameworks used)
 
 ## Getting started
@@ -31,6 +32,5 @@ Run app in development mode
 npm start
 ```
 
-## Other Project Related Repositories
+## Other Project Related Repository
 * Blog API: https://github.com/topihenrik/blog-api
-* Blog Edit: https://github.com/topihenrik/blog-edit
