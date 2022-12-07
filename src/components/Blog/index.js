@@ -14,8 +14,8 @@ function PostFull({postid, setPostExists}) {
             .then((res) => res.json())
             .then((result) => {
                 setIsLoaded(true);
-                setPost(result.post_list);
-                if (result.post_list !== undefined) {
+                setPost(result);
+                if (result !== null) {
                     setPostExists(true);
                 }
             },

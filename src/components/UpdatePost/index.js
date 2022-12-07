@@ -38,7 +38,7 @@ export default function UpdatePost({user}) {
             .then((res) => res.json())
             .then((result) => {
                 setIsLoaded1(true);
-                setPost(result.post_list);
+                setPost(result);
             },
             (error) => {
                 setIsLoaded1(true);
@@ -76,13 +76,15 @@ export default function UpdatePost({user}) {
                     },
                     body: formData
                 })
-                .then((res) => res.json())
+                .then((res) => {
+                    if (res.status === 201) {
+                        navigate("/edit", {replace: true});
+                    }
+                    return res.json()
+                })
                 .then((result) => {
                     setIsLoaded2(true);
                     setResultErrors(result);
-                    if (result.status === 201) {
-                        navigate("/edit", {replace: true});
-                    }
                     setSubmitBtnDisabled(false);
                 },
                 (error) => {

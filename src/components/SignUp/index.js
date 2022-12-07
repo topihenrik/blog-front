@@ -110,7 +110,7 @@ export default function SignUp({user}) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState({});
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState(undefined);
     
     const [submitBtnDisabled, setSubmitBtnDisabled] = useState(false); // During fetch request -> disable submit button
     const navigate = useNavigate();
@@ -147,7 +147,7 @@ export default function SignUp({user}) {
             setSubmitBtnDisabled(false);
             return;
         }
-
+        console.log(file, typeof(file));
         const formData = new FormData();
         formData.append("first_name", e.target.first_name.value);
         formData.append("last_name", e.target.last_name.value);

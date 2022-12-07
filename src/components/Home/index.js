@@ -53,7 +53,7 @@ export default function Home({user}) {
             .then((res) => res.json())
             .then((result) => {
                     setIsLoaded(true);
-                    setPosts(result.post_list);
+                    setPosts(result);
                 },
                 (error) => {
                     setIsLoaded(true);
@@ -83,7 +83,7 @@ export default function Home({user}) {
                 </div>
             </div>
         )
-    } else if (posts === undefined) {
+    } else if (posts.length === 0) {
         return (
             <div className="no-content-main">
                 <HeroScreen/>

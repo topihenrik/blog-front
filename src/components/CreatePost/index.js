@@ -49,13 +49,15 @@ export default function CreatePost({user}) {
                     },
                     body: formData
                 })
-                .then((res) => res.json())
+                .then((res) => {
+                    if (res.status === 201) {
+                        navigate("/edit", {replace: true});
+                    }
+                    return res.json();
+                })
                 .then((result) => {
                     setIsLoaded(true);
                     setResultErrors(result);
-                    if (result.status === 201) {
-                        navigate("/edit", {replace: true});
-                    }
                     setSubmitBtnDisabled(false);
                 },
                 (error) => {

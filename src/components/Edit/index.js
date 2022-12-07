@@ -77,7 +77,7 @@ export default function Edit({user}) {
             .then((res) => res.json())
             .then((result) => {
                 setIsLoaded(true);
-                setPosts(result.post_list);
+                setPosts(result);
             },
             (error) => {
                 setIsLoaded(true);
@@ -106,7 +106,7 @@ export default function Edit({user}) {
                 </div>
             </div>
         )
-    } else if (posts === undefined) {
+    } else if (posts.length === 0) {
         return (
             <div className="no-content-main">
                 <HeroScreen/>

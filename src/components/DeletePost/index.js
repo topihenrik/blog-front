@@ -59,7 +59,7 @@ export default function DeletePost({user}) {
             .then((res) => res.json())
             .then((result) => {
                 setIsLoaded1(true);
-                setPost(result.post_list);
+                setPost(result);
                 setCount(result.count);
             },
             (error) => {
@@ -81,13 +81,15 @@ export default function DeletePost({user}) {
                 },
                 body: new URLSearchParams({confirmation: e.target.confirmation.value})
             })
-            .then((res) => res.json())
+            .then((res) => {
+                if (res.status === 200) {
+                    navigate("/edit", {replace: true});
+                }
+                return res.json();
+            })
             .then((result) => {
                 setIsLoaded2(true);
                 setResult(result);
-                if (result.status === 200) {
-                    navigate("/edit", {replace: true});
-                }
                 setSubmitBtnDisabled(false);
             },
             (error) => {

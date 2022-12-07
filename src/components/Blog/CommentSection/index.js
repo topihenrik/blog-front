@@ -25,11 +25,13 @@ function Comment({postid, comment, user, updateComments, setUpdateComments}) {
                     "Authorization": bearer
                 }
             })
-            .then((res) => res.json())
-            .then((result) => {
-                if (result.status === 200) {
+            .then((res) => {
+                if (res.status === 200) {
                     setUpdateComments(updateComments+1);
                 }
+                return res.json()
+            })
+            .then(() => {
                 setSubmitDelBtnDisabled(false);
             }, (error) => {
                 console.error(error);
@@ -49,12 +51,14 @@ function Comment({postid, comment, user, updateComments, setUpdateComments}) {
                 },
                 body: new URLSearchParams({content: e.target.content.value})
             })
-            .then((res) => res.json())
-            .then((result) => {
-                if (result.status === 200) {
+            .then((res) => {
+                if (res.status === 200) {
                     setEdit(false);
                     setUpdateComments(updateComments+1);
                 }
+                return res.json()
+            })
+            .then(() => {
                 setSubmitEditBtnDisabled(false);
             }, (error) => {
                 console.error(error);
@@ -128,14 +132,16 @@ function CommentCreator({postid, user, updateComments, setUpdateComments}) {
                     "Content-Type": "application/x-www-form-urlencoded"},
                 body: new URLSearchParams({content: e.target.content.value})
             })
-            .then((res) => res.json())
-            .then((result) => {
-                setIsLoaded(true);
-                setResult(result);
-                if (result.status == 201) {
+            .then((res) => {
+                if (res.status === 201) {
                     setUpdateComments(updateComments+1);
                     e.target.reset();
                 }
+                return res.json()
+            })
+            .then((result) => {
+                setIsLoaded(true);
+                setResult(result);
                 setSubmitBtnDisabled(false);
             },
             (error) => {
@@ -167,7 +173,7 @@ export default function CommentSection({postid, user, postExists}) {
             .then((res) => res.json())
             .then((result) => {
                 setIsLoaded(true);
-                setComments(result.comment_list);
+                setComments(result);
             },
             (error) => {
                 setIsLoaded(true);

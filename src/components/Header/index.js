@@ -42,8 +42,8 @@ export default function Header({user, setUser}) {
                     <a onClick={handleClick}><button className="mobile-logout-button">Log Out</button></a>
                 </div>:
                 <div className={menuVis + " mobile-auth-box"}>
-                    <a href="/login"><button className="mobile-login-button">Login</button></a>
-                    <a href="/signup"><button className="mobile-sign-up-button">Sign up</button></a>
+                    <a href="/login"><button className="mobile-login-button">Log In</button></a>
+                    <a href="/signup"><button className="mobile-sign-up-button">Sign Up</button></a>
                 </div>}
                 {user?
                 <div className="auth-box">
@@ -56,8 +56,8 @@ export default function Header({user, setUser}) {
                     <a onClick={handleClick}><button className="logout-button">Log Out</button></a>
                 </div>:
                 <div className="auth-box">
-                    <a href="/login"><button className="login-button">Login</button></a>
-                    <a href="/signup"><button className="sign-up-button">Sign up</button></a>
+                    <a href="/login"><button className="login-button">Log In</button></a>
+                    <a href="/signup"><button className="sign-up-button">Sign Up</button></a>
                 </div>}
             </div>
         </header>
