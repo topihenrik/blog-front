@@ -171,11 +171,11 @@ export default function ProfileEdit({user, setUser}) {
             .then((res) => res.json())
             .then((result) => {
                 setIsLoaded(true);
-                setResult(result.user);
+                setResult(result);
                 setOldDob({
-                    "date": new Date(result.user.dob).getDate(),
-                    "month": new Date(result.user.dob).getMonth(),
-                    "year": new Date(result.user.dob).getFullYear(),
+                    "date": new Date(result.dob).getDate(),
+                    "month": new Date(result.dob).getMonth(),
+                    "year": new Date(result.dob).getFullYear(),
                 })
             },
             (error) => {
@@ -223,12 +223,14 @@ export default function ProfileEdit({user, setUser}) {
                 method: "PUT",
                 body: formData
             })
-            .then((res) => res.json())
-            .then((result) => {
-                setResultBasic(result);
-                if (result.status === 201) {
+            .then((res) => {
+                if (res.status === 201) {
                     navigate("../profile", {replace: true});
                 }
+                return res.json()
+            })
+            .then((result) => {
+                setResultBasic(result);
                 setSubmitBasicBtnDisabled(false);
             }, (error) => {
                 console.log(error);
@@ -249,8 +251,11 @@ export default function ProfileEdit({user, setUser}) {
                 method: "PUT",
                 body: new URLSearchParams({"old_password": e.target.old_password.value, "password": e.target.password.value, "password_confirm": e.target.password_confirm.value})
             })
-            .then((res) => res.json())
+            .then(async (res) => {
+                return { ...(await res.json()), status: res.status }
+            })
             .then((result) => {
+                console.log(result);
                 setResultPassword(result);
                 if (result.status === 201) {
                     localStorage.clear();

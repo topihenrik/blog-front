@@ -44,7 +44,7 @@ export default function ProfileDelete({user, setUser}) {
                 method: "DELETE",
                 body: new URLSearchParams({email: e.target.email.value, password: e.target.password.value})
             })
-            .then((res) => res.json())
+            .then(async (res) => ({ ...(await res.json()), status: res.status }))
             .then((result) => {
                 setResultDelete(result);
                 if (result.status === 200) {

@@ -147,7 +147,7 @@ export default function SignUp({user}) {
             setSubmitBtnDisabled(false);
             return;
         }
-        console.log(file, typeof(file));
+
         const formData = new FormData();
         formData.append("first_name", e.target.first_name.value);
         formData.append("last_name", e.target.last_name.value);
@@ -162,13 +162,15 @@ export default function SignUp({user}) {
                 method: "POST",
                 body: formData
             })
-            .then((res) => res.json())
+            .then((res) => {
+                if (res.status === 201) {
+                    navigate("/signup/success", {replace: true});
+                }
+                return res.json();
+            })
             .then((result) => {
                 setIsLoaded(true);
                 setResult(result);
-                if (result.status === 201) {
-                    navigate("/signup/success", {replace: true});
-                }
                 setSubmitBtnDisabled(false);
             },
             (error) => {

@@ -23,8 +23,11 @@ export default function LogIn({user, setUser}) {
                 headers: {"Content-Type": "application/x-www-form-urlencoded"}, 
                 body: new URLSearchParams({email: e.target.email.value, password: e.target.password.value})
             })
-            .then((res) => res.json())
+            .then(async (res) => {
+                return { ...(await res.json()), status: res.status }
+            })
             .then((result) => {
+                console.log(result);
                 setIsLoaded(true);
                 setResult(result);
                 if (result.status === 200) {
