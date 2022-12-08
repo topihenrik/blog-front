@@ -6,7 +6,6 @@ import Blog from "./components/Blog";
 import Footer from "./components/Footer";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
-import SignUpSuccess from "./components/SignUpSuccess";
 import Profile from "./components/Profile";
 import ProfileEdit from "./components/ProfileEdit";
 import ProfileDelete from "./components/ProfileDelete";
@@ -26,7 +25,6 @@ export default function RouteSwitch() {
                     <Route path="/post/:postid" element={<Blog user={user}/>}/>
                     <Route path="/login" element={<LogIn user={user} setUser={setUser}/>}/>
                     <Route path="/signup" element={<SignUp user={user}/>}/> 
-                    <Route path="/signup/success" element={<SignUpSuccess/>}/>
                     <Route path="/profile" element={<Profile user={user}/>}/>
                     <Route path="/profile/edit" element={<ProfileEdit user={user} setUser={setUser}/>}/>
                     <Route path="/profile/delete" element={<ProfileDelete user={user} setUser={setUser}/>}/>

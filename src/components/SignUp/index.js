@@ -106,11 +106,31 @@ function Errors({result}) {
     )
 }
 
+function SignUpSuccess() {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setTimeout(() => {navigate("/login", {replace: true});}, 5000);
+    }, []);
+
+    return(
+        <div className="signup-success">
+            <div className="signup-success-box">
+                <div className="success-title-box">
+                    <h2>Account Created 👏</h2>
+                </div>
+                <p>Proceed to login so you may partake in discussions with other users.</p>
+            </div>
+        </div>
+    )
+}
+
 export default function SignUp({user}) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState({});
     const [file, setFile] = useState(undefined);
+    const [success, setSuccess] = useState(false);
     
     const [submitBtnDisabled, setSubmitBtnDisabled] = useState(false); // During fetch request -> disable submit button
     const navigate = useNavigate();
@@ -164,7 +184,7 @@ export default function SignUp({user}) {
             })
             .then((res) => {
                 if (res.status === 201) {
-                    navigate("/signup/success", {replace: true});
+                    setSuccess(true);
                 }
                 return res.json();
             })
@@ -180,22 +200,26 @@ export default function SignUp({user}) {
             })
     }
 
-    return(
-        <main className="signup-main">
-            <div className="signup-box">
-                <div className="signup-title-box">
-                    <h2>Sign Up</h2>
+    if (success) {
+        return <SignUpSuccess/>;
+    }  else {
+        return(
+            <main className="signup-main">
+                <div className="signup-box">
+                    <div className="signup-title-box">
+                        <h2>Sign Up</h2>
+                    </div>
+                    <form className="signup-form" onSubmit={handleSubmit}>
+                        <FullName/>
+                        <Email/>
+                        <DateOfBirth/>
+                        <Password/>
+                        <Avatar file={file} handleChange={handleChange}/>
+                        <Errors result={result}/>
+                        <button disabled={submitBtnDisabled} style={submitBtnDisabled?{cursor: "wait"}:{}}>Sign Up</button>
+                    </form>
                 </div>
-                <form className="signup-form" onSubmit={handleSubmit}>
-                    <FullName/>
-                    <Email/>
-                    <DateOfBirth/>
-                    <Password/>
-                    <Avatar file={file} handleChange={handleChange}/>
-                    <Errors result={result}/>
-                    <button disabled={submitBtnDisabled} style={submitBtnDisabled?{cursor: "wait"}:{}}>Sign Up</button>
-                </form>
-            </div>
-        </main>
-    )
+            </main>
+        )
+    }
 }
