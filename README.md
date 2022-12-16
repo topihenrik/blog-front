@@ -1,5 +1,5 @@
 # Frontend App for the Blog Project
-The blog project has seperated frontend and backend. This is the repository for the frontend of the blog project. Frontend obtains necessary data by utilizing the Express.js REST API that has a separate repository. Information is then displayed with the use of React.js and vanilla CSS.
+The blog project has seperated frontend and backend. This is the repository for the frontend of the blog project. Frontend obtains necessary data by utilizing the Express.js API that has a separate repository. Information is then displayed with the use of React.js and vanilla CSS.
 
 ## Live preview
 https://blog-front-pi.vercel.app/
