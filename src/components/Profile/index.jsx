@@ -86,8 +86,8 @@ export function Profile({user}) {
                             </div>
                         </div>
                         <div className="profile-action-buttons">
-                            <a href="/profile/edit"><button className="profile-action-button"><img className="icon" src={EditIcon}/>Edit Information</button></a>
-                            <a href="/profile/delete"><button className="profile-action-button"><img className="icon" src={DeleteIcon}/>Delete Account</button></a>
+                            <a><button onClick={() => navigate('/profile/edit')} className="profile-action-button"><img className="icon" src={EditIcon}/>Edit Information</button></a>
+                            <a><button onClick={() => navigate('/profile/delete')} className="profile-action-button"><img className="icon" src={DeleteIcon}/>Delete Account</button></a>
                         </div>
                     </div>
                 </div>

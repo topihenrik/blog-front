@@ -5,6 +5,7 @@ import EditIcon from "../../../icons/edit.png"
 import DeleteIcon from "../../../icons/delete.png"
 import CancelIcon from "../../../icons/cancel.png";
 import AddIcon from "../../../icons/add.png";
+import {useNavigate} from "react-router";
 
 function Comment({postid, comment, user, updateComments, setUpdateComments}) {
     const [edit, setEdit] = useState(false);
@@ -167,6 +168,7 @@ export function CommentSection({postid, user, postExists}) {
     const [isLoaded, setIsLoaded] = useState(false);
     const [comments, setComments] = useState();
     const [updateComments, setUpdateComments] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`${import.meta.env.VITE_API_URL}/posts/${postid}/comments`)
@@ -220,7 +222,7 @@ export function CommentSection({postid, user, postExists}) {
                     {localStorage.getItem("token")!==null ?
                         <CommentCreator postid={postid} user={user} updateComments={updateComments} setUpdateComments={setUpdateComments}/> :
                         <div className="new-comment">
-                            <a href="/login"><h3>Log In to Create a New Comment</h3></a>
+                            <button onClick={() => navigate('/login')}><h3>Log In to Create a New Comment</h3></button>
                         </div>
                     }
                 </div>
