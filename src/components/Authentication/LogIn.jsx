@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
-export function LogIn({user, setUser}) {
+export function LogIn({ user, setUser }) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState({});
@@ -10,57 +10,75 @@ export function LogIn({user, setUser}) {
 
     useEffect(() => {
         if (user != null) {
-            navigate("/", {replace: true});
+            navigate('/', { replace: true });
         }
-    },[]);
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setSubmitBtnDisabled(true);
-        fetch(`${import.meta.env.VITE_API_URL}/login`,
-            {
-                method: "POST",
-                headers: {"Content-Type": "application/x-www-form-urlencoded"},
-                body: new URLSearchParams({email: e.target.email.value, password: e.target.password.value})
-            })
+        fetch(`${import.meta.env.VITE_API_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ email: e.target.email.value, password: e.target.password.value }),
+        })
             .then(async (res) => {
-                return { ...(await res.json()), status: res.status }
+                return { ...(await res.json()), status: res.status };
             })
-            .then((result) => {
-                console.log(result);
-                setIsLoaded(true);
-                setResult(result);
-                if (result.status === 200) {
-                    localStorage.setItem("token", result.token);
-                    localStorage.setItem("user", JSON.stringify(result.user));
-                    setUser({...result.user});
-                    window.location = document.referrer;
+            .then(
+                (result) => {
+                    console.log(result);
+                    setIsLoaded(true);
+                    setResult(result);
+                    if (result.status === 200) {
+                        localStorage.setItem('token', result.token);
+                        localStorage.setItem('user', JSON.stringify(result.user));
+                        setUser({ ...result.user });
+                        window.location = document.referrer;
+                    }
+                    setSubmitBtnDisabled(false);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                    setSubmitBtnDisabled(false);
                 }
-                setSubmitBtnDisabled(false);
-            },
-            (error) => {
-                setIsLoaded(true);
-                setError(error);
-                setSubmitBtnDisabled(false);
-            })
-    }
+            );
+    };
 
-    return(
+    return (
         <main className="login-main">
             <div className="login-box">
                 <div className="login-title-box">
                     <h2>Log In</h2>
                 </div>
                 <form className="login-form" onSubmit={handleSubmit}>
-                    <input className="text-input" id="email" name="email" required={true} type="email" placeholder="Email"/>
-                    <input className="text-input" id="password" name="password" required={true} type="password" placeholder="Password"/>
-                    {result.status == 401 &&
-                    <div className="error-box">
-                        <p>{result.message}</p>
-                    </div>}
-                    <button disabled={submitBtnDisabled} style={submitBtnDisabled?{cursor: "wait"}:{}}>Log In</button>
+                    <input
+                        className="text-input"
+                        id="email"
+                        name="email"
+                        required={true}
+                        type="email"
+                        placeholder="Email"
+                    />
+                    <input
+                        className="text-input"
+                        id="password"
+                        name="password"
+                        required={true}
+                        type="password"
+                        placeholder="Password"
+                    />
+                    {result.status == 401 && (
+                        <div className="error-box">
+                            <p>{result.message}</p>
+                        </div>
+                    )}
+                    <button disabled={submitBtnDisabled} style={submitBtnDisabled ? { cursor: 'wait' } : {}}>
+                        Log In
+                    </button>
                 </form>
             </div>
         </main>
-    )
+    );
 }

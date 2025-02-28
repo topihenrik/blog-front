@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
-import LoadingIcon from "../../icons/loading.svg";
-import {DateTime} from "luxon";
+import React, { useEffect, useState } from 'react';
+import LoadingIcon from '../../icons/loading.svg';
+import { DateTime } from 'luxon';
 
-export function PostContent({postid, setPostExists}) {
+export function PostContent({ postid, setPostExists }) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [post, setPost] = useState([]);
@@ -10,7 +10,8 @@ export function PostContent({postid, setPostExists}) {
     useEffect(() => {
         fetch(`${import.meta.env.VITE_API_URL}/posts/${postid}`)
             .then((res) => res.json())
-            .then((result) => {
+            .then(
+                (result) => {
                     setIsLoaded(true);
                     setPost(result);
                     if (result !== null) {
@@ -21,7 +22,7 @@ export function PostContent({postid, setPostExists}) {
                     setIsLoaded(true);
                     setError(error);
                 }
-            )
+            );
     }, []);
 
     if (error) {
@@ -32,18 +33,18 @@ export function PostContent({postid, setPostExists}) {
                     <p>{error.message}</p>
                 </div>
             </div>
-        )
+        );
     } else if (!isLoaded) {
         return (
             <div className="loading-main">
                 <div className="loading-container">
                     <div className="loading-icon-box">
-                        <img id="loading-icon" src={LoadingIcon}/>
+                        <img id="loading-icon" src={LoadingIcon} />
                     </div>
                     <p>Loading Post...</p>
                 </div>
             </div>
-        )
+        );
     } else if (post === undefined) {
         return (
             <div className="no-content-main">
@@ -51,24 +52,35 @@ export function PostContent({postid, setPostExists}) {
                     <h2>No post found</h2>
                 </div>
             </div>
-        )
+        );
     } else {
-        return(
+        return (
             <div className="post-full">
                 <div className="info-box">
                     <div className="author-box">
-                        <img className="author-avatar-full" src={post.author.avatar.url}/>
-                        <h4>{post.author.first_name + " " + post.author.last_name}</h4>
+                        <img className="author-avatar-full" src={post.author.avatar.url} />
+                        <h4>{post.author.first_name + ' ' + post.author.last_name}</h4>
                     </div>
                     <h4 className="post-timestamp">
-                        <span className="post-timestamp-original">{DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATE_MED)}</span>
-                        {post.edit_timestamp&&"*"}
-                        {post.edit_timestamp&&<span className="post-timestamp-edit-tooltip"><p className="p-edit-timestamp">{"Edited: "+DateTime.fromJSDate(new Date(post.edit_timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</p></span>}
+                        <span className="post-timestamp-original">
+                            {DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATE_MED)}
+                        </span>
+                        {post.edit_timestamp && '*'}
+                        {post.edit_timestamp && (
+                            <span className="post-timestamp-edit-tooltip">
+                                <p className="p-edit-timestamp">
+                                    {'Edited: ' +
+                                        DateTime.fromJSDate(new Date(post.edit_timestamp)).toLocaleString(
+                                            DateTime.DATETIME_SHORT
+                                        )}
+                                </p>
+                            </span>
+                        )}
                     </h4>
                 </div>
-                <img className="post-cover-photo" src={post.photo.url}/>
-                <div className="post-text-container" dangerouslySetInnerHTML={{__html: post.content}}></div>
+                <img className="post-cover-photo" src={post.photo.url} />
+                <div className="post-text-container" dangerouslySetInnerHTML={{ __html: post.content }}></div>
             </div>
-        )
+        );
     }
 }

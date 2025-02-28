@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import addIcon from "../../icons/add.png";
-import LoadingIcon from "../../icons/loading.svg"
-import {HeroScreen} from "./HeroScreen.jsx";
+import addIcon from '../../icons/add.png';
+import LoadingIcon from '../../icons/loading.svg';
+import { HeroScreen } from './HeroScreen.jsx';
+import { PostCardEdit } from './PostCardEdit.jsx';
 
-export function YourStories({user}) {
+export function YourStories({ user }) {
     const navigate = useNavigate();
 
     const [error, setError] = useState(null);
@@ -13,27 +14,28 @@ export function YourStories({user}) {
 
     useEffect(() => {
         if (!user) {
-            navigate("/login", {replace: false});
+            navigate('/login', { replace: false });
         }
 
-        const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`${import.meta.env.VITE_API_URL}/auth/posts/author`,
-            {
-                method: "GET",
-                headers: {
-                    "Authorization": bearer
-                }
-            })
-            .then((res) => res.json())
-            .then((result) => {
-                setIsLoaded(true);
-                setPosts(result);
+        const bearer = 'Bearer ' + localStorage.getItem('token');
+        fetch(`${import.meta.env.VITE_API_URL}/auth/posts/author`, {
+            method: 'GET',
+            headers: {
+                Authorization: bearer,
             },
-            (error) => {
-                setIsLoaded(true);
-                setError(error);
-            })
-    }, [])
+        })
+            .then((res) => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setPosts(result);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            );
+    }, []);
 
     if (error) {
         return (
@@ -43,49 +45,59 @@ export function YourStories({user}) {
                     <p>{error.message}</p>
                 </div>
             </div>
-        )
+        );
     } else if (!isLoaded) {
         return (
             <div className="loading-main">
-                <HeroScreen/>
+                <HeroScreen />
                 <div className="loading-container">
                     <div className="loading-icon-box">
-                        <img id="loading-icon" src={LoadingIcon}/>
+                        <img id="loading-icon" src={LoadingIcon} />
                     </div>
                     <p>Loading Posts...</p>
                 </div>
             </div>
-        )
+        );
     } else if (posts.length === 0) {
         return (
             <div className="no-content-main">
-                <HeroScreen/>
+                <HeroScreen />
                 <div className="no-content-container">
                     <div className="post-create-box">
-                        <a><button onClick={() => navigate('/post/create')} id="newPostBtn"><img id="add-icon" src={addIcon}/>New Post</button></a>
+                        <a>
+                            <button onClick={() => navigate('/post/create')} id="newPostBtn">
+                                <img id="add-icon" src={addIcon} />
+                                New Post
+                            </button>
+                        </a>
                     </div>
                     <h2>No posts found</h2>
                     <p>🥇 Share your ideas and make your first post!</p>
                 </div>
             </div>
-        )
+        );
     } else {
-        return(
+        return (
             <main className="edit-home-main">
-                <HeroScreen/>
+                <HeroScreen />
                 <div className="edit-posts-box">
                     <div className="edit-post-create-box">
-                        <a><button onClick={() => navigate('/post/create')} id="newPostBtn"><img id="add-icon" src={addIcon}/>New Post</button></a>
+                        <a>
+                            <button onClick={() => navigate('/post/create')} id="newPostBtn">
+                                <img id="add-icon" src={addIcon} />
+                                New Post
+                            </button>
+                        </a>
                     </div>
                     {posts.map((post) => {
-                        return(
+                        return (
                             <React.Fragment key={post._id}>
-                                <PostCardEdit post={post}/>
+                                <PostCardEdit post={post} />
                             </React.Fragment>
-                        )
+                        );
                     })}
                 </div>
             </main>
-        )
+        );
     }
 }
