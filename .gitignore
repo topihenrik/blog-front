@@ -24,6 +24,6 @@ yarn-error.log*
 
 # other
 .env*
-.vercel/**
-/public/tinymce/**
+.vercel
+public/tinymce
 .idea
