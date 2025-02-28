@@ -112,9 +112,7 @@ export function Edit({user}) {
                 <HeroScreen/>
                 <div className="no-content-container">
                     <div className="post-create-box">
-                        <a href="/post/create">
-                            <button id="newPostBtn"><img id="add-icon" src={addIcon}/>New Post</button>
-                        </a>
+                        <a><button onClick={() => navigate('/post/create')} id="newPostBtn"><img id="add-icon" src={addIcon}/>New Post</button></a>
                     </div>
                     <h2>No posts found</h2>
                     <p>🥇 Share your ideas and make your first post!</p>
@@ -127,9 +125,7 @@ export function Edit({user}) {
                 <HeroScreen/>
                 <div className="edit-posts-box">
                     <div className="edit-post-create-box">
-                        <a href="/post/create">
-                            <button id="newPostBtn"><img id="add-icon" src={addIcon}/>New Post</button>
-                        </a>
+                        <a><button onClick={() => navigate('/post/create')} id="newPostBtn"><img id="add-icon" src={addIcon}/>New Post</button></a>
                     </div>
                     {posts.map((post) => {
                         return(

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { DateTime } from "luxon";
 import LoadingIcon from "../../icons/loading.svg"
+import {useNavigate} from "react-router";
 
 function HeroScreen() {
     return(
@@ -20,9 +21,11 @@ function HeroScreen() {
 }
 
 function PostCard({post}) {
+    const navigate = useNavigate();
+
     return(
         <div className="post-card">
-            <a href={"/post/"+post._id}>
+            <button onClick={() => navigate("/post/"+post._id)}>
                 <div className="post-box-left">
                     <div className="info-box">
                         <div className="author-box">
@@ -38,7 +41,7 @@ function PostCard({post}) {
                 <div className="post-box-right">
                     <img className="photo-thumbnail" src={post.photo.url}/>
                 </div>
-            </a>
+            </button>
         </div>
     )
 }
@@ -47,6 +50,7 @@ export function Home({user}) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [posts, setPosts] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`${import.meta.env.VITE_API_URL}/posts`)
@@ -92,10 +96,10 @@ export function Home({user}) {
                     <p>🥇 Be the first creator to make a post!</p>
                     {user?
                     <div>
-                        <a href="/edit"><button className="action-button">Your Stories 📖</button></a>
+                        <a><button onClick={() => navigate('/edit')} className="action-button">Your Stories 📖</button></a>
                     </div>:
                     <div>
-                        <a href="/signup"><button className="action-button">Join now</button></a>
+                        <a><button onClick={() => navigate('/signup')} className="action-button">Join now</button></a>
                     </div>}
                 </div>
             </div>
@@ -109,10 +113,10 @@ export function Home({user}) {
                         <h2 className="posts-title">Shared ideas</h2>
                         {user?
                         <div>
-                            <a href="/edit"><button className="action-button">Your Stories 📖</button></a>
+                            <a><button onClick={() => navigate('/edit')} className="action-button">Your Stories 📖</button></a>
                         </div>:
                         <div>
-                            <a href="/signup"><button className="action-button">Join now</button></a>
+                            <a><button onClick={() => navigate('/signup')} className="action-button">Join now</button></a>
                         </div>}
                     </div>
                     {posts.map((post, i) => {

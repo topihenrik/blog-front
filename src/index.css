@@ -154,19 +154,21 @@ header > div {
   width: 100%;
 }
 
-.logo-box a {
+.logo-box button {
   display: flex;
   text-decoration: none;
   align-items: center;
   color: black;
+  background: none;
+  border: none;
 }
 
-.logo-box a h1 {
+.logo-box button h1 {
   font-family: "Montserrat-Alternates";
   padding-bottom: 6px;
 }
 
-.logo-box a:hover {
+.logo-box button:hover {
   color: gray;
 }
 
@@ -835,13 +837,17 @@ header > div {
   align-items: center;
 }
 
-.post-card a {
+.post-card button {
+  text-align: inherit;
+  font-size: inherit;
   display: flex;
   flex-direction: column;
   gap: 5px;
   padding: 10px;
   text-decoration: none;
   color: black;
+  background: none;
+  border: none;
 }
 
 .post-box-left {
@@ -897,7 +903,7 @@ header > div {
     width: clamp(550px, 90vw, 768px);
   }
 
-  .post-card a {
+  .post-card button {
     flex-direction: row;
     justify-content: space-between;
     gap: 32px;
@@ -924,7 +930,7 @@ header > div {
     height: 100%;
   }
 
-  .post-card a {
+  .post-card button {
     flex-direction: row;
     gap: 32px;
   }
@@ -1142,7 +1148,11 @@ header > div {
   align-items: center;
 }
 
-.new-comment a {
+.new-comment button {
+  font-size: inherit;
+  text-align: inherit;
+  background: none;
+  border: none;
   text-decoration: none;
   padding: 10px;
   color: black;
@@ -1342,7 +1352,7 @@ footer {
 .edit-post-create-box {
   display: flex;
   justify-content: center;
-  
+
 }
 
 .edit-post-create-box a {
