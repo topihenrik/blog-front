@@ -1,12 +1,12 @@
 import React, {useEffect, useRef, useState} from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import uploadIcon from "../../icons/file_upload.png";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { nanoid } from "nanoid";
 import LoadingIcon from "../../icons/loading.svg"
 
-export default function UpdatePost({user}) {
+export function UpdatePost({user}) {
     const editorRef = useRef(null);
     const navigate = useNavigate();
     const { postid } = useParams();
@@ -14,7 +14,7 @@ export default function UpdatePost({user}) {
     const [error1, setError1] = useState(null);
     const [isLoaded1, setIsLoaded1] = useState(false);
     const [post, setPost] = useState([]);
-    
+
     const [error2, setError2] = useState(null);
     const [isLoaded2, setIsLoaded2] = useState(false);
     const [result, setResult] = useState({});
@@ -22,14 +22,14 @@ export default function UpdatePost({user}) {
     const [file, setFile] = useState(null);
 
     const [submitBtnDisabled, setSubmitBtnDisabled] = useState(false); // During fetch request -> disable submit button
-    
+
     useEffect(() => {
         if (!user) {
             navigate("../login", {replace: true});
         }
 
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}/auth/posts/${postid}/edit`,
+        fetch(`${import.meta.env.VITE_API_URL}/auth/posts/${postid}/edit`,
             {
                 headers: {
                     "Authorization": bearer
@@ -68,7 +68,7 @@ export default function UpdatePost({user}) {
             formData.append("description", editorRef.current.dom.select('p')[0]?.innerText??"");
             formData.append("photo", file);
             formData.append("published", e.target.published.checked);
-            fetch(`${process.env.REACT_APP_API_URL}/auth/posts`, 
+            fetch(`${import.meta.env.VITE_API_URL}/auth/posts`,
                 {
                     method: "PUT",
                     headers: {
@@ -132,7 +132,7 @@ export default function UpdatePost({user}) {
                     <div className="more-info">
                         <form className="editor-form" onSubmit={handleSubmit}>
                             <Editor
-                                tinymceScriptSrc={process.env.PUBLIC_URL + "/tinymce/tinymce.min.js"}
+                                tinymceScriptSrc={"/tinymce/tinymce.min.js"}
                                 initialValue={post.content}
                                 onInit={(evt, editor) => {
                                     editorRef.current = editor;
@@ -178,8 +178,8 @@ export default function UpdatePost({user}) {
                                         <button className="editor-btn-submit" disabled={submitBtnDisabled} style={submitBtnDisabled?{cursor: "wait"}:{}}>Update Post</button>
                                     </div>
                             </div>
-                        </form>                    
-                    </div>               
+                        </form>
+                    </div>
                 </div>
             </main>
         )

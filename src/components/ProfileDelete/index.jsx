@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import LoadingIcon from "../../icons/loading.svg";
 
-export default function ProfileDelete({user, setUser}) {
+export function ProfileDelete({user, setUser}) {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -16,7 +16,7 @@ export default function ProfileDelete({user, setUser}) {
         }
 
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}/auth/user/full`, 
+        fetch(`${import.meta.env.VITE_API_URL}/auth/user/full`,
             {
                 headers: {
                     "Authorization": bearer
@@ -36,7 +36,7 @@ export default function ProfileDelete({user, setUser}) {
         e.preventDefault();
         setSubmitBtnDisabled(true);
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}/auth/user/delete/all`,
+        fetch(`${import.meta.env.VITE_API_URL}/auth/user/delete/all`,
             {
                 headers: {
                     "Authorization": bearer

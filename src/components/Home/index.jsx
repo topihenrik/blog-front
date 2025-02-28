@@ -6,7 +6,7 @@ function HeroScreen() {
     return(
         <div className="hero-screen" style={
             {
-                backgroundImage: `url("https://res.cloudinary.com/dqcnxy51g/image/upload/v1668987801/${process.env.REACT_APP_CLOUDINARY_FOLDER}/static/blog-bg_tmdcsm.jpg")`,
+                backgroundImage: `url("https://res.cloudinary.com/dqcnxy51g/image/upload/v1668987801/${import.meta.env.VITE_CLOUDINARY_FOLDER}/static/blog-bg_tmdcsm.jpg")`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover"
             }
@@ -43,13 +43,13 @@ function PostCard({post}) {
     )
 }
 
-export default function Home({user}) {
+export function Home({user}) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/posts`)
+        fetch(`${import.meta.env.VITE_API_URL}/posts`)
             .then((res) => res.json())
             .then((result) => {
                     setIsLoaded(true);
@@ -113,7 +113,7 @@ export default function Home({user}) {
                         </div>:
                         <div>
                             <a href="/signup"><button className="action-button">Join now</button></a>
-                        </div>}                        
+                        </div>}
                     </div>
                     {posts.map((post, i) => {
                         if (i+1 === posts.length) {

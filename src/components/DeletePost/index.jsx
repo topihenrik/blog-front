@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import { useNavigate } from 'react-router-dom';
-import { useParams } from "react-router-dom";
+import { useNavigate } from 'react-router';
+import { useParams } from "react-router";
 import { DateTime } from "luxon";
 import LoadingIcon from "../../icons/loading.svg"
 
@@ -14,7 +14,7 @@ function PostCard({post, count}) {
                             <img className="del-author-avatar-card" src={post.author.avatar.url}/>
                             <h3>{post.author.first_name + " " + post.author.last_name}</h3>
                         </div>
-                        
+
                         <h3>{DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATE_MED)}</h3>
                     </div>
                     <h2>{post.title}</h2>
@@ -29,15 +29,15 @@ function PostCard({post, count}) {
     )
 }
 
-export default function DeletePost({user}) {
+export function DeletePost({user}) {
     const { postid } = useParams();
     const navigate = useNavigate();
-    
+
     const [error1, setError1] = useState(null);
     const [isLoaded1, setIsLoaded1] = useState(false);
     const [post, setPost] = useState([]);
     const [count, setCount] = useState(0);
-    
+
     const [error2, setError2] = useState(null);
     const [isLoaded2, setIsLoaded2] = useState(false);
     const [result, setResult] = useState({});
@@ -50,7 +50,7 @@ export default function DeletePost({user}) {
         }
 
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}/auth/posts/${postid}`,
+        fetch(`${import.meta.env.VITE_API_URL}/auth/posts/${postid}`,
             {
                 headers: {
                     "Authorization": bearer
@@ -73,7 +73,7 @@ export default function DeletePost({user}) {
         e.preventDefault();
         setSubmitBtnDisabled(true);
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}/auth/posts/${postid}`,
+        fetch(`${import.meta.env.VITE_API_URL}/auth/posts/${postid}`,
             {
                 method: "DELETE",
                 headers: {

@@ -1,7 +1,7 @@
 import React from "react";
 import GithubLogo from "../../icons/github.png"
 
-export default function Footer() {
+export function Footer() {
     return(
         <footer>
             <p className="footer-author">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import uploadIcon from "../../icons/file_upload.png";
 import LoadingIcon from "../../icons/loading.svg";
 import { DateTime } from "luxon";
@@ -139,13 +139,13 @@ function PasswordErrors({resultPassword}) {
     )
 }
 
-export default function ProfileEdit({user, setUser}) {
+export function ProfileEdit({user, setUser}) {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState(null);
     const [file, setFile] = useState(null);
-    
+
     const [oldDob, setOldDob] = useState(undefined);
     const [resultBasic, setResultBasic] = useState({});
     const [resultPassword, setResultPassword] = useState({});
@@ -162,7 +162,7 @@ export default function ProfileEdit({user, setUser}) {
         }
 
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}/auth/user/edit`,
+        fetch(`${import.meta.env.VITE_API_URL}/auth/user/edit`,
             {
                 headers: {
                     "Authorization": bearer
@@ -215,7 +215,7 @@ export default function ProfileEdit({user, setUser}) {
         formData.append("email", e.target.email.value);
         formData.append("dob", dob_iso);
         formData.append("avatar", file);
-        fetch(`${process.env.REACT_APP_API_URL}/auth/user/basic`,
+        fetch(`${import.meta.env.VITE_API_URL}/auth/user/basic`,
             {
                 headers: {
                     "Authorization": bearer
@@ -243,7 +243,7 @@ export default function ProfileEdit({user, setUser}) {
         setSubmitPwdBtnDisabled(true);
         const bearer = "Bearer " + localStorage.getItem("token");
 
-        fetch(`${process.env.REACT_APP_API_URL}/auth/user/password`,
+        fetch(`${import.meta.env.VITE_API_URL}/auth/user/password`,
             {
                 headers: {
                     "Authorization": bearer

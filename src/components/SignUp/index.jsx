@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import uploadIcon from "../../icons/file_upload.png";
 import {DateTime} from "luxon";
 
@@ -125,13 +125,13 @@ function SignUpSuccess() {
     )
 }
 
-export default function SignUp({user}) {
+export function SignUp({user}) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState({});
     const [file, setFile] = useState(undefined);
     const [success, setSuccess] = useState(false);
-    
+
     const [submitBtnDisabled, setSubmitBtnDisabled] = useState(false); // During fetch request -> disable submit button
     const navigate = useNavigate();
 
@@ -177,7 +177,7 @@ export default function SignUp({user}) {
         formData.append("password_confirm", e.target.password_confirm.value);
         formData.append("avatar", file);
 
-        fetch(`${process.env.REACT_APP_API_URL}/signup`,
+        fetch(`${import.meta.env.VITE_API_URL}/signup`,
             {
                 method: "POST",
                 body: formData

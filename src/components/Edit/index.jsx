@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { DateTime } from "luxon";
 import addIcon from "../../icons/add.png";
 import LoadingIcon from "../../icons/loading.svg"
@@ -11,7 +11,7 @@ function HeroScreen() {
     return(
         <div className="hero-screen" style={
             {
-                backgroundImage: `url("https://res.cloudinary.com/dqcnxy51g/image/upload/v1668989572/${process.env.REACT_APP_CLOUDINARY_FOLDER}/static/blog-bg2_uhn0x6.jpg")`,
+                backgroundImage: `url("https://res.cloudinary.com/dqcnxy51g/image/upload/v1668989572/${import.meta.env.VITE_CLOUDINARY_FOLDER}/static/blog-bg2_uhn0x6.jpg")`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover"
             }}>
@@ -32,7 +32,7 @@ function PostCard({post}) {
                         <div className="edit-author-box">
                             <img className="edit-author-avatar-card" src={post.author.avatar.url}/>
                             <h4>{post.author.first_name + " " + post.author.last_name}</h4>
-                        </div>                       
+                        </div>
                         <h4>{DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATE_MED)}</h4>
                     </div>
                     <h2>{post.title}</h2>
@@ -54,7 +54,7 @@ function PostCard({post}) {
     )
 }
 
-export default function Edit({user}) {
+export function Edit({user}) {
     const navigate = useNavigate();
 
     const [error, setError] = useState(null);
@@ -67,7 +67,7 @@ export default function Edit({user}) {
         }
 
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}/auth/posts/author`, 
+        fetch(`${import.meta.env.VITE_API_URL}/auth/posts/author`,
             {
                 method: "GET",
                 headers: {
@@ -114,7 +114,7 @@ export default function Edit({user}) {
                     <div className="post-create-box">
                         <a href="/post/create">
                             <button id="newPostBtn"><img id="add-icon" src={addIcon}/>New Post</button>
-                        </a> 
+                        </a>
                     </div>
                     <h2>No posts found</h2>
                     <p>🥇 Share your ideas and make your first post!</p>
@@ -129,7 +129,7 @@ export default function Edit({user}) {
                     <div className="edit-post-create-box">
                         <a href="/post/create">
                             <button id="newPostBtn"><img id="add-icon" src={addIcon}/>New Post</button>
-                        </a> 
+                        </a>
                     </div>
                     {posts.map((post) => {
                         return(
