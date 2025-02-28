@@ -1,8 +1,8 @@
 {
-  "short_name": "Blog",
-  "name": "Blog for thinkers",
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+    "short_name": "Blog",
+    "name": "Blog for thinkers",
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff"
 }

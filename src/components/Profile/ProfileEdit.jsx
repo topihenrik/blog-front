@@ -1,145 +1,191 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import uploadIcon from "../../icons/file_upload.png";
-import LoadingIcon from "../../icons/loading.svg";
-import { DateTime } from "luxon";
-import { nanoid } from "nanoid";
+import uploadIcon from '../../icons/file_upload.png';
+import LoadingIcon from '../../icons/loading.svg';
+import { DateTime } from 'luxon';
+import { nanoid } from 'nanoid';
 
-function FullName({result}) {
-    return(
+function FullName({ result }) {
+    return (
         <>
-            <input className="text-input" name="first_name" placeholder="First Name" defaultValue={result.first_name}/>
-            <input className="text-input" name="last_name" placeholder="Last Name" defaultValue={result.last_name}/>
+            <input className="text-input" name="first_name" placeholder="First Name" defaultValue={result.first_name} />
+            <input className="text-input" name="last_name" placeholder="Last Name" defaultValue={result.last_name} />
         </>
-    )
+    );
 }
 
-function Email({result}) {
-    return(
-        <input className="text-input" name="email" placeholder="Email" defaultValue={result.email}/>
-    )
+function Email({ result }) {
+    return <input className="text-input" name="email" placeholder="Email" defaultValue={result.email} />;
 }
 
-function DateOfBirth({oldDob}) {
+function DateOfBirth({ oldDob }) {
     const [years, setYears] = useState([]);
     useEffect(() => {
         const loopYears = [];
-        for (let i = new Date().getFullYear();i>=1900;i--) {
-            loopYears.push(i)
+        for (let i = new Date().getFullYear(); i >= 1900; i--) {
+            loopYears.push(i);
         }
         setYears(loopYears);
-    }, [])
+    }, []);
 
-    return(
+    return (
         <div className="signup-dob-box">
             <p>Date of Birth</p>
             <div className="signup-select-box">
                 <select className="dob-select" name="dob_day">
-                    <option className="dob-option" disabled selected>Day</option>
-                    {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31].map((day, i) => {
-                        if (oldDob.date === i+1) {
-                            return(
-                                <option key={nanoid(10)} selected className="dob-option" value={day}>{day}</option>
-                            )
+                    <option className="dob-option" disabled selected>
+                        Day
+                    </option>
+                    {[
+                        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+                        27, 28, 29, 30, 31,
+                    ].map((day, i) => {
+                        if (oldDob.date === i + 1) {
+                            return (
+                                <option key={nanoid(10)} selected className="dob-option" value={day}>
+                                    {day}
+                                </option>
+                            );
                         } else {
-                            return(
-                                <option key={nanoid(10)} className="dob-option" value={day}>{day}</option>
-                            )
+                            return (
+                                <option key={nanoid(10)} className="dob-option" value={day}>
+                                    {day}
+                                </option>
+                            );
                         }
                     })}
                 </select>
                 <select className="dob-select" name="dob_month">
-                    <option className="dob-option" disabled selected>Month</option>
-                    {["January","February","March","April","May","June","July","August","September","October","November","December"].map((month, i) => {
+                    <option className="dob-option" disabled selected>
+                        Month
+                    </option>
+                    {[
+                        'January',
+                        'February',
+                        'March',
+                        'April',
+                        'May',
+                        'June',
+                        'July',
+                        'August',
+                        'September',
+                        'October',
+                        'November',
+                        'December',
+                    ].map((month, i) => {
                         if (oldDob.month === i) {
-                            return(
-                                <option key={nanoid(10)} selected className="dob-option" value={i+1}>{month}</option>
-                            )
+                            return (
+                                <option key={nanoid(10)} selected className="dob-option" value={i + 1}>
+                                    {month}
+                                </option>
+                            );
                         } else {
-                            return(
-                                <option key={nanoid(10)} className="dob-option" value={i+1}>{month}</option>
-                            )
+                            return (
+                                <option key={nanoid(10)} className="dob-option" value={i + 1}>
+                                    {month}
+                                </option>
+                            );
                         }
                     })}
                 </select>
                 <select className="dob-select" name="dob_year">
-                    <option className="dob-option" disabled selected>Year</option>
+                    <option className="dob-option" disabled selected>
+                        Year
+                    </option>
                     {years.map((year, i) => {
                         if (oldDob.year === year) {
-                            return(
-                                <option key={nanoid(10)} selected className="dob-option" value={year}>{year}</option>
-                            )
+                            return (
+                                <option key={nanoid(10)} selected className="dob-option" value={year}>
+                                    {year}
+                                </option>
+                            );
                         } else {
-                            return(
-                                <option key={nanoid(10)} className="dob-option" value={year}>{year}</option>
-                            )
+                            return (
+                                <option key={nanoid(10)} className="dob-option" value={year}>
+                                    {year}
+                                </option>
+                            );
                         }
                     })}
                 </select>
             </div>
         </div>
-    )
+    );
 }
 
-function Avatar({file, result, handleChange}) {
-    return(
+function Avatar({ file, result, handleChange }) {
+    return (
         <div className="profile-avatar-box">
-            <label className="profile-avatar-label" htmlFor="avatar"><img id="upload-icon" src={uploadIcon}/><span className="profile-avatar-span">{file?file.name:result.avatar.originalName?result.avatar.originalName:"Avatar image"}</span><span className="profile-avatar-span">{"(max: 2MB)"}</span></label>
-            <input id="avatar" name="avatar" type="file" accept="image/png, image/jpeg" onChange={handleChange}/>
+            <label className="profile-avatar-label" htmlFor="avatar">
+                <img id="upload-icon" src={uploadIcon} />
+                <span className="profile-avatar-span">
+                    {file ? file.name : result.avatar.originalName ? result.avatar.originalName : 'Avatar image'}
+                </span>
+                <span className="profile-avatar-span">{'(max: 2MB)'}</span>
+            </label>
+            <input id="avatar" name="avatar" type="file" accept="image/png, image/jpeg" onChange={handleChange} />
         </div>
-    )
+    );
 }
 
-function BasicErrors({resultBasic}) {
-    return(
+function BasicErrors({ resultBasic }) {
+    return (
         <>
-            {(resultBasic.status >= 400 && resultBasic.status <= 451)  &&
-            <div className="error-box">
-                <p>{resultBasic.message}</p>
-            </div>}
-            {resultBasic["errors"] !== undefined &&
-            resultBasic.errors.map((error) => {
-                return (
-                    <div className="error-box">
-                        <p>{error.msg}</p>
-                    </div>
-                )
-            })}
+            {resultBasic.status >= 400 && resultBasic.status <= 451 && (
+                <div className="error-box">
+                    <p>{resultBasic.message}</p>
+                </div>
+            )}
+            {resultBasic['errors'] !== undefined &&
+                resultBasic.errors.map((error) => {
+                    return (
+                        <div className="error-box">
+                            <p>{error.msg}</p>
+                        </div>
+                    );
+                })}
         </>
-    )
+    );
 }
 
 function Password() {
-    return(
+    return (
         <>
             <h2>Change Password</h2>
-            <input className="text-input" type="password" name="old_password" placeholder="Old Password" required/>
-            <input className="text-input" type="password" name="password" placeholder="New Password" required/>
-            <input className="text-input" type="password" name="password_confirm" placeholder="Confirm New Password" required/>
+            <input className="text-input" type="password" name="old_password" placeholder="Old Password" required />
+            <input className="text-input" type="password" name="password" placeholder="New Password" required />
+            <input
+                className="text-input"
+                type="password"
+                name="password_confirm"
+                placeholder="Confirm New Password"
+                required
+            />
         </>
-    )
+    );
 }
 
-function PasswordErrors({resultPassword}) {
-    return(
+function PasswordErrors({ resultPassword }) {
+    return (
         <>
-            {(resultPassword.status >= 400 && resultPassword.status <= 451)  &&
-            <div className="error-box">
-                <p>{resultPassword.message}</p>
-            </div>}
-            {resultPassword["errors"] !== undefined &&
-            resultPassword.errors.map((error) => {
-                return (
-                    <div className="error-box">
-                        <p>{error.msg}</p>
-                    </div>
-                )
-            })}
+            {resultPassword.status >= 400 && resultPassword.status <= 451 && (
+                <div className="error-box">
+                    <p>{resultPassword.message}</p>
+                </div>
+            )}
+            {resultPassword['errors'] !== undefined &&
+                resultPassword.errors.map((error) => {
+                    return (
+                        <div className="error-box">
+                            <p>{error.msg}</p>
+                        </div>
+                    );
+                })}
         </>
-    )
+    );
 }
 
-export function ProfileEdit({user, setUser}) {
+export function ProfileEdit({ user, setUser }) {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -154,120 +200,134 @@ export function ProfileEdit({user, setUser}) {
 
     const handleChange = (e) => {
         setFile(e.target.files[0]);
-    }
+    };
 
     useEffect(() => {
         if (!user) {
-            navigate("../login", {replace: true});
+            navigate('../login', { replace: true });
         }
 
-        const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`${import.meta.env.VITE_API_URL}/auth/user/edit`,
-            {
-                headers: {
-                    "Authorization": bearer
-                }
-            })
-            .then((res) => res.json())
-            .then((result) => {
-                setIsLoaded(true);
-                setResult(result);
-                setOldDob({
-                    "date": new Date(result.dob).getDate(),
-                    "month": new Date(result.dob).getMonth(),
-                    "year": new Date(result.dob).getFullYear(),
-                })
+        const bearer = 'Bearer ' + localStorage.getItem('token');
+        fetch(`${import.meta.env.VITE_API_URL}/auth/user/edit`, {
+            headers: {
+                Authorization: bearer,
             },
-            (error) => {
-                setIsLoaded(true);
-                setError(error);
-            })
+        })
+            .then((res) => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setResult(result);
+                    setOldDob({
+                        date: new Date(result.dob).getDate(),
+                        month: new Date(result.dob).getMonth(),
+                        year: new Date(result.dob).getFullYear(),
+                    });
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            );
     }, []);
 
     const handleSubmitBasic = (e) => {
         e.preventDefault();
         setSubmitBasicBtnDisabled(true);
-        const bearer = "Bearer " + localStorage.getItem("token");
+        const bearer = 'Bearer ' + localStorage.getItem('token');
 
         // Client side validation
-        const dob_iso = e.target.dob_year.value.padStart(2, "0") + "-" + e.target.dob_month.value.padStart(2, "0") + "-" + e.target.dob_day.value.padStart(2, "0");
+        const dob_iso =
+            e.target.dob_year.value.padStart(2, '0') +
+            '-' +
+            e.target.dob_month.value.padStart(2, '0') +
+            '-' +
+            e.target.dob_day.value.padStart(2, '0');
         if (!DateTime.fromISO(dob_iso).isValid) {
-            setResultBasic({errors:[{msg: "Invalid date"}]});
+            setResultBasic({ errors: [{ msg: 'Invalid date' }] });
             setSubmitBasicBtnDisabled(false);
             return;
         }
 
-        if(DateTime.fromISO(dob_iso).diffNow("years").years>-18) {
-            setResultBasic({errors:[{msg: "you must be over 18 years old"}]});
+        if (DateTime.fromISO(dob_iso).diffNow('years').years > -18) {
+            setResultBasic({ errors: [{ msg: 'you must be over 18 years old' }] });
             setSubmitBasicBtnDisabled(false);
             return;
         }
 
         if (file?.size >= 2097152) {
-            setResultBasic({errors:[{msg: "File too large, max size is 2MB"}]});
+            setResultBasic({ errors: [{ msg: 'File too large, max size is 2MB' }] });
             setSubmitBasicBtnDisabled(false);
             return;
         }
 
         const formData = new FormData();
-        formData.append("first_name", e.target.first_name.value);
-        formData.append("last_name", e.target.last_name.value);
-        formData.append("email", e.target.email.value);
-        formData.append("dob", dob_iso);
-        formData.append("avatar", file);
-        fetch(`${import.meta.env.VITE_API_URL}/auth/user/basic`,
-            {
-                headers: {
-                    "Authorization": bearer
-                },
-                method: "PUT",
-                body: formData
-            })
+        formData.append('first_name', e.target.first_name.value);
+        formData.append('last_name', e.target.last_name.value);
+        formData.append('email', e.target.email.value);
+        formData.append('dob', dob_iso);
+        formData.append('avatar', file);
+        fetch(`${import.meta.env.VITE_API_URL}/auth/user/basic`, {
+            headers: {
+                Authorization: bearer,
+            },
+            method: 'PUT',
+            body: formData,
+        })
             .then((res) => {
                 if (res.status === 201) {
-                    navigate("../profile", {replace: true});
+                    navigate('../profile', { replace: true });
                 }
-                return res.json()
+                return res.json();
             })
-            .then((result) => {
-                setResultBasic(result);
-                setSubmitBasicBtnDisabled(false);
-            }, (error) => {
-                console.log(error);
-                setSubmitBasicBtnDisabled(false);
-            })
-    }
+            .then(
+                (result) => {
+                    setResultBasic(result);
+                    setSubmitBasicBtnDisabled(false);
+                },
+                (error) => {
+                    console.log(error);
+                    setSubmitBasicBtnDisabled(false);
+                }
+            );
+    };
 
     const handleSubmitPassword = (e) => {
         e.preventDefault();
         setSubmitPwdBtnDisabled(true);
-        const bearer = "Bearer " + localStorage.getItem("token");
+        const bearer = 'Bearer ' + localStorage.getItem('token');
 
-        fetch(`${import.meta.env.VITE_API_URL}/auth/user/password`,
-            {
-                headers: {
-                    "Authorization": bearer
-                },
-                method: "PUT",
-                body: new URLSearchParams({"old_password": e.target.old_password.value, "password": e.target.password.value, "password_confirm": e.target.password_confirm.value})
-            })
+        fetch(`${import.meta.env.VITE_API_URL}/auth/user/password`, {
+            headers: {
+                Authorization: bearer,
+            },
+            method: 'PUT',
+            body: new URLSearchParams({
+                old_password: e.target.old_password.value,
+                password: e.target.password.value,
+                password_confirm: e.target.password_confirm.value,
+            }),
+        })
             .then(async (res) => {
-                return { ...(await res.json()), status: res.status }
+                return { ...(await res.json()), status: res.status };
             })
-            .then((result) => {
-                console.log(result);
-                setResultPassword(result);
-                if (result.status === 201) {
-                    localStorage.clear();
-                    setUser(null);
-                    navigate("../login", {replace: true});
+            .then(
+                (result) => {
+                    console.log(result);
+                    setResultPassword(result);
+                    if (result.status === 201) {
+                        localStorage.clear();
+                        setUser(null);
+                        navigate('../login', { replace: true });
+                    }
+                    setSubmitPwdBtnDisabled(false);
+                },
+                (error) => {
+                    console.log(error);
+                    setSubmitPwdBtnDisabled(false);
                 }
-                setSubmitPwdBtnDisabled(false);
-            }, (error) => {
-                console.log(error);
-                setSubmitPwdBtnDisabled(false);
-            })
-    }
+            );
+    };
 
     if (error) {
         return (
@@ -277,18 +337,18 @@ export function ProfileEdit({user, setUser}) {
                     <p>{error.message}</p>
                 </div>
             </div>
-        )
+        );
     } else if (!isLoaded) {
         return (
             <div className="loading-main">
                 <div className="loading-container">
                     <div className="loading-icon-box">
-                        <img id="loading-icon" src={LoadingIcon}/>
+                        <img id="loading-icon" src={LoadingIcon} />
                     </div>
                     <p>Loading...</p>
                 </div>
             </div>
-        )
+        );
     } else if (result === undefined) {
         return (
             <div className="no-content-main">
@@ -297,9 +357,9 @@ export function ProfileEdit({user, setUser}) {
                     <p>Something went wrong.</p>
                 </div>
             </div>
-        )
+        );
     } else {
-        return(
+        return (
             <main className="profile-edit-main">
                 <div className="profile-edit-container">
                     <div className="profile-edit-title-box">
@@ -308,21 +368,31 @@ export function ProfileEdit({user, setUser}) {
                     <div className="profile-forms">
                         <form onSubmit={handleSubmitBasic} className="profile-form">
                             <h2>Basic Information</h2>
-                            <FullName result={result}/>
-                            <Email result={result}/>
-                            <DateOfBirth oldDob={oldDob}/>
-                            <Avatar file={file} result={result} handleChange={handleChange}/>
-                            <BasicErrors resultBasic={resultBasic}/>
-                            <button className="profile-edit-button" disabled={submitBasicBtnDisabled} style={submitBasicBtnDisabled?{cursor: "wait"}:{}}>Update</button>
+                            <FullName result={result} />
+                            <Email result={result} />
+                            <DateOfBirth oldDob={oldDob} />
+                            <Avatar file={file} result={result} handleChange={handleChange} />
+                            <BasicErrors resultBasic={resultBasic} />
+                            <button
+                                className="profile-edit-button"
+                                disabled={submitBasicBtnDisabled}
+                                style={submitBasicBtnDisabled ? { cursor: 'wait' } : {}}>
+                                Update
+                            </button>
                         </form>
                         <form onSubmit={handleSubmitPassword} className="profile-form">
-                            <Password/>
-                            <PasswordErrors resultPassword={resultPassword}/>
-                            <button className="profile-edit-button" disabled={submitPwdBtnDisabled} style={submitPwdBtnDisabled?{cursor: "wait"}:{}}>Update</button>
+                            <Password />
+                            <PasswordErrors resultPassword={resultPassword} />
+                            <button
+                                className="profile-edit-button"
+                                disabled={submitPwdBtnDisabled}
+                                style={submitPwdBtnDisabled ? { cursor: 'wait' } : {}}>
+                                Update
+                            </button>
                         </form>
                     </div>
                 </div>
             </main>
-        )
+        );
     }
 }
