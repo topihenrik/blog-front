@@ -1,4 +1,4 @@
-# Frontend App for the Blog Project
+# Frontend App for the Post Project
 The blog project has seperated frontend and backend. This is the repository for the frontend of the blog project. Frontend obtains necessary data by utilizing the Express.js API that has a separate repository. Information is then displayed with the use of React.js and vanilla CSS.
 
 ## Live preview
@@ -9,11 +9,11 @@ https://blog-front-pi.vercel.app/
 ## What actions can be done?
 * Create account
 * View account information
-* Edit account information
+* YourStories account information
 * Delete account
 * View posts
 * View specific post and its comments
-* Edit own posts and comments
+* YourStories own posts and comments
 * Delete own posts and comments
 
 ## What was utilized?
@@ -33,4 +33,4 @@ npm start
 ```
 
 ## Other Project Related Repository
-* Blog API: https://github.com/topihenrik/blog-api
+* Post API: https://github.com/topihenrik/blog-api
