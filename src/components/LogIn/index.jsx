@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
-export default function LogIn({user, setUser}) {
+export function LogIn({user, setUser}) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [result, setResult] = useState({});
@@ -17,10 +17,10 @@ export default function LogIn({user, setUser}) {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSubmitBtnDisabled(true);
-        fetch(`${process.env.REACT_APP_API_URL}/login`, 
+        fetch(`${import.meta.env.VITE_API_URL}/login`,
             {
                 method: "POST",
-                headers: {"Content-Type": "application/x-www-form-urlencoded"}, 
+                headers: {"Content-Type": "application/x-www-form-urlencoded"},
                 body: new URLSearchParams({email: e.target.email.value, password: e.target.password.value})
             })
             .then(async (res) => {
@@ -54,7 +54,7 @@ export default function LogIn({user, setUser}) {
                 <form className="login-form" onSubmit={handleSubmit}>
                     <input className="text-input" id="email" name="email" required={true} type="email" placeholder="Email"/>
                     <input className="text-input" id="password" name="password" required={true} type="password" placeholder="Password"/>
-                    {result.status == 401 && 
+                    {result.status == 401 &&
                     <div className="error-box">
                         <p>{result.message}</p>
                     </div>}

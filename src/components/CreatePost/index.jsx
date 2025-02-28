@@ -1,10 +1,10 @@
 import React, {useEffect, useRef, useState} from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import uploadIcon from "../../icons/file_upload.png";
 import { nanoid } from "nanoid";
 
-export default function CreatePost({user}) {
+export function CreatePost({user}) {
     const editorRef = useRef(null);
     const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ export default function CreatePost({user}) {
             formData.append("description", editorRef.current.dom.select('p')[0]?.innerText??"");
             formData.append("photo", file);
             formData.append("published", e.target.published.checked);
-            fetch(`${process.env.REACT_APP_API_URL}/auth/posts`, 
+            fetch(`${import.meta.env.VITE_API_URL}/auth/posts`,
                 {
                     method: "POST",
                     headers: {
@@ -76,7 +76,7 @@ export default function CreatePost({user}) {
                 <div className="more-info">
                     <form className="editor-form" onSubmit={handleSubmit}>
                         <Editor
-                            tinymceScriptSrc={process.env.PUBLIC_URL + "/tinymce/tinymce.min.js"}
+                            tinymceScriptSrc={"/tinymce/tinymce.min.js"}
                             onInit={(evt, editor) => editorRef.current = editor}
                             init={{
                                 selector: "textarea",
@@ -113,8 +113,8 @@ export default function CreatePost({user}) {
                                 <button className="editor-btn-submit" disabled={submitBtnDisabled} style={submitBtnDisabled?{cursor: "wait"}:{}}>Submit Post</button>
                             </div>
                         </div>
-                    </form>                    
-                </div>               
+                    </form>
+                </div>
             </div>
         </main>
     )

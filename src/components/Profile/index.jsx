@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import EditIcon from "../../icons/edit.png"
 import DeleteIcon from "../../icons/delete.png"
 import LoadingIcon from "../../icons/loading.svg"
 import { DateTime } from "luxon";
 
-export default function Profile({user}) {
+export function Profile({user}) {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -17,7 +17,7 @@ export default function Profile({user}) {
         }
 
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}/auth/user/full`, 
+        fetch(`${import.meta.env.VITE_API_URL}/auth/user/full`,
             {
                 headers: {
                     "Authorization": bearer

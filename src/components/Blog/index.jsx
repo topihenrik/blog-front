@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import {DateTime} from "luxon";
 import LoadingIcon from "../../icons/loading.svg";
-import CommentSection from "./CommentSection";
+import {CommentSection} from "./CommentSection";
 
 function PostFull({postid, setPostExists}) {
     const [error, setError] = useState(null);
@@ -10,7 +10,7 @@ function PostFull({postid, setPostExists}) {
     const [post, setPost] = useState([]);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/posts/${postid}`)
+        fetch(`${import.meta.env.VITE_API_URL}/posts/${postid}`)
             .then((res) => res.json())
             .then((result) => {
                 setIsLoaded(true);
@@ -75,7 +75,7 @@ function PostFull({postid, setPostExists}) {
     }
 }
 
-export default function BlogMain({user}) {
+export function BlogMain({user}) {
     const { postid } = useParams();
     const [postExists, setPostExists] = useState(false);
 

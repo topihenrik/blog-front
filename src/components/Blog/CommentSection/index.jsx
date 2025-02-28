@@ -10,7 +10,7 @@ function Comment({postid, comment, user, updateComments, setUpdateComments}) {
     const [edit, setEdit] = useState(false);
     const [submitDelBtnDisabled, setSubmitDelBtnDisabled] = useState(false); // During fetch request -> disable submit button
     const [submitEditBtnDisabled, setSubmitEditBtnDisabled] = useState(false); // During fetch request -> disable submit button
-    
+
     const handleClickEdit = () => {
         (edit === false?setEdit(true):setEdit(false))
     }
@@ -18,7 +18,7 @@ function Comment({postid, comment, user, updateComments, setUpdateComments}) {
     const handleClickDelete = () => {
         setSubmitDelBtnDisabled(true);
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}/auth/posts/${postid}/comments/${comment._id}`,
+        fetch(`${import.meta.env.VITE_API_URL}/auth/posts/${postid}/comments/${comment._id}`,
             {
                 method: "DELETE",
                 headers: {
@@ -43,7 +43,7 @@ function Comment({postid, comment, user, updateComments, setUpdateComments}) {
         e.preventDefault();
         setSubmitEditBtnDisabled(true);
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}/auth/posts/${postid}/comments/${comment._id}`,
+        fetch(`${import.meta.env.VITE_API_URL}/auth/posts/${postid}/comments/${comment._id}`,
             {
                 method: "PUT",
                 headers: {
@@ -89,7 +89,7 @@ function Comment({postid, comment, user, updateComments, setUpdateComments}) {
                 <div className="comment-modification-buttons">
                     <button className="comment-modification-button" onClick={handleClickEdit}><img className="icon" src={EditIcon}/>Edit</button>
                     <button className="comment-modification-button" onClick={handleClickDelete} disabled={submitDelBtnDisabled} style={submitDelBtnDisabled?{cursor: "wait"}:{}}><img className="icon" src={DeleteIcon}/>Delete</button>
-                </div>}  
+                </div>}
             </div>
         )
     } else {
@@ -107,7 +107,7 @@ function Comment({postid, comment, user, updateComments, setUpdateComments}) {
                     <div className="comment-creator-buttons">
                         <button className="comment-modification-button" type="submit" disabled={submitEditBtnDisabled} style={submitEditBtnDisabled?{cursor: "wait"}:{}}><img className="icon" src={EditIcon}/>Update</button>
                         <button className="comment-modification-button" type="button" onClick={handleCancel} disabled={submitEditBtnDisabled} style={submitEditBtnDisabled?{cursor: "wait"}:{}}><img className="icon" src={CancelIcon}/>Cancel</button>
-                    </div>   
+                    </div>
                 </form>
             </div>
         )
@@ -124,7 +124,7 @@ function CommentCreator({postid, user, updateComments, setUpdateComments}) {
         e.preventDefault();
         setSubmitBtnDisabled(true);
         const bearer = "Bearer " + localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}/auth/posts/${postid}/comments`, 
+        fetch(`${import.meta.env.VITE_API_URL}/auth/posts/${postid}/comments`,
             {
                 method: "POST",
                 headers: {
@@ -162,14 +162,14 @@ function CommentCreator({postid, user, updateComments, setUpdateComments}) {
     )
 }
 
-export default function CommentSection({postid, user, postExists}) {
+export function CommentSection({postid, user, postExists}) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [comments, setComments] = useState();
     const [updateComments, setUpdateComments] = useState(0);
-    
+
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/posts/${postid}/comments`)
+        fetch(`${import.meta.env.VITE_API_URL}/posts/${postid}/comments`)
             .then((res) => res.json())
             .then((result) => {
                 setIsLoaded(true);
@@ -216,9 +216,9 @@ export default function CommentSection({postid, user, postExists}) {
                             </React.Fragment>
                         )
                     }):<></>}
-                    
+
                     {localStorage.getItem("token")!==null ?
-                        <CommentCreator postid={postid} user={user} updateComments={updateComments} setUpdateComments={setUpdateComments}/> : 
+                        <CommentCreator postid={postid} user={user} updateComments={updateComments} setUpdateComments={setUpdateComments}/> :
                         <div className="new-comment">
                             <a href="/login"><h3>Log In to Create a New Comment</h3></a>
                         </div>
