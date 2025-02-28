@@ -33,4 +33,4 @@ npm start
 ```
 
 ## Other Project Related Repository
-* Post API: https://github.com/topihenrik/blog-api
+* Blog API: https://github.com/topihenrik/blog-api
