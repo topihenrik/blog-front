@@ -1,10 +1,8 @@
-import React, {useState, useEffect} from "react";
-import { useParams } from "react-router";
-import {DateTime} from "luxon";
+import React, {useEffect, useState} from "react";
 import LoadingIcon from "../../icons/loading.svg";
-import {CommentSection} from "./CommentSection";
+import {DateTime} from "luxon";
 
-function PostFull({postid, setPostExists}) {
+export function PostContent({postid, setPostExists}) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [post, setPost] = useState([]);
@@ -13,17 +11,17 @@ function PostFull({postid, setPostExists}) {
         fetch(`${import.meta.env.VITE_API_URL}/posts/${postid}`)
             .then((res) => res.json())
             .then((result) => {
-                setIsLoaded(true);
-                setPost(result);
-                if (result !== null) {
-                    setPostExists(true);
+                    setIsLoaded(true);
+                    setPost(result);
+                    if (result !== null) {
+                        setPostExists(true);
+                    }
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
                 }
-            },
-            (error) => {
-                setIsLoaded(true);
-                setError(error);
-            }
-        )
+            )
     }, []);
 
     if (error) {
@@ -73,16 +71,4 @@ function PostFull({postid, setPostExists}) {
             </div>
         )
     }
-}
-
-export function BlogMain({user}) {
-    const { postid } = useParams();
-    const [postExists, setPostExists] = useState(false);
-
-    return(
-        <main className="blog-main">
-            <PostFull postid={postid} setPostExists={setPostExists}/>
-            <CommentSection postid={postid} user={user} postExists={postExists}/>
-        </main>
-    )
 }
