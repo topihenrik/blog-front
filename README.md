@@ -9,11 +9,11 @@ https://blog-front-pi.vercel.app/
 ## What actions can be done?
 * Create account
 * View account information
-* YourStories account information
+* Edit account information
 * Delete account
 * View posts
 * View specific post and its comments
-* YourStories own posts and comments
+* Edit own posts and comments
 * Delete own posts and comments
 
 ## What was utilized?
