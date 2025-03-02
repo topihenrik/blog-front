@@ -4,11 +4,11 @@ import { HeroScreen } from './HeroScreen.jsx';
 import { PostCard } from './PostCard.jsx';
 import { usePostsQuery } from '../../api/queries/postqueries.ts';
 import { Fragment } from 'react';
-import { useTokenLocalStorage } from '../../hooks/useTokenLocalStorage.ts';
+import { useUserContext } from '../../hooks/useUserContext.tsx';
 
 export function Home() {
     const navigate = useNavigate();
-    const [token] = useTokenLocalStorage();
+    const userContext = useUserContext();
     const posts = usePostsQuery();
 
     if (posts.error) {
@@ -38,7 +38,7 @@ export function Home() {
                 <div className="no-content-container">
                     <h2>No posts found</h2>
                     <p>🥇 Be the first creator to make a post!</p>
-                    {token ? (
+                    {userContext.token ? (
                         <div>
                             <a>
                                 <button onClick={() => navigate('/edit')} className="action-button">
@@ -65,7 +65,7 @@ export function Home() {
                 <div className="posts-box">
                     <div className="posts-title-box">
                         <h2 className="posts-title">Shared ideas</h2>
-                        {token ? (
+                        {userContext.token ? (
                             <div>
                                 <a>
                                     <button onClick={() => navigate('/edit')} className="action-button">

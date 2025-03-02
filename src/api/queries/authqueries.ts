@@ -1,18 +1,18 @@
 import { mutationKeys } from '../../constants/mutationkeys.ts';
 import { postLogin, postSignUp } from '../services/authservice.ts';
 import { useMutation } from '@tanstack/react-query';
-import { useTokenLocalStorage } from '../../hooks/useTokenLocalStorage.ts';
-import { useUserLocalStorage } from '../../hooks/useUserLocalStorage.ts';
+import { useUserContext } from '../../hooks/useUserContext.tsx';
 
 export function useLoginMutation() {
-    const [, setToken] = useTokenLocalStorage();
-    const [, setUser] = useUserLocalStorage();
+    const userContext = useUserContext();
     return useMutation({
         mutationFn: postLogin,
         mutationKey: [mutationKeys.login],
         onSuccess: (data) => {
-            setToken(data.token);
-            setUser(data.user);
+            userContext.set({
+                token: data.token,
+                ...data.user,
+            });
         },
     });
 }

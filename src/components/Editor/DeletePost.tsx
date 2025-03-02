@@ -4,22 +4,22 @@ import { useParams } from 'react-router';
 import LoadingIcon from '../../icons/loading.svg';
 import { usePostByIdQuery, usePostDeleteMutation } from '../../api/queries/postqueries.ts';
 import { Errors } from '../General/Errors.tsx';
-import { useTokenLocalStorage } from '../../hooks/useTokenLocalStorage.ts';
 import { PostCard } from '../Home/PostCard.tsx';
+import { useUserContext } from '../../hooks/useUserContext.tsx';
 
 export function DeletePost() {
     const navigate = useNavigate();
     const { postid } = useParams();
-    const [token] = useTokenLocalStorage();
+    const userContext = useUserContext();
     const postDelete = usePostDeleteMutation();
     const post = usePostByIdQuery(postid);
     const [confirmation, setConfirmation] = useState('');
 
     useEffect(() => {
-        if (!token) {
+        if (!userContext.token) {
             navigate('/login', { replace: true });
         }
-    }, [navigate, token]);
+    }, [navigate, userContext.token]);
 
     function handleSubmit() {
         postDelete.mutate(

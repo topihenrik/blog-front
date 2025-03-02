@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, CreateAxiosDefaults } from 'axios';
-import { storageKeys } from '../../constants/storagekeys.ts';
+import { getContext } from '../../utils/getcontext.ts';
 
 const axiosConfig: CreateAxiosDefaults = {
     baseURL: import.meta.env.VITE_API_URL,
@@ -33,9 +33,9 @@ const authInstance = axios.create(axiosConfig);
 
 authInstance.interceptors.request.use(
     (axiosRequest) => {
-        const token = localStorage.getItem(storageKeys.token);
-        if (token) {
-            axiosRequest.headers.Authorization = `Bearer ${token.split('"')[1]}`;
+        const context = getContext();
+        if (context.token) {
+            axiosRequest.headers.Authorization = `Bearer ${context.token}`;
         }
         return axiosRequest;
     },

@@ -5,23 +5,21 @@ import { useNavigate } from 'react-router';
 import uploadIcon from '../../icons/file_upload.png';
 import { usePostPostMutation } from '../../api/queries/postqueries.ts';
 import { Errors } from '../General/Errors.tsx';
-import { useTokenLocalStorage } from '../../hooks/useTokenLocalStorage.ts';
-import { useUserLocalStorage } from '../../hooks/useUserLocalStorage.ts';
+import { useUserContext } from '../../hooks/useUserContext.tsx';
 
 export function CreatePost() {
     const navigate = useNavigate();
-    const [token] = useTokenLocalStorage();
-    const [user] = useUserLocalStorage();
+    const userContext = useUserContext();
     const postPost = usePostPostMutation();
     const editorRef = useRef<TinyMCEEditor>(null);
     const [published, setPublished] = useState(false);
     const [file, setFile] = useState<File | null>(null);
 
     useEffect(() => {
-        if (!token) {
+        if (!userContext.token) {
             navigate('/login', { replace: true });
         }
-    }, [navigate, token]);
+    }, [navigate, userContext.token]);
 
     function handleFileChange(value: File | null) {
         setFile(value);
@@ -88,7 +86,7 @@ export function CreatePost() {
                                 />
                             </div>
                             <p className="editor-author">
-                                <strong>{'Author: ' + user?.full_name}</strong>
+                                <strong>{'Author: ' + userContext.full_name}</strong>
                             </p>
                             <div className="editor-submit-box">
                                 <button

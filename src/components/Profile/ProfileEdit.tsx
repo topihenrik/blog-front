@@ -2,10 +2,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
 import uploadIcon from '../../icons/file_upload.png';
 import LoadingIcon from '../../icons/loading.svg';
-import { useTokenLocalStorage } from '../../hooks/useTokenLocalStorage.ts';
 import { useUserBasicPutMutation, useUserPasswordPutMutation, useUserQuery } from '../../api/queries/userqueries.ts';
 import { Avatar as AvatarType } from '../../types/usermodel.ts';
 import { Errors } from '../General/Errors.tsx';
+import { useUserContext } from '../../hooks/useUserContext.tsx';
 
 function generateYears() {
     const loopYears = [];
@@ -163,7 +163,7 @@ function Avatar({ file, avatar, onChange }: AvatarProps) {
 
 export function ProfileEdit() {
     const navigate = useNavigate();
-    const [token] = useTokenLocalStorage();
+    const userContext = useUserContext();
     const user = useUserQuery();
     const userBasic = useUserBasicPutMutation();
     const userPassword = useUserPasswordPutMutation();
@@ -200,10 +200,10 @@ export function ProfileEdit() {
     }
 
     useEffect(() => {
-        if (!token) {
+        if (!userContext.token) {
             navigate('/login', { replace: true });
         }
-    }, [navigate, token]);
+    }, [navigate, userContext.token]);
 
     function handleSubmitBasic() {
         userBasic.mutate(

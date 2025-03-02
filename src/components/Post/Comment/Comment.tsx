@@ -5,11 +5,11 @@ import DeleteIcon from '../../../icons/delete.png';
 import CancelIcon from '../../../icons/cancel.png';
 import { CommentOutputModel } from '../../../types/commentmodel.ts';
 import { useParams } from 'react-router';
-import { useUserLocalStorage } from '../../../hooks/useUserLocalStorage.ts';
 import { useCommentDeleteMutation, useCommentPutMutation } from '../../../api/queries/commentqueries.ts';
 import { queryClient } from '../../../config/queryclient.ts';
 import { queryKeys } from '../../../constants/querykeys.ts';
 import { Errors } from '../../General/Errors.tsx';
+import { useUserContext } from '../../../hooks/useUserContext.tsx';
 
 interface CommentProps {
     comment: CommentOutputModel;
@@ -17,7 +17,7 @@ interface CommentProps {
 
 export function Comment({ comment }: CommentProps) {
     const { postid } = useParams();
-    const [user] = useUserLocalStorage();
+    const userContext = useUserContext();
     const commentPut = useCommentPutMutation();
     const commentDelete = useCommentDeleteMutation();
     const [editComment, setEditComment] = useState('');
@@ -90,7 +90,7 @@ export function Comment({ comment }: CommentProps) {
                     </h4>
                 </div>
                 <p className="comment-text">{comment.content}</p>
-                {user?._id === comment.author._id && (
+                {userContext._id === comment.author._id && (
                     <div className="comment-modification-buttons">
                         <button
                             type="button"

@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import AddIcon from '../../../icons/add.png';
-import { useUserLocalStorage } from '../../../hooks/useUserLocalStorage.ts';
 import { useCommentPostMutation } from '../../../api/queries/commentqueries.ts';
 import { useParams } from 'react-router';
 import { queryClient } from '../../../config/queryclient.ts';
 import { queryKeys } from '../../../constants/querykeys.ts';
 import { Errors } from '../../General/Errors.tsx';
+import { useUserContext } from '../../../hooks/useUserContext.tsx';
 
 export function CommentCreator() {
     const { postid } = useParams();
-    const [user] = useUserLocalStorage();
+    const userContext = useUserContext();
     const commentPost = useCommentPostMutation();
     const [comment, setComment] = useState('');
 
@@ -30,7 +30,7 @@ export function CommentCreator() {
 
     return (
         <div className="comment-creator">
-            <h3>Author: {user?.full_name}</h3>
+            <h3>Author: {userContext.full_name}</h3>
             <form className="comment-creator-form">
                 <textarea
                     value={comment}

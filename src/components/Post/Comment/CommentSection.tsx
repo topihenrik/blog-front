@@ -5,10 +5,12 @@ import { CommentCreator } from './CommentCreator.jsx';
 import { Comment } from './Comment.jsx';
 import { useCommentsByPostIdQuery } from '../../../api/queries/commentqueries.ts';
 import { usePostByIdQuery } from '../../../api/queries/postqueries.ts';
+import { useUserContext } from '../../../hooks/useUserContext.tsx';
 
 export function CommentSection() {
     const navigate = useNavigate();
     const { postid } = useParams();
+    const userContext = useUserContext();
     const comments = useCommentsByPostIdQuery(postid);
     const posts = usePostByIdQuery(postid);
 
@@ -49,7 +51,7 @@ export function CommentSection() {
                         <></>
                     )}
 
-                    {localStorage.getItem('token') !== null ? (
+                    {userContext.token ? (
                         <CommentCreator />
                     ) : (
                         <div className="new-comment">

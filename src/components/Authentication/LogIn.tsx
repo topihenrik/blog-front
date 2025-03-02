@@ -1,21 +1,21 @@
 import { useState, useEffect, SyntheticEvent } from 'react';
 import { useNavigate } from 'react-router';
 import { useLoginMutation } from '../../api/queries/authqueries.ts';
-import { useUserLocalStorage } from '../../hooks/useUserLocalStorage.ts';
 import { Errors } from '../General/Errors.tsx';
+import { useUserContext } from '../../hooks/useUserContext.tsx';
 
 export function LogIn() {
     const navigate = useNavigate();
     const login = useLoginMutation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [user] = useUserLocalStorage();
+    const userContext = useUserContext();
 
     useEffect(() => {
-        if (user) {
+        if (userContext.token) {
             navigate('/', { replace: true });
         }
-    }, [navigate, user]);
+    }, [navigate, userContext.token]);
 
     const handleSubmit = (e: SyntheticEvent) => {
         e.preventDefault();

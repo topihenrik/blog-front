@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import uploadIcon from '../../icons/file_upload.png';
 import { useSignUpMutation } from '../../api/queries/authqueries.ts';
 import { Errors } from '../General/Errors.tsx';
-import { useTokenLocalStorage } from '../../hooks/useTokenLocalStorage.ts';
+import { useUserContext } from '../../hooks/useUserContext.tsx';
 
 function generateYears() {
     const loopYears = [];
@@ -169,7 +169,7 @@ function SignUpSuccess() {
 
 export function SignUp() {
     const navigate = useNavigate();
-    const [token] = useTokenLocalStorage();
+    const userContext = useUserContext();
     const signup = useSignUpMutation();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -180,10 +180,10 @@ export function SignUp() {
     const [dob, setDob] = useState('');
 
     useEffect(() => {
-        if (token) {
+        if (userContext.token) {
             navigate('/', { replace: true });
         }
-    }, [navigate, token]);
+    }, [navigate, userContext.token]);
 
     function handleDobChange(year: number, month: number, day: number) {
         const isoDate =
