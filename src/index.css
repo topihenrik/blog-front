@@ -480,7 +480,7 @@ header > div {
     font-size: 16px;
 }
 
-.error-box {
+.error-message {
     box-sizing: border-box;
     background-color: #cf000f;
     color: white;
@@ -867,17 +867,24 @@ header > div {
     align-items: center;
 }
 
-.post-card button {
+.post-card .post-card-clickable {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 32px;
     text-align: inherit;
     font-size: inherit;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
     padding: 10px;
+    width: 100%;
     text-decoration: none;
     color: black;
     background: none;
     border: none;
+}
+
+.post-box-right {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .post-box-left {
@@ -1048,7 +1055,6 @@ header > div {
 @media (min-width: 916px) {
     .post-full {
         box-sizing: border-box;
-        margin: 16px auto;
         width: 768px;
         margin: 0 auto;
     }
@@ -1248,38 +1254,6 @@ footer {
     padding-bottom: 16px;
 }
 
-/* .hero-screen {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  background-color: var(--gray);
-  height: 256px;
-}
-
-.hero-box {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  margin: 0 34px;
-  width: 85%;
-  gap: 8px;
-}
-
-.hero-box > h1 {
-  font-family: "Montserrat-Alternates";
-}
-
-.hero-box > h1::first-letter {
-  font-family: "Montserrat";
-}
-
-.hero-box > p {
-  line-height: 20px;
-  word-break: break-word;
-  font-weight: 600;
-} */
-
 .hero-box > h1::first-letter {
     font-family: 'Montserrat';
 }
@@ -1291,16 +1265,6 @@ footer {
     background-color: var(--white);
     margin: 0 14px;
 }
-
-/* .posts-title {
-  margin: 8px 0;
-} */
-
-/* .post-hr, .comment-hr {
-  height: 0;
-  border-top: 1px solid #eee;
-  width: calc(100% - 2px);
-} */
 
 .edit-post-card {
     background-color: var(--white);
@@ -1425,21 +1389,7 @@ footer {
     width: fit-content;
 }
 
-/* .icon {
-  height: 24px;
-} */
-
 @media (min-width: 600px) {
-    /* .hero-screen {
-    box-sizing: border-box;
-    margin: 0 auto;
-    width: clamp(550px, 90vw, 768px);
-  }
-
-  .hero-box {
-    width: 500px;
-  } */
-
     .edit-photo-thumbnail {
         display: inline-block;
         object-fit: cover;
@@ -1449,7 +1399,6 @@ footer {
 
     .edit-posts-box {
         box-sizing: border-box;
-        margin: 32px 0;
         margin: 0 auto;
         width: clamp(550px, 90vw, 768px);
     }
@@ -1578,7 +1527,7 @@ footer {
     cursor: pointer;
 }
 
-.editor-error-box {
+.error-box {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -1598,7 +1547,6 @@ footer {
     grid-area: 1 / 1 / 2 / 2;
     display: flex;
     min-width: 100%;
-    display: flex;
     justify-content: flex-start;
 }
 
@@ -1640,7 +1588,6 @@ footer {
         grid-area: 1 / 1 / 2 / 2;
         display: flex;
         min-width: 100%;
-        display: flex;
         justify-content: flex-start;
     }
 
@@ -1690,7 +1637,7 @@ footer {
     }
 }
 
-/* DeletePost and PostCardDel */
+/* DeletePost */
 .delete-post {
     box-sizing: border-box;
     display: flex;
@@ -1705,59 +1652,6 @@ footer {
     flex-direction: column;
     gap: 16px;
     margin: 0 14px;
-}
-
-.post-card-del {
-    background-color: var(--white);
-    border-radius: 5px;
-    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
-}
-
-.post-card-del .del-info-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.post-card-del-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px;
-}
-
-.del-post-box-right {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.del-post-box-left {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 5px;
-}
-
-.del-post-comments-count {
-    margin-top: auto;
-    font-weight: 500;
-}
-
-.del-photo-thumbnail {
-    display: none;
-    max-height: 200px;
-    object-fit: cover;
-}
-
-.del-post-description {
-    font-size: 16px;
-    line-height: 20px;
-}
-
-.del-author-avatar-card {
-    height: 24px;
-    width: 24px;
-    border-radius: 100px;
 }
 
 .delete-form {
@@ -1801,35 +1695,11 @@ footer {
         width: clamp(550px, 90vw, 768px);
         margin: 0 auto;
     }
-
-    .del-photo-thumbnail {
-        display: inline-block;
-        object-fit: cover;
-        width: 192px;
-        height: 100%;
-    }
-
-    .post-card-del-container {
-        flex-direction: row;
-        gap: 32px;
-    }
 }
 
 @media (min-width: 916px) {
     .delete-post-box {
         width: 768px;
         margin: 0 auto;
-    }
-
-    .del-photo-thumbnail {
-        display: inline-block;
-        object-fit: cover;
-        width: 256px;
-        height: 100%;
-    }
-
-    .post-card-del-container {
-        flex-direction: row;
-        gap: 32px;
     }
 }
