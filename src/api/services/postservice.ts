@@ -1,6 +1,6 @@
 import { authRequest, request } from './network.ts';
 import { PostInputModel, PostOutputModel } from '../../types/postmodel.ts';
-import { storageKeys } from '../../constants/storagekeys.ts';
+import { getContext } from '../../utils/getcontext.ts';
 
 export async function getPosts(): Promise<PostOutputModel[]> {
     return request({
@@ -18,11 +18,11 @@ export async function getPostsByAuthor(): Promise<PostOutputModel[]> {
 
 export async function getPostById(id: string): Promise<PostOutputModel> {
     // Special functionality where unpublished posts can be acquired if you are the author
-    const token = localStorage.getItem(storageKeys.token);
     let headers;
-    if (token) {
+    const context = getContext();
+    if (context.token) {
         headers = {
-            Authorization: `Bearer ${token.split('"')[1]}`,
+            Authorization: `Bearer ${context.token}`,
         };
     }
 

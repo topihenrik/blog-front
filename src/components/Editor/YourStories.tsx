@@ -5,18 +5,18 @@ import LoadingIcon from '../../icons/loading.svg';
 import { HeroScreen } from './HeroScreen.jsx';
 import { PostCardEdit } from './PostCardEdit.jsx';
 import { usePostsByAuthorQuery } from '../../api/queries/postqueries.ts';
-import { useTokenLocalStorage } from '../../hooks/useTokenLocalStorage.ts';
+import { useUserContext } from '../../hooks/useUserContext.tsx';
 
 export function YourStories() {
     const navigate = useNavigate();
-    const [token] = useTokenLocalStorage();
+    const userContext = useUserContext();
     const posts = usePostsByAuthorQuery();
 
     useEffect(() => {
-        if (!token) {
+        if (!userContext.token) {
             navigate('/login', { replace: false });
         }
-    }, [navigate, token]);
+    }, [navigate, userContext.token]);
 
     if (posts.error) {
         return (

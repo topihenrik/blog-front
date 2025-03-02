@@ -1,25 +1,23 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router';
 import LoadingIcon from '../../icons/loading.svg';
-import { useTokenLocalStorage } from '../../hooks/useTokenLocalStorage.ts';
 import { useUserDeleteMutation, useUserQuery } from '../../api/queries/userqueries.ts';
-import { useUserLocalStorage } from '../../hooks/useUserLocalStorage.ts';
 import { Errors } from '../General/Errors.tsx';
+import { useUserContext } from '../../hooks/useUserContext.tsx';
 
 export function ProfileDelete() {
     const navigate = useNavigate();
-    const [token, , clearToken] = useTokenLocalStorage();
-    const [, , clearUser] = useUserLocalStorage();
+    const userContext = useUserContext();
     const user = useUserQuery();
     const userDelete = useUserDeleteMutation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     useEffect(() => {
-        if (!token) {
+        if (!userContext.token) {
             navigate('/login', { replace: true });
         }
-    }, [navigate, token]);
+    }, [navigate, userContext.token]);
 
     function handleSubmit() {
         userDelete.mutate(
@@ -29,8 +27,7 @@ export function ProfileDelete() {
             },
             {
                 onSuccess: () => {
-                    clearUser();
-                    clearToken();
+                    userContext.clear();
                     navigate('/login', { replace: true });
                 },
             }

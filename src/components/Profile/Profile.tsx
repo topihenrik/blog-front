@@ -5,19 +5,19 @@ import DeleteIcon from '../../icons/delete.png';
 import LoadingIcon from '../../icons/loading.svg';
 import { DateTime } from 'luxon';
 import { useUserQuery } from '../../api/queries/userqueries.ts';
-import { useTokenLocalStorage } from '../../hooks/useTokenLocalStorage.ts';
+import { useUserContext } from '../../hooks/useUserContext.tsx';
 
 export function Profile() {
     const navigate = useNavigate();
-    const [token] = useTokenLocalStorage();
+    const userContext = useUserContext();
 
     const user = useUserQuery();
 
     useEffect(() => {
-        if (!token) {
+        if (!userContext.token) {
             navigate('/login', { replace: true });
         }
-    }, [navigate, token]);
+    }, [navigate, userContext.token]);
 
     if (user.error) {
         return (

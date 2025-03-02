@@ -6,12 +6,12 @@ import LoadingIcon from '../../icons/loading.svg';
 import { Editor as TinyMCEEditor } from 'tinymce';
 import { usePostByIdQuery, usePostPutMutation } from '../../api/queries/postqueries.ts';
 import { Errors } from '../General/Errors.tsx';
-import { useTokenLocalStorage } from '../../hooks/useTokenLocalStorage.ts';
+import { useUserContext } from '../../hooks/useUserContext.tsx';
 
 export function UpdatePost() {
     const navigate = useNavigate();
     const { postid } = useParams();
-    const [token] = useTokenLocalStorage();
+    const userContext = useUserContext();
     const post = usePostByIdQuery(postid);
     const postPut = usePostPutMutation();
     const editorRef = useRef<TinyMCEEditor>(null);
@@ -25,10 +25,10 @@ export function UpdatePost() {
     }, [post.data?.published]);
 
     useEffect(() => {
-        if (!token) {
+        if (!userContext.token) {
             navigate('/login', { replace: true });
         }
-    }, [navigate, token]);
+    }, [navigate, userContext.token]);
 
     function handleFileChange(value: File | null) {
         setFile(value);

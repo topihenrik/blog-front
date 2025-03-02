@@ -1,4 +1,3 @@
 export const storageKeys = {
-    token: 'token',
-    user: 'user',
+    context: 'context',
 };

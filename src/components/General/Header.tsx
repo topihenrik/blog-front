@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import MenuIcon from '../../icons/menu.png';
 import { useNavigate } from 'react-router';
-import { useUserLocalStorage } from '../../hooks/useUserLocalStorage.ts';
+import { useUserContext } from '../../hooks/useUserContext.tsx';
 
 export function Header() {
     const [menuVis, setMenuVis] = useState('dispNone');
     const navigate = useNavigate();
-    const [user, , clearUser] = useUserLocalStorage();
+    const userContext = useUserContext();
 
     const handleClick = () => {
         localStorage.clear();
-        clearUser();
+        userContext.clear();
         navigate('/', { replace: true });
     };
 
@@ -35,12 +35,12 @@ export function Header() {
                         <img id="menu" src={MenuIcon} />
                     </button>
                 </div>
-                {user ? (
+                {userContext.token ? (
                     <div className={menuVis + ' mobile-auth-box'}>
                         <a>
                             <button onClick={() => navigate('/profile')} className="mobile-profile-button">
                                 <span>Profile</span>
-                                <img className="mobile-profile-avatar-icon" src={user.avatar_url} />
+                                <img className="mobile-profile-avatar-icon" src={userContext.avatar_url} />
                             </button>
                         </a>
                         <a onClick={handleClick}>
@@ -61,11 +61,11 @@ export function Header() {
                         </a>
                     </div>
                 )}
-                {user ? (
+                {userContext.token ? (
                     <div className="auth-box">
                         <a>
                             <button onClick={() => navigate('/profile')} className="profile-button">
-                                <img className="profile-avatar-icon" src={user.avatar_url} />
+                                <img className="profile-avatar-icon" src={userContext.avatar_url} />
                                 <span>Profile</span>
                             </button>
                         </a>
