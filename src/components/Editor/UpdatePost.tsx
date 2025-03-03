@@ -43,7 +43,7 @@ export function UpdatePost() {
                     description: editorRef.current.dom.select('p')[0]?.innerText ?? '',
                     published,
                     photo: file,
-                    postID: post.data?._id ?? '',
+                    postId: post.data?._id ?? '',
                 },
                 {
                     onSuccess: () => {

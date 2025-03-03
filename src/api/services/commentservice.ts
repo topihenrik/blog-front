@@ -4,15 +4,16 @@ import { CommentInputModel, CommentOutputModel } from '../../types/commentmodel.
 export async function getCommentsByPostId(postId: string): Promise<CommentOutputModel[]> {
     return request({
         method: 'GET',
-        url: `/posts/${postId}/comments`,
+        url: `/comments/post/${postId}/`,
     });
 }
 
 export async function postComment(values: Omit<CommentInputModel, 'commentId'>): Promise<CommentOutputModel[]> {
     return authRequest({
         method: 'POST',
-        url: `/posts/${values.postId}/comments`,
+        url: `/comments`,
         data: {
+            postId: values.postId,
             content: values.content,
         },
     });
@@ -21,8 +22,9 @@ export async function postComment(values: Omit<CommentInputModel, 'commentId'>):
 export async function putComment(values: CommentInputModel): Promise<CommentOutputModel[]> {
     return authRequest({
         method: 'PUT',
-        url: `/posts/${values.postId}/comments/${values.commentId}`,
+        url: `/comments/${values.commentId}`,
         data: {
+            postId: values.postId,
             content: values.content,
         },
     });
@@ -31,6 +33,6 @@ export async function putComment(values: CommentInputModel): Promise<CommentOutp
 export async function deleteComment(values: Omit<CommentInputModel, 'content'>): Promise<CommentOutputModel[]> {
     return authRequest({
         method: 'DELETE',
-        url: `/posts/${values.postId}/comments/${values.commentId}`,
+        url: `/comments/${values.commentId}`,
     });
 }

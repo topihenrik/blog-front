@@ -53,20 +53,20 @@ export async function postPost(values: PostInputModel) {
     });
 }
 
-export async function putPost(values: PostInputModel & { postID: string }) {
+export async function putPost(values: PostInputModel & { postId: string }) {
     const formData = new FormData();
     formData.append('title', values.title);
     formData.append('content', values.content);
     formData.append('description', values.description);
     formData.append('published', String(values.published));
-    formData.append('postID', values.postID);
+    // formData.append('postId', values.postId);
     if (values.photo) {
         formData.append('photo', values.photo);
     }
 
     return authRequest({
         method: 'PUT',
-        url: '/posts',
+        url: `/posts/${values.postId}`,
         data: formData,
         headers: {
             'Content-Type': 'multipart/form-data',
