@@ -231,7 +231,7 @@ export function ProfileEdit() {
             },
             {
                 onSuccess: () => {
-                    localStorage.clear();
+                    userContext.clear();
                     navigate('/login', { replace: true });
                 },
             }
