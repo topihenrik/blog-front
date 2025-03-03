@@ -52,12 +52,8 @@ export async function request(config: AxiosRequestConfig) {
 }
 
 export async function authRequest(config: AxiosRequestConfig) {
-    const authConfig: AxiosRequestConfig = {
-        ...config,
-        baseURL: `${import.meta.env.VITE_API_URL}/auth`,
-    };
     return authInstance
-        .request(authConfig)
+        .request(config)
         .then((response) => response.data)
         .catch(errorHandling);
 }
