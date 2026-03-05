@@ -1,16 +1,21 @@
-import { UserOutputModel } from './usermodel.ts';
+import { ShortUserResponse } from './shortuserresponse.ts';
+import { GuidResponse } from './guidresponse.ts';
 
-export interface CommentOutputModel {
-    _id: string;
+export interface CommentResponse {
+    id: string;
     content: string;
-    author: UserOutputModel;
-    post: string;
-    timestamp: string;
-    edit_timestamp?: string | null;
+    author: ShortUserResponse;
+    post: GuidResponse;
+    createdAt: string;
+    updatedAt: string | null;
 }
 
-export interface CommentInputModel {
+export interface CreateCommentRequest {
     postId: string;
+    content: string;
+}
+
+export interface UpdateCommentRequest {
     commentId: string;
     content: string;
 }

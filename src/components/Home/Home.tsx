@@ -86,13 +86,13 @@ export function Home() {
                     {posts.data.map((post, i) => {
                         if (i + 1 === posts.data.length) {
                             return (
-                                <Fragment key={post._id}>
+                                <Fragment key={post.id}>
                                     <PostCard post={post} />
                                 </Fragment>
                             );
                         } else {
                             return (
-                                <Fragment key={post._id}>
+                                <Fragment key={post.id}>
                                     <PostCard post={post} />
                                     <hr className="post-hr" />
                                 </Fragment>

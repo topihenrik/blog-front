@@ -30,7 +30,7 @@ export function CommentCreator() {
 
     return (
         <div className="comment-creator">
-            <h3>Author: {userContext.full_name}</h3>
+            <h3>Author: {userContext.fullName}</h3>
             <form className="comment-creator-form">
                 <textarea
                     value={comment}

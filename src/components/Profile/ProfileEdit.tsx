@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router';
 import uploadIcon from '../../icons/file_upload.png';
 import LoadingIcon from '../../icons/loading.svg';
 import { useUserBasicPutMutation, useUserPasswordPutMutation, useUserQuery } from '../../api/queries/userqueries.ts';
-import { Avatar as AvatarType } from '../../types/usermodel.ts';
 import { Errors } from '../General/Errors.tsx';
 import { useUserContext } from '../../hooks/useUserContext.tsx';
+import { ImageResponse } from '../../types/imagemodel.ts';
 
 function generateYears() {
     const loopYears = [];
@@ -134,7 +134,7 @@ function DateOfBirth({ value, onChange }: DateOfBirthProps) {
 
 interface AvatarProps {
     file: File | null;
-    avatar: AvatarType;
+    avatar: ImageResponse;
     onChange: (file: File | null) => void;
 }
 
@@ -144,7 +144,7 @@ function Avatar({ file, avatar, onChange }: AvatarProps) {
             <label className="signup-avatar-label" htmlFor="avatar">
                 <img id="upload-icon" src={uploadIcon} />
                 <span className="signup-avatar-span">
-                    {file ? file.name : avatar.originalName ? avatar.originalName : 'Avatar image'}
+                    {file ? file.name : avatar.fileName ? avatar.fileName : 'Avatar image'}
                 </span>
                 <span className="signup-avatar-span">{'(max: 2MB)'}</span>
             </label>
@@ -167,7 +167,8 @@ export function ProfileEdit() {
     const user = useUserQuery();
     const userBasic = useUserBasicPutMutation();
     const userPassword = useUserPasswordPutMutation();
-    const [file, setFile] = useState<File | null>(null);
+    const [avatar, setAvatar] = useState<File | null>(null);
+    const [localErrors, setLocalErrors] = useState<Array<{ message: string }> | null>(null);
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -175,18 +176,18 @@ export function ProfileEdit() {
     const [oldPassword, setOldPassword] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
-    const [dob, setDob] = useState('');
+    const [dateOfBirth, setDateOfBirth] = useState('');
 
     useEffect(() => {
         if (user.data) {
-            setFirstName(user.data.user.first_name);
-            setLastName(user.data.user.last_name);
-            setEmail(user.data.user.email);
+            setFirstName(user.data.firstName);
+            setLastName(user.data.lastName);
+            setEmail(user.data.email);
         }
     }, [user.data]);
 
     function handleFileChange(value: File | null) {
-        setFile(value);
+        setAvatar(value);
     }
 
     function handleDobChange(year: number, month: number, day: number) {
@@ -196,7 +197,7 @@ export function ProfileEdit() {
             month.toString().padStart(2, '0') +
             '-' +
             day.toString().padStart(2, '0');
-        setDob(isoDate);
+        setDateOfBirth(isoDate);
     }
 
     useEffect(() => {
@@ -208,11 +209,11 @@ export function ProfileEdit() {
     function handleSubmitBasic() {
         userBasic.mutate(
             {
-                first_name: firstName,
-                last_name: lastName,
+                firstName,
+                lastName,
                 email,
-                dob,
-                avatar: file,
+                dateOfBirth,
+                avatar,
             },
             {
                 onSuccess: () => {
@@ -223,11 +224,24 @@ export function ProfileEdit() {
     }
 
     function handleSubmitPassword() {
+        if (password === '' || oldPassword === '' || passwordConfirm === '') {
+            setLocalErrors(() => [{ message: 'Password fields are required' }]);
+            return;
+        } else {
+            setLocalErrors(() => null);
+        }
+
+        if (password !== passwordConfirm) {
+            setLocalErrors(() => [{ message: "passwords don't match" }]);
+            return;
+        } else {
+            setLocalErrors(() => null);
+        }
+
         userPassword.mutate(
             {
-                old_password: oldPassword,
+                oldPassword,
                 password,
-                password_confirm: passwordConfirm,
             },
             {
                 onSuccess: () => {
@@ -302,8 +316,8 @@ export function ProfileEdit() {
                                 name="email"
                                 placeholder="Email"
                             />
-                            <DateOfBirth value={user.data.user.dob} onChange={handleDobChange} />
-                            <Avatar file={file} avatar={user.data.user.avatar} onChange={handleFileChange} />
+                            <DateOfBirth value={user.data.dateOfBirth} onChange={handleDobChange} />
+                            <Avatar file={avatar} avatar={user.data.avatar} onChange={handleFileChange} />
                             <Errors errors={userBasic.error} />
                             <button
                                 type="button"
@@ -343,7 +357,7 @@ export function ProfileEdit() {
                                 placeholder="Confirm New Password"
                                 required
                             />
-                            <Errors errors={userPassword.error} />
+                            <Errors errors={localErrors ?? userPassword.error} />
                             <button
                                 type="button"
                                 onClick={handleSubmitPassword}

@@ -1,21 +1,20 @@
-import { User } from './user.ts';
+import { ShortUserResponse } from './shortuserresponse.ts';
 
-export interface SignupInputModel {
+export interface SignUpRequest {
+    firstName: string;
+    lastName: string;
+    email: string;
+    dateOfBirth: string;
+    password: string;
     avatar?: File;
-    first_name: string;
-    last_name: string;
-    email: string;
-    dob: string;
-    password: string;
-    password_confirm: string;
 }
 
-export interface LoginInputModel {
+export interface LoginRequest {
     email: string;
     password: string;
 }
 
-export interface LoginOutputModel {
+export interface LoginResponse {
     token: string;
-    user: User;
+    user: ShortUserResponse;
 }

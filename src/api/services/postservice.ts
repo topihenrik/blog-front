@@ -1,22 +1,22 @@
 import { authRequest, request } from './network.ts';
-import { PostInputModel, PostOutputModel } from '../../types/postmodel.ts';
+import { CreatePostRequest, PostResponse, UpdatePostRequest } from '../../types/postmodel.ts';
 import { getContext } from '../../utils/getcontext.ts';
 
-export async function getPosts(): Promise<PostOutputModel[]> {
+export async function getPosts(): Promise<PostResponse[]> {
     return request({
         method: 'GET',
-        url: '/posts',
+        url: '/posts?includeCommentCount=true',
     });
 }
 
-export async function getPostsByAuthor(): Promise<PostOutputModel[]> {
+export async function getPostsByAuthor(): Promise<PostResponse[]> {
     return authRequest({
         method: 'GET',
-        url: '/posts/author',
+        url: '/posts/?onlyPersonal=true&includeCommentCount=true',
     });
 }
 
-export async function getPostById(id: string): Promise<PostOutputModel> {
+export async function getPostById(id: string): Promise<PostResponse> {
     // Special functionality where unpublished posts can be acquired if you are the author
     let headers;
     const context = getContext();
@@ -28,19 +28,18 @@ export async function getPostById(id: string): Promise<PostOutputModel> {
 
     return request({
         method: 'GET',
-        url: `/posts/${id}`,
+        url: `/posts/${id}?includeCommentCount=true`,
         headers,
     });
 }
 
-export async function postPost(values: PostInputModel) {
+export async function postPost(values: CreatePostRequest) {
     const formData = new FormData();
     formData.append('title', values.title);
     formData.append('content', values.content);
-    formData.append('description', values.description);
-    formData.append('published', String(values.published));
-    if (values.photo) {
-        formData.append('photo', values.photo);
+    formData.append('isPublished', String(values.isPublished));
+    if (values.image) {
+        formData.append('image', values.image);
     }
 
     return authRequest({
@@ -53,15 +52,14 @@ export async function postPost(values: PostInputModel) {
     });
 }
 
-export async function putPost(values: PostInputModel & { postId: string }) {
+export async function putPost(values: UpdatePostRequest & { postId: string }) {
     const formData = new FormData();
     formData.append('title', values.title);
     formData.append('content', values.content);
-    formData.append('description', values.description);
-    formData.append('published', String(values.published));
+    formData.append('isPublished', String(values.published));
     // formData.append('postId', values.postId);
-    if (values.photo) {
-        formData.append('photo', values.photo);
+    if (values.image) {
+        formData.append('image', values.image);
     }
 
     return authRequest({

@@ -12,9 +12,9 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
             value={{
                 set,
                 clear,
-                _id: context._id,
-                full_name: context.full_name,
-                avatar_url: context.avatar_url,
+                id: context.id,
+                fullName: context.fullName,
+                avatarUrl: context.avatarUrl,
                 token: context.token,
             }}>
             {children}

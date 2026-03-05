@@ -40,7 +40,7 @@ export function Header() {
                         <a>
                             <button onClick={() => navigate('/profile')} className="mobile-profile-button">
                                 <span>Profile</span>
-                                <img className="mobile-profile-avatar-icon" src={userContext.avatar_url} />
+                                <img className="mobile-profile-avatar-icon" src={userContext.avatarUrl} />
                             </button>
                         </a>
                         <a onClick={handleClick}>
@@ -65,7 +65,7 @@ export function Header() {
                     <div className="auth-box">
                         <a>
                             <button onClick={() => navigate('/profile')} className="profile-button">
-                                <img className="profile-avatar-icon" src={userContext.avatar_url} />
+                                <img className="profile-avatar-icon" src={userContext.avatarUrl} />
                                 <span>Profile</span>
                             </button>
                         </a>

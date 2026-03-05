@@ -177,7 +177,8 @@ export function SignUp() {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [file, setFile] = useState<File | null>(null);
-    const [dob, setDob] = useState('');
+    const [dateOfBirth, setDateOfBirth] = useState('');
+    const [localErrors, setLocalErrors] = useState<Array<{ message: string }> | null>(null);
 
     useEffect(() => {
         if (userContext.token) {
@@ -192,7 +193,7 @@ export function SignUp() {
             month.toString().padStart(2, '0') +
             '-' +
             day.toString().padStart(2, '0');
-        setDob(isoDate);
+        setDateOfBirth(isoDate);
     }
 
     function handleFileChange(value: File | null) {
@@ -202,20 +203,33 @@ export function SignUp() {
     const handleSubmit = (e: SyntheticEvent) => {
         e.preventDefault();
 
+        if (password !== passwordConfirm) {
+            setLocalErrors(() => [{ message: "passwords don't match" }]);
+            return;
+        } else {
+            setLocalErrors(() => null);
+        }
+
         signup.mutate({
             avatar: file ?? undefined,
-            first_name: firstName,
-            last_name: lastName,
+            firstName: firstName,
+            lastName: lastName,
             email,
-            dob,
+            dateOfBirth,
             password,
-            password_confirm: passwordConfirm,
         });
     };
 
     if (signup.isSuccess) {
         return <SignUpSuccess />;
     }
+
+    // if (signup.isError) {
+    //     signup.data;
+    //     debugger;
+    // }
+
+    console.log(localErrors);
 
     return (
         <main className="signup-main">
@@ -273,7 +287,7 @@ export function SignUp() {
                         required={true}
                     />
                     <Avatar file={file} onChange={handleFileChange} />
-                    <Errors errors={signup.error} />
+                    <Errors errors={localErrors ?? signup.error} />
                     <button disabled={signup.isPending} style={signup.isPending ? { cursor: 'wait' } : {}}>
                         Sign Up
                     </button>

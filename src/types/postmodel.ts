@@ -1,27 +1,30 @@
-import { UserOutputModel } from './usermodel.ts';
+import { ShortUserResponse } from './shortuserresponse.ts';
+import { ImageResponse } from './imagemodel.ts';
 
-export interface PostOutputModel {
-    _id: string;
+export interface PostResponse {
+    id: string;
     title: string;
     content: string;
-    description: string;
-    author: UserOutputModel;
-    timestamp: string;
-    edit_timestamp?: string | null;
-    photo: {
-        is_default: boolean;
-        public_id?: string | null;
-        originalName: string;
-        url: string;
-    };
-    published: boolean;
-    count: number;
+    // description: string;
+    author: ShortUserResponse;
+    createdAt: string;
+    updatedAt: string | null;
+    image: ImageResponse | null;
+    isPublished: boolean;
+    commentCount: number | null;
 }
 
-export interface PostInputModel {
+export interface CreatePostRequest {
+    title: string;
+    content: string;
+    isPublished: boolean;
+    image: File | null;
+}
+
+export interface UpdatePostRequest {
     title: string;
     content: string;
     description: string;
     published: boolean;
-    photo: File | null;
+    image: File | null;
 }
