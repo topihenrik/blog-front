@@ -372,6 +372,10 @@ header > div {
     font-size: 16px;
     text-decoration: none;
     box-sizing: border-box;
+
+    &.title {
+        width: 100%;
+    }
 }
 
 .file-input {
@@ -1442,6 +1446,12 @@ footer {
     justify-content: center;
     padding: 16px 0;
     flex: 1 0 0;
+}
+
+.editor-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .editor-box {

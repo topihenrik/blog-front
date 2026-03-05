@@ -17,12 +17,19 @@ export function UpdatePost() {
     const editorRef = useRef<TinyMCEEditor>(null);
     const [published, setPublished] = useState(false);
     const [file, setFile] = useState<File | null>(null);
+    const [title, setTitle] = useState('');
 
     useEffect(() => {
-        if (post.data?.published) {
-            setPublished(post.data.published);
+        if (post.data?.isPublished) {
+            setPublished(post.data.isPublished);
         }
-    }, [post.data?.published]);
+    }, [post.data?.isPublished]);
+
+    useEffect(() => {
+        if (post.data?.title) {
+            setTitle(post.data?.title);
+        }
+    }, [post.data?.title]);
 
     useEffect(() => {
         if (!userContext.token) {
@@ -38,12 +45,12 @@ export function UpdatePost() {
         if (editorRef.current) {
             postPut.mutate(
                 {
-                    title: editorRef.current.dom.select('h1')[0]?.innerText ?? '',
+                    title: title ?? '',
                     content: editorRef.current.getContent(),
                     description: editorRef.current.dom.select('p')[0]?.innerText ?? '',
                     published,
-                    photo: file,
-                    postId: post.data?._id ?? '',
+                    image: file,
+                    postId: post.data?.id ?? '',
                 },
                 {
                     onSuccess: () => {
@@ -89,6 +96,16 @@ export function UpdatePost() {
                 <div className="editor-box">
                     <div className="more-info">
                         <form className="editor-form">
+                            <input
+                                onChange={({ target }) => setTitle(target.value)}
+                                value={title}
+                                className="text-input title"
+                                id="title"
+                                name="title"
+                                required={true}
+                                type="text"
+                                placeholder="Title"
+                            />
                             <Editor
                                 tinymceScriptSrc={'/tinymce/tinymce.min.js'}
                                 initialValue={post.data.content}
@@ -108,8 +125,8 @@ export function UpdatePost() {
                                         <span className="editor-photo-span">
                                             {file
                                                 ? file.name
-                                                : post.data.photo.originalName
-                                                  ? post.data.photo.originalName
+                                                : post.data?.image?.fileName
+                                                  ? post.data?.image?.fileName
                                                   : 'Cover image'}
                                         </span>
                                         <span className="editor-photo-span max-size">{'(max: 2MB)'}</span>
@@ -125,7 +142,7 @@ export function UpdatePost() {
                                     />
                                 </div>
                                 <div className="published-box">
-                                    {!post.data.published ? (
+                                    {!post.data.isPublished ? (
                                         <>
                                             <label htmlFor="published">Publish: </label>
                                             <input
@@ -143,7 +160,7 @@ export function UpdatePost() {
                                     )}
                                 </div>
                                 <p className="editor-author">
-                                    {'Author: ' + post.data?.author?.first_name + ' ' + post.data?.author?.last_name}
+                                    {'Author: ' + post.data?.author?.firstName + ' ' + post.data?.author?.lastName}
                                 </p>
                                 <div className="editor-submit-box">
                                     <button

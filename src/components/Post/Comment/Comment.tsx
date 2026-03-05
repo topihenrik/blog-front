@@ -3,8 +3,7 @@ import { DateTime } from 'luxon';
 import EditIcon from '../../../icons/edit.png';
 import DeleteIcon from '../../../icons/delete.png';
 import CancelIcon from '../../../icons/cancel.png';
-import { CommentOutputModel } from '../../../types/commentmodel.ts';
-import { useParams } from 'react-router';
+import { CommentResponse } from '../../../types/commentmodel.ts';
 import { useCommentDeleteMutation, useCommentPutMutation } from '../../../api/queries/commentqueries.ts';
 import { queryClient } from '../../../config/queryclient.ts';
 import { queryKeys } from '../../../constants/querykeys.ts';
@@ -12,11 +11,10 @@ import { Errors } from '../../General/Errors.tsx';
 import { useUserContext } from '../../../hooks/useUserContext.tsx';
 
 interface CommentProps {
-    comment: CommentOutputModel;
+    comment: CommentResponse;
 }
 
 export function Comment({ comment }: CommentProps) {
-    const { postid } = useParams();
     const userContext = useUserContext();
     const commentPut = useCommentPutMutation();
     const commentDelete = useCommentDeleteMutation();
@@ -30,8 +28,7 @@ export function Comment({ comment }: CommentProps) {
     function handleSubmitEdit() {
         commentPut.mutate(
             {
-                postId: postid ?? '',
-                commentId: comment._id,
+                commentId: comment.id,
                 content: editComment,
             },
             {
@@ -46,8 +43,7 @@ export function Comment({ comment }: CommentProps) {
     function handleSubmitDelete() {
         commentDelete.mutate(
             {
-                postId: postid ?? '',
-                commentId: comment._id,
+                commentId: comment.id,
             },
             {
                 onSuccess: () => {
@@ -67,19 +63,19 @@ export function Comment({ comment }: CommentProps) {
             <div className="comment">
                 <div className="info-box">
                     <div className="author-box">
-                        <img className="author-avatar-comment" src={comment.author.avatar.url} />
-                        <h4>{comment.author.first_name + ' ' + comment.author.last_name}</h4>
+                        <img className="author-avatar-comment" src={comment.author?.avatar?.url} />
+                        <h4>{comment.author.firstName + ' ' + comment.author.lastName}</h4>
                     </div>
                     <h4 className="comment-timestamp">
                         <span className="comment-timestamp-original">
-                            {DateTime.fromJSDate(new Date(comment.timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}
+                            {DateTime.fromJSDate(new Date(comment.createdAt)).toLocaleString(DateTime.DATETIME_SHORT)}
                         </span>
-                        {comment.edit_timestamp && '*'}
-                        {comment.edit_timestamp ? (
+                        {comment.updatedAt && '*'}
+                        {comment.updatedAt ? (
                             <span className="comment-timestamp-edit-tooltip">
                                 <p className="p-edit-timestamp">
                                     {'Edited: ' +
-                                        DateTime.fromJSDate(new Date(comment.edit_timestamp)).toLocaleString(
+                                        DateTime.fromJSDate(new Date(comment.updatedAt)).toLocaleString(
                                             DateTime.DATETIME_SHORT
                                         )}
                                 </p>
@@ -90,7 +86,7 @@ export function Comment({ comment }: CommentProps) {
                     </h4>
                 </div>
                 <p className="comment-text">{comment.content}</p>
-                {userContext._id === comment.author._id && (
+                {userContext.id === comment.author.id && (
                     <div className="comment-modification-buttons">
                         <button
                             type="button"
@@ -116,10 +112,10 @@ export function Comment({ comment }: CommentProps) {
             <div className="comment">
                 <div className="info-box">
                     <div className="author-box">
-                        <img className="author-avatar-comment" src={comment.author.avatar.url} />
-                        <h3>{comment.author.first_name + ' ' + comment.author.last_name}</h3>
+                        {/*<img className="author-avatar-comment" src={comment.author.avatar.url} />*/}
+                        <h3>{comment.author.firstName + ' ' + comment.author.lastName}</h3>
                     </div>
-                    <h4>{DateTime.fromJSDate(new Date(comment.timestamp)).toLocaleString(DateTime.DATETIME_SHORT)}</h4>
+                    <h4>{DateTime.fromJSDate(new Date(comment.createdAt)).toLocaleString(DateTime.DATETIME_SHORT)}</h4>
                 </div>
                 <form className="comment-creator-form">
                     <textarea

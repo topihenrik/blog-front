@@ -71,7 +71,7 @@ export function YourStories() {
                     </div>
                     {posts.data.map((post) => {
                         return (
-                            <Fragment key={post._id}>
+                            <Fragment key={post.id}>
                                 <PostCardEdit post={post} />
                             </Fragment>
                         );

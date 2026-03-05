@@ -12,8 +12,9 @@ export function CreatePost() {
     const userContext = useUserContext();
     const postPost = usePostPostMutation();
     const editorRef = useRef<TinyMCEEditor>(null);
-    const [published, setPublished] = useState(false);
+    const [isPublished, setIsPublished] = useState(false);
     const [file, setFile] = useState<File | null>(null);
+    const [title, setTitle] = useState('');
 
     useEffect(() => {
         if (!userContext.token) {
@@ -29,11 +30,10 @@ export function CreatePost() {
         if (editorRef.current) {
             postPost.mutate(
                 {
-                    title: editorRef.current.dom.select('h1')[0]?.innerText ?? '',
+                    title: title ?? '',
                     content: editorRef.current.getContent(),
-                    description: editorRef.current.dom.select('p')[0]?.innerText ?? '',
-                    published,
-                    photo: file,
+                    isPublished,
+                    image: file,
                 },
                 {
                     onSuccess: () => {
@@ -49,6 +49,16 @@ export function CreatePost() {
             <div className="editor-box">
                 <div className="more-info">
                     <form className="editor-form">
+                        <input
+                            onChange={({ target }) => setTitle(target.value)}
+                            value={title}
+                            className="text-input title"
+                            id="title"
+                            name="title"
+                            required={true}
+                            type="text"
+                            placeholder="Title"
+                        />
                         <Editor
                             tinymceScriptSrc={'/tinymce/tinymce.min.js'}
                             onInit={(_, editor) => (editorRef.current = editor)}
@@ -78,15 +88,15 @@ export function CreatePost() {
                             <div className="published-box">
                                 <label htmlFor="published">Publish: </label>
                                 <input
-                                    checked={published}
-                                    onChange={({ target }) => setPublished(target.checked)}
+                                    checked={isPublished}
+                                    onChange={({ target }) => setIsPublished(target.checked)}
                                     id="published"
                                     name="published"
                                     type="checkbox"
                                 />
                             </div>
                             <p className="editor-author">
-                                <strong>{'Author: ' + userContext.full_name}</strong>
+                                <strong>{'Author: ' + userContext.fullName}</strong>
                             </p>
                             <div className="editor-submit-box">
                                 <button

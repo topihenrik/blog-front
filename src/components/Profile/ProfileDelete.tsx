@@ -74,9 +74,9 @@ export function ProfileDelete() {
                     <div className="profile-delete-content-box">
                         <div className="profile-delete-information">
                             <p>
-                                {user.data.user.first_name +
+                                {user.data.firstName +
                                     ' ' +
-                                    user.data.user.last_name +
+                                    user.data.lastName +
                                     ', you have made ' +
                                     user.data.postCount +
                                     ' posts and ' +

@@ -39,19 +39,19 @@ export function PostContent() {
             <div className="post-full">
                 <div className="info-box">
                     <div className="author-box">
-                        <img className="author-avatar-full" src={post.data.author.avatar.url} />
-                        <h4>{post.data.author.first_name + ' ' + post.data.author.last_name}</h4>
+                        <img className="author-avatar-full" src={post.data.author?.avatar?.url} />
+                        <h4>{post.data.author.firstName + ' ' + post.data.author.lastName}</h4>
                     </div>
                     <h4 className="post-timestamp">
                         <span className="post-timestamp-original">
-                            {DateTime.fromJSDate(new Date(post.data.timestamp)).toLocaleString(DateTime.DATE_MED)}
+                            {DateTime.fromJSDate(new Date(post.data.createdAt)).toLocaleString(DateTime.DATE_MED)}
                         </span>
-                        {post.data.edit_timestamp && '*'}
-                        {post.data.edit_timestamp && (
+                        {post.data.updatedAt && '*'}
+                        {post.data.updatedAt && (
                             <span className="post-timestamp-edit-tooltip">
                                 <p className="p-edit-timestamp">
                                     {'Edited: ' +
-                                        DateTime.fromJSDate(new Date(post.data.edit_timestamp)).toLocaleString(
+                                        DateTime.fromJSDate(new Date(post.data.updatedAt)).toLocaleString(
                                             DateTime.DATETIME_SHORT
                                         )}
                                 </p>
@@ -59,7 +59,8 @@ export function PostContent() {
                         )}
                     </h4>
                 </div>
-                <img className="post-cover-photo" src={post.data.photo.url} />
+                <img className="post-cover-photo" src={post.data.image?.url} />
+                <h1>{post.data.title}</h1>
                 <div className="post-text-container" dangerouslySetInnerHTML={{ __html: post.data.content }}></div>
             </div>
         );

@@ -2,11 +2,12 @@ import { DateTime } from 'luxon';
 import ViewIcon from '../../icons/view.png';
 import EditIcon from '../../icons/edit.png';
 import DeleteIcon from '../../icons/delete.png';
-import { PostOutputModel } from '../../types/postmodel.ts';
+import { PostResponse } from '../../types/postmodel.ts';
 import { useNavigate } from 'react-router';
+import { stripHtml } from 'string-strip-html';
 
 interface PostCardEditProps {
-    post: PostOutputModel;
+    post: PostResponse;
 }
 
 export function PostCardEdit({ post }: PostCardEditProps) {
@@ -17,26 +18,26 @@ export function PostCardEdit({ post }: PostCardEditProps) {
                 <div className="edit-post-box-left">
                     <div className="edit-info-box">
                         <div className="edit-author-box">
-                            <img className="edit-author-avatar-card" src={post.author.avatar.url} />
-                            <h4>{post.author.first_name + ' ' + post.author.last_name}</h4>
+                            <img className="edit-author-avatar-card" src={post.author.avatar?.url} />
+                            <h4>{post.author.firstName + ' ' + post.author.lastName}</h4>
                         </div>
-                        <h4>{DateTime.fromJSDate(new Date(post.timestamp)).toLocaleString(DateTime.DATE_MED)}</h4>
+                        <h4>{DateTime.fromJSDate(new Date(post.createdAt)).toLocaleString(DateTime.DATE_MED)}</h4>
                     </div>
                     <h2>{post.title}</h2>
                     <p className="edit-post-description">
-                        {post.description.split(' ').slice(0, 28).join(' ') + ' ...'}
+                        {stripHtml(post.content).result.split(' ').slice(0, 28).join(' ') + ' ...'}
                     </p>
-                    <p className="edit-post-comments-count">{post.count + ' comments'}</p>
-                    {post.published ? (
+                    <p className="edit-post-comments-count">{post.commentCount + ' comments'}</p>
+                    {post.isPublished ? (
                         <p className="edit-post-published-true">Published</p>
                     ) : (
                         <p className="edit-post-published-false">Not published</p>
                     )}
                     <div className="edit-post-modification-buttons">
-                        {post.published && (
+                        {post.isPublished && (
                             <a className="edit-post-modification-anchor">
                                 <button
-                                    onClick={() => navigate('/post/' + post._id)}
+                                    onClick={() => navigate('/post/' + post.id)}
                                     className="edit-post-modification-button">
                                     <img className="icon" src={ViewIcon} />
                                     View
@@ -45,7 +46,7 @@ export function PostCardEdit({ post }: PostCardEditProps) {
                         )}
                         <a className="edit-post-modification-anchor">
                             <button
-                                onClick={() => navigate('/post/update/' + post._id)}
+                                onClick={() => navigate('/post/update/' + post.id)}
                                 className="edit-post-modification-button">
                                 <img className="icon" src={EditIcon} />
                                 Edit
@@ -53,7 +54,7 @@ export function PostCardEdit({ post }: PostCardEditProps) {
                         </a>
                         <a className="edit-post-modification-anchor">
                             <button
-                                onClick={() => navigate('/post/delete/' + post._id)}
+                                onClick={() => navigate('/post/delete/' + post.id)}
                                 className="edit-post-modification-button">
                                 <img className="icon" src={DeleteIcon} />
                                 Delete
@@ -62,7 +63,7 @@ export function PostCardEdit({ post }: PostCardEditProps) {
                     </div>
                 </div>
                 <div className="edit-post-box-right">
-                    <img className="edit-photo-thumbnail" src={post.photo.url} />
+                    <img className="edit-photo-thumbnail" src={post.image?.url} />
                 </div>
             </div>
         </div>

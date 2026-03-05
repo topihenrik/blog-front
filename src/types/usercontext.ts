@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 
 export interface UserContextType {
-    _id: string | undefined;
-    full_name: string | undefined;
-    avatar_url: string | undefined;
-    token: string | undefined;
+    id?: string;
+    fullName?: string;
+    avatarUrl?: string;
+    token?: string;
 }
 
 export type UserContextValues = UserContextType & {

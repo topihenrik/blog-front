@@ -52,14 +52,13 @@ export function Profile() {
             <main className="profile-main">
                 <div className="profile-container">
                     <div className="profile-title-box">
-                        <h2>{'Hello, ' + user.data.user.first_name + ' ' + user.data.user.last_name + '! 👋'}</h2>
+                        <h2>{'Hello, ' + user.data.firstName + ' ' + user.data.lastName + '! 👋'}</h2>
                     </div>
                     <div className="profile-content-box">
                         <p>
                             {'Since the creation of your account ' +
                                 Math.floor(
-                                    -1 *
-                                        DateTime.fromJSDate(new Date(user.data.user.creation_date)).diffNow('days').days
+                                    -1 * DateTime.fromJSDate(new Date(user.data.createdAt)).diffNow('days').days
                                 ) +
                                 ' days ago, you have created ' +
                                 user.data.postCount +
@@ -71,16 +70,16 @@ export function Profile() {
                             <h2>Personal Information</h2>
                             <div className="profile-personal-box">
                                 <div className="profile-personal-text">
-                                    <p>{'First Name: ' + user.data.user.first_name}</p>
-                                    <p>{'Last Name: ' + user.data.user.last_name}</p>
-                                    <p>{'Email: ' + user.data.user.email}</p>
+                                    <p>{'First Name: ' + user.data.firstName}</p>
+                                    <p>{'Last Name: ' + user.data.lastName}</p>
+                                    <p>{'Email: ' + user.data.email}</p>
                                     <p>
                                         {'Date of Birth: ' +
-                                            DateTime.fromJSDate(new Date(user.data.user.dob)).toLocaleString()}
+                                            DateTime.fromJSDate(new Date(user.data.dateOfBirth)).toLocaleString()}
                                     </p>
                                 </div>
                                 <div>
-                                    <img id="author-avatar-profile" src={user.data.user?.avatar?.url} />
+                                    <img id="author-avatar-profile" src={user.data?.avatar?.url} />
                                 </div>
                             </div>
                         </div>

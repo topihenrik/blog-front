@@ -1,42 +1,31 @@
-export interface UserOutputModel {
-    _id: string;
-    first_name: string;
-    last_name: string;
+import { ImageResponse } from './imagemodel.ts';
+
+export interface UserResponse {
+    id: string;
+    firstName: string;
+    lastName: string;
     email: string;
-    dob: string;
-    password: string;
-    avatar: Avatar;
-    creation_date: string;
-}
-
-export interface Avatar {
-    is_default: boolean;
-    public_id?: string | null;
-    originalName: string;
-    url: string;
-}
-
-export interface ProfileOutputModel {
-    user: UserOutputModel;
+    dateOfBirth: string;
+    avatar: ImageResponse;
+    createdAt: string;
     postCount: number;
     commentCount: number;
 }
 
-export interface UserBasicInputModel {
-    first_name: string;
-    last_name: string;
+export interface UpdateUserBasicRequest {
+    firstName: string;
+    lastName: string;
     email: string;
-    dob: string;
+    dateOfBirth: string;
     avatar: File | null;
 }
 
-export interface UserPasswordInputModel {
-    old_password: string;
+export interface UpdateUserPasswordRequest {
+    oldPassword: string;
     password: string;
-    password_confirm: string;
 }
 
-export interface UserDeleteInputModel {
+export interface DeleteUserRequest {
     email: string;
     password: string;
 }

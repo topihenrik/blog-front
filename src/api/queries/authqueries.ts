@@ -11,7 +11,9 @@ export function useLoginMutation() {
         onSuccess: (data) => {
             userContext.set({
                 token: data.token,
-                ...data.user,
+                id: data.user.id,
+                fullName: `${data.user.firstName} ${data.user.lastName}`,
+                avatarUrl: data.user.avatar?.url,
             });
         },
     });

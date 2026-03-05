@@ -10,8 +10,19 @@ const axiosConfig: CreateAxiosDefaults = {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function errorHandling(error: any) {
-    if (error?.response?.data?.errors?.length) {
-        return Promise.reject(error.response.data.errors.map((err: { msg: string }) => ({ message: err.msg })));
+    // debugger;
+    if (error?.response?.data?.detail) {
+        return Promise.reject([{ message: error.response.data.detail }]);
+    }
+
+    if (error?.response?.data?.errors) {
+        return Promise.reject(
+            Object.values(error.response?.data?.errors)
+                .flat()
+                .map((msg) => ({
+                    message: msg,
+                }))
+        );
     }
 
     if (error?.response?.data) {
@@ -23,7 +34,7 @@ function errorHandling(error: any) {
     }
     return Promise.reject([
         {
-            message: error.message,
+            message: error.message.data.detail,
         },
     ]);
 }

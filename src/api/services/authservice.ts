@@ -1,21 +1,20 @@
 import { request } from './network.ts';
-import { LoginInputModel, LoginOutputModel, SignupInputModel } from '../../types/authmodel.ts';
+import { LoginRequest, LoginResponse, SignUpRequest } from '../../types/authmodel.ts';
 
-export async function postSignUp(values: SignupInputModel) {
+export async function postSignUp(values: SignUpRequest) {
     const formData = new FormData();
-    formData.append('first_name', values.first_name);
-    formData.append('last_name', values.last_name);
+    formData.append('firstName', values.firstName);
+    formData.append('lastName', values.lastName);
     formData.append('email', values.email);
-    formData.append('dob', values.dob);
+    formData.append('dateOfBirth', values.dateOfBirth);
     formData.append('password', values.password);
-    formData.append('password_confirm', values.password_confirm);
     if (values.avatar) {
         formData.append('avatar', values.avatar);
     }
 
     return request({
         method: 'POST',
-        url: '/signup',
+        url: '/auth/signup',
         data: values,
         headers: {
             'Content-Type': 'multipart/form-data',
@@ -23,10 +22,10 @@ export async function postSignUp(values: SignupInputModel) {
     });
 }
 
-export async function postLogin(values: LoginInputModel): Promise<LoginOutputModel> {
+export async function postLogin(values: LoginRequest): Promise<LoginResponse> {
     return request({
         method: 'POST',
-        url: '/login',
+        url: '/auth/login',
         data: values,
     });
 }

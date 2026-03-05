@@ -41,7 +41,7 @@ export function CommentSection() {
                     {comments.data ? (
                         comments.data.map((comment) => {
                             return (
-                                <Fragment key={comment._id}>
+                                <Fragment key={comment.id}>
                                     <Comment comment={comment} />
                                     <hr className="comment-hr" />
                                 </Fragment>

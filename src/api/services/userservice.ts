@@ -1,30 +1,30 @@
 import { authRequest } from './network.ts';
 import {
-    ProfileOutputModel,
-    UserBasicInputModel,
-    UserDeleteInputModel,
-    UserPasswordInputModel,
+    DeleteUserRequest,
+    UpdateUserBasicRequest,
+    UpdateUserPasswordRequest,
+    UserResponse,
 } from '../../types/usermodel.ts';
 
-export async function getUser(): Promise<ProfileOutputModel> {
+export async function getUser(): Promise<UserResponse> {
     return authRequest({
         method: 'GET',
-        url: '/user',
+        url: `/users/me?includePostCount=true&includeCommentCount=true`,
     });
 }
 
-export async function putUserBasic(values: UserBasicInputModel) {
+export async function putUserBasic(values: UpdateUserBasicRequest) {
     const formData = new FormData();
-    formData.append('first_name', values.first_name);
-    formData.append('last_name', values.last_name);
+    formData.append('firstName', values.firstName);
+    formData.append('lastName', values.lastName);
     formData.append('email', values.email);
-    formData.append('dob', values.dob);
+    formData.append('dateOfBirth', values.dateOfBirth);
     if (values.avatar) {
         formData.append('avatar', values.avatar);
     }
     return authRequest({
         method: 'PUT',
-        url: '/user/basic',
+        url: '/users/me',
         data: formData,
         headers: {
             'Content-Type': 'multipart/form-data',
@@ -32,18 +32,18 @@ export async function putUserBasic(values: UserBasicInputModel) {
     });
 }
 
-export async function putUserPassword(values: UserPasswordInputModel) {
+export async function putUserPassword(values: UpdateUserPasswordRequest) {
     return authRequest({
         method: 'PUT',
-        url: '/user/password',
+        url: '/users/me/password',
         data: values,
     });
 }
 
-export async function deleteUser(values: UserDeleteInputModel) {
+export async function deleteUser(values: DeleteUserRequest) {
     return authRequest({
         method: 'DELETE',
-        url: '/user',
+        url: '/users/me',
         data: values,
     });
 }
